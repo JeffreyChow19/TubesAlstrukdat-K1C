@@ -81,6 +81,8 @@ void copyList(ListDin lIn, ListDin *lOut)
 
 void insertLast(ListDin *l, ElType val)
 {
+  if (isFull(*l))
+    expandList(l, CAPACITY(*l));
   if (isEmpty(*l))
     NEFF(*l) = 1;
   else
@@ -93,6 +95,8 @@ void deleteLast(ListDin *l, ElType *val)
 {
   *val = ELMT(*l, getLastIdx(*l));
   NEFF(*l) -= 1;
+  if (NEFF(*l) < CAPACITY(*l) / 4)
+    shrinkList(l, CAPACITY(*l) / 2);
 }
 
 void expandList(ListDin *l, int num)

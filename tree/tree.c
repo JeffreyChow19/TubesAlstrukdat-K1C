@@ -11,7 +11,7 @@ Address newNode(Makanan val)
   return a;
 }
 
-Address getNodeById(Address t, int id)
+Address findNodeInTree(Address t, int id)
 {
   if (t == NULL || listLength(CHILDREN(t)) == 0)
     return NULL;
@@ -23,6 +23,18 @@ Address getNodeById(Address t, int id)
     res = getNodeById(Elmt(CHILDREN(t), i), id);
     if (res != NULL)
       return res;
+  }
+  return NULL;
+}
+
+Address findNodeInList(ListDin l, int id)
+{
+  int i = 0;
+  while (i < NEFF(l))
+  {
+    Address e = findNodeInTree(ELMT(l, i), id);
+    if (e != NULL)
+      return e;
   }
   return NULL;
 }

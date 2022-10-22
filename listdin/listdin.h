@@ -88,47 +88,49 @@ boolean isListEqual(ListDin l1, ListDin l2);
 
 /* ********** SEARCHING ********** */
 /* ***  Perhatian : list boleh kosong!! *** */
-IdxType indexOf(ListDin l, int id);
-/* Search apakah ada elemen List l yang bernilai val */
-/* Jika ada, menghasilkan indeks i terkecil, dengan elemen ke-i = val */
+/* Search apakah ada elemen List l yang memiliki id=id */
+/* Jika ada, menghasilkan indeks i terkecil, dengan id elemen ke-i = id */
 /* Jika tidak ada, mengirimkan IDX_UNDEF */
 /* Menghasilkan indeks tak terdefinisi (IDX_UNDEF) jika List l kosong */
 /* Skema Searching yang digunakan bebas */
+IdxType indexOf(ListDin l, int id);
 
 /* ********** OPERASI LAIN ********** */
-void copyList(ListDin lIn, ListDin *lOut);
 /* I.S. lIn terdefinisi tidak kosong, lOut sembarang */
 /* F.S. lOut berisi salinan dari lIn (identik, nEff dan capacity sama) */
 /* Proses : Menyalin isi lIn ke lOut */
+void copyList(ListDin lIn, ListDin *lOut);
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
-void insertLast(ListDin *l, ElType val);
 /* Proses: Menambahkan val sebagai elemen terakhir list */
-/* I.S. List l boleh kosong, tetapi tidak penuh */
-/* F.S. val adalah elemen terakhir l yang baru */
+/* I.S. List l boleh kosong */
+/* F.S. val adalah elemen terakhir l yang baru, jika list penuh maka akan dialokasikan 2 kali kapasitas sebelumnya */
+void insertLast(ListDin *l, ElType val);
+
 /* ********** MENGHAPUS ELEMEN ********** */
-void deleteLast(ListDin *l, ElType *val);
 /* Proses : Menghapus elemen terakhir list */
 /* I.S. List tidak kosong */
 /* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */
 /*      Banyaknya elemen list berkurang satu */
-/*      List l mungkin menjadi kosong */
+/*      List l mungkin menjadi kosong, jika panjang list menjadi */
+/*      < seperempat kapasitas, maka kapasitas akan dikurangi setengahnya */
+void deleteLast(ListDin *l, ElType *val);
 
 /* ********* MENGUBAH UKURAN ARRAY ********* */
-void expandList(ListDin *l, int num);
 /* Proses : Menambahkan capacity l sebanyak num */
 /* I.S. List sudah terdefinisi */
 /* F.S. Ukuran list bertambah sebanyak num */
+void expandList(ListDin *l, int num);
 
-void shrinkList(ListDin *l, int num);
 /* Proses : Mengurangi capacity sebanyak num */
 /* I.S. List sudah terdefinisi, ukuran capacity > num, dan nEff < capacity - num. */
 /* F.S. Ukuran list berkurang sebanyak num. */
+void shrinkList(ListDin *l, int num);
 
-void compressList(ListDin *l);
 /* Proses : Mengubah capacity sehingga nEff = capacity */
 /* I.S. List tidak kosong */
 /* F.S. Ukuran nEff = capacity */
+void compressList(ListDin *l);
 
 #endif

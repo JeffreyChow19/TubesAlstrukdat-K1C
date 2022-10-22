@@ -5,11 +5,13 @@
 
 #define ID(m) (m).id
 #define NAME(m) (m).name
+#define ACTION(m) (m).action
 
 typedef struct
 {
   int id;
   String name;
+  String action;
 } Makanan;
 
 /* ********** KONSTRUKTOR ********** */
@@ -18,6 +20,6 @@ typedef struct
   I.S. m sembarang
   F.S. terbentuk makanan dengan id dan nama yang sesuai
  */
-void CreateMakanan(Makanan *m, int id, String name);
+void CreateMakanan(Makanan *m, int id, String name, String action);
 
 #endif
