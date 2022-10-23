@@ -60,4 +60,15 @@ void expandString(String *s, int num);
  */
 boolean isStringEqual(String s1, String s2);
 
+/*
+  Mengembalikan nilai integer dari string.
+  Prekondisi: string merupakan angka
+ */
+int stringToInt(String s);
+
+/*
+  Mengembalikan nilai berupa banyak kemunculan char c pada string
+ */
+int countChar(String s, char c);
+
 #endif

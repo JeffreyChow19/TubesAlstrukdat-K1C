@@ -3,10 +3,11 @@
 
 int main()
 {
-  String a, b, c;
+  String a, b, c, num;
   CreateEmptyString(&a, 2);
   CreateEmptyString(&b, 10);
   CreateEmptyString(&c, 10);
+  CreateEmptyString(&num, 10);
 
   appendChar(&a, 'a');
   appendChar(&a, 'a');
@@ -17,15 +18,22 @@ int main()
   printf("a = %s\n", SBUFFER(a));
   printf("length a = %d\n", LENGTH(a));
   printf("capacity a = %d\n", SCAPACITY(a));
+  printf("count 'a' in a = %d\n", countChar(a, 'a'));
 
   setLiteral(&b, "Hello World");
   printf("b = %s\n", SBUFFER(b));
   printf("length b = %d\n", LENGTH(b));
   printf("capacity b = %d\n", SCAPACITY(b));
+  printf("count 'l' in b = %d\n", countChar(b, 'l'));
 
   setLiteral(&c, "Hello World");
   printf("a = b is %s\n", isStringEqual(a, b) ? "true" : "false");
   printf("b = c is %s\n", isStringEqual(b, c) ? "true" : "false");
+
+  setLiteral(&num, "123");
+
+  int x = stringToInt(num);
+  printf("x = 123 is %s\n", x == 123 ? "true" : "false");
 
   return 0;
 }
