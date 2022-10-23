@@ -3,7 +3,7 @@
 
 /* Implementasi ADT Waktu */
 
-#include "boolean.h"
+#include "../boolean.h"
 #include "time.h"
 #include <stdio.h>
 
