@@ -141,7 +141,7 @@ int searchIdx(PrioQueue Q, int id)
     }
 }
 
-void removeIdx(PrioQueue *Q, int id)
+void removeIdx(PrioQueue *Q, Makanan *val, int id)
 {
     int idx = searchIdx(*Q, id);
     if (idx == Nil)
@@ -150,6 +150,7 @@ void removeIdx(PrioQueue *Q, int id)
     }
     else
     {
+        *val = InfoHead(*Q);
         if (queueLength(*Q) == 1)
         {
             Head(*Q) = Nil;

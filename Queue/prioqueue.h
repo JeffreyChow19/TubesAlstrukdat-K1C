@@ -77,7 +77,7 @@ void removeLast(PrioQueue *Q, ElType *X);
 int searchIdx(PrioQueue Q, int id);
 /* Mencari indeks pada Q sesuai ID elemen */
 
-void removeIdx(PrioQueue *Q, int id);
+void removeIdx(PrioQueue *Q, ElType *val, int id);
 /* Proses: Menghapus elemen pada indeks ditemukannya ID */
 
 #endif
