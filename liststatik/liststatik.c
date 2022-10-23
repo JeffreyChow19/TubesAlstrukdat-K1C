@@ -33,12 +33,12 @@ boolean isIdxEff(ListStatik l, IdxType i)
 
 boolean isEmpty(ListStatik l)
 {
-    return (listLength == 0);
+    return (listLength(l) == 0);
 }
 
 boolean isFull(ListStatik l)
 {
-    return (listLength == CAPACITY);
+    return (listLength(l) == CAPACITY);
 }
 
 int indexOf(ListStatik l, int id)
