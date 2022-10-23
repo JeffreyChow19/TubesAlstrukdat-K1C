@@ -8,6 +8,7 @@
 #define NAME(m) (m).name
 #define EXPIRY(m) (m).expiry
 #define ACTION(m) (m).action
+#define DELIVERY(m) (m).delivery
 
 typedef struct
 {
@@ -15,6 +16,7 @@ typedef struct
   String name;
   Time expiry;
   String action;
+  Time delivery;
 } Makanan;
 
 /* ********** KONSTRUKTOR ********** */
@@ -23,6 +25,16 @@ typedef struct
   I.S. m sembarang
   F.S. terbentuk makanan dengan id dan nama yang sesuai
  */
-void CreateMakanan(Makanan *m, int id, String name, Time expiry, String action);
+void CreateMakanan(Makanan *m, int id, String name, Time expiry, String action, Time delivery);
+
+/*
+  Menampilkan makanan dengan format <nama> <waktu delivery>
+ */
+void printWithDelivery(Makanan m);
+
+/*
+  Menampilkan dengan format <nama> - <durasi kedaluarsa> - <aksi> - <durasi delivery>
+ */
+void printMakananDetails(Makanan m);
 
 #endif

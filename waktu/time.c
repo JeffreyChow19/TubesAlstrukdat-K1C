@@ -45,7 +45,8 @@ void WriteDuration(Time T)
     }
     if (Minute(T) != 0)
         printf("%d Menit", Minute(T));
-    printf("\n");
+    if ((Day(T) == 0) && (Hour(T) == 0) && (Minute(T) == 0))
+        printf("0");
 }
 
 /* Validasi Time */
