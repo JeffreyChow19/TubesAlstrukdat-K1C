@@ -67,4 +67,9 @@ void removeFoodLast(Sim *S, Makanan *val);
 */
 void openInv(Sim S);
 
+/* *** Menampilkan posisi simulator *** */
+/* I.S. Posisi terdefinisi */
+/* F.S. Koordinat posisi simulator ditampilkan di layar*/
+void currPos(Sim S);
+
 #endif

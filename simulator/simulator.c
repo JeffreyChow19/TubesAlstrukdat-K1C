@@ -51,6 +51,7 @@ void openInv(Sim S)
         printf("Inventory kosong\n");
     else
     {
+        printf("List Makanan di Inventory\n (nama - waktu sisa kedaluwarsa)");
         int i = queueLength(Inv(S))-1;
         while (i >= 0)
         {
@@ -59,4 +60,9 @@ void openInv(Sim S)
             i++;
         }
     }
+}
+
+void currPos(Sim S)
+{
+    WritePoint(Pos(S));
 }
