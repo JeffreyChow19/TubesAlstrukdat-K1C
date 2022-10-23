@@ -43,4 +43,7 @@ Address findNodeInTree(Address t, int id);
 /* Mengembalikan node dengan id yang dicari, deep search ke semua root tree */
 Address findNodeInList(ListDin l, int id);
 
+/* Mengembalikan semua node yang memiliki children (merupakan sebuah resep) */
+ListDin getAllRecipeNodes(ListDin l);
+
 #endif

@@ -120,6 +120,13 @@ void insertLast(ListDin *l, ElType val);
 /*      < seperempat kapasitas, maka kapasitas akan dikurangi setengahnya */
 void deleteLast(ListDin *l, ElType *val);
 
+/*
+  Menambahkan seluruh elemen l2 ke l1 lalu dealokasi l2.
+  I.S. l1 dan l2 terdefinisi, mungkin kosong
+  F.S. l1 berisi semua elemen l1 dan l2, l2 terdealokasi
+ */
+void concatList(ListDin *l1, ListDin *l2);
+
 /* ********* MENGUBAH UKURAN ARRAY ********* */
 /* Proses : Menambahkan capacity l sebanyak num */
 /* I.S. List sudah terdefinisi */

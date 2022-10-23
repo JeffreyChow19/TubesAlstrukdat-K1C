@@ -38,3 +38,17 @@ Address findNodeInList(ListDin l, int id)
   }
   return NULL;
 }
+
+ListDin getAllRecipeNodes(ListDin l)
+{
+  ListDin res;
+  CreateListDin(&res, 10);
+  for (int i = getFirstIdx(l); i <= getLastIdx(l); ++i)
+  {
+    if (NEFF(CHILDREN(ELMT(l, i))) > 0)
+      insertLast(&res, ELMT(l, i));
+    ListDin childRecipes = getAllRecipeNodes(CHILDREN(ELMT(l, i)));
+    concatList(&res, &childRecipes);
+  }
+  return res;
+}

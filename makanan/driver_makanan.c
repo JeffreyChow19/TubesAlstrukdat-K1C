@@ -1,6 +1,9 @@
 #include "makanan.h"
 #include <stdio.h>
 
+// command:
+// gcc driver_makanan.c makanan.c ../string/string.c ../waktu/time.c ../point/point.c
+
 int main()
 {
   int id;

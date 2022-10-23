@@ -99,6 +99,17 @@ void deleteLast(ListDin *l, ElType *val)
     shrinkList(l, CAPACITY(*l) / 2);
 }
 
+void concatList(ListDin *l1, ListDin *l2)
+{
+  IdxType i;
+
+  for (i = getFirstIdx(*l2); i <= getLastIdx(*l2); i++)
+  {
+    insertLast(l1, ELMT(*l2, i));
+  }
+  dealocateList(l2);
+}
+
 void expandList(ListDin *l, int num)
 {
   CAPACITY(*l) += num;
