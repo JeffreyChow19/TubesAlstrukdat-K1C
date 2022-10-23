@@ -18,6 +18,7 @@ int main()
   CreateMakanan(&m, id, name, expiry, action, delivery);
   printf("Makanan: %s\nid: %d\n", SBUFFER(NAME(m)), ID(m));
   printWithDelivery(m);
+  printWithExpired(m);
   printMakananDetails(m);
 
   return 0;

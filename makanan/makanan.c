@@ -18,6 +18,13 @@ void printWithDelivery(Makanan m)
   printf(")\n");
 }
 
+void printWithExpired(Makanan m)
+{
+  printf("%s (", SBUFFER(NAME(m)));
+  WriteDuration(EXPIRY(m));
+  printf(")\n");
+}
+
 void printMakananDetails(Makanan m)
 {
   printf("%s - ", SBUFFER(NAME(m)));

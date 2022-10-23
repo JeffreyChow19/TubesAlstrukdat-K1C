@@ -28,9 +28,14 @@ typedef struct
 void CreateMakanan(Makanan *m, int id, String name, Time expiry, String action, Time delivery);
 
 /*
-  Menampilkan makanan dengan format <nama> <waktu delivery>
+  Menampilkan makanan dengan format <nama> (<durasi delivery>)
  */
 void printWithDelivery(Makanan m);
+
+/*
+  Menampilkan makanan dengan format <nama> (<durasi kedaluarsa>)
+ */
+void printWithExpired(Makanan m);
 
 /*
   Menampilkan dengan format <nama> - <durasi kedaluarsa> - <aksi> - <durasi delivery>
