@@ -71,4 +71,9 @@ int stringToInt(String s);
  */
 int countChar(String s, char c);
 
+/*
+  Mengembalikan copy dari string s
+ */
+String getCopyString(String s);
+
 #endif

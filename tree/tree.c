@@ -13,14 +13,14 @@ Address newNode(Makanan val)
 
 Address findNodeInTree(Address t, int id)
 {
-  if (t == NULL || listLength(CHILDREN(t)) == 0)
+  if (t == NULL)
     return NULL;
   if (ID(INFO(t)) == id)
     return t;
   Address res;
   for (int i = getFirstIdx(CHILDREN(t)); i <= getLastIdx(CHILDREN(t)); ++i)
   {
-    res = getNodeById(Elmt(CHILDREN(t), i), id);
+    res = findNodeInTree(ELMT(CHILDREN(t), i), id);
     if (res != NULL)
       return res;
   }

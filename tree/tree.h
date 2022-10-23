@@ -5,6 +5,19 @@
 #include "../listdin/listdin.h"
 #include <stdlib.h>
 
+#ifndef LISTDIN_S
+#define LISTDIN_S
+/* Definisi elemen dan koleksi objek */
+typedef struct node *ElType; /* type elemen list */
+typedef int IdxType;
+typedef struct listdin
+{
+  ElType *buffer; /* memori tempat penyimpan elemen (container) */
+  int nEff;       /* >=0, banyaknya elemen efektif */
+  int capacity;   /* ukuran elemen */
+} ListDin;
+#endif
+
 typedef struct node *Address;
 typedef struct node
 {

@@ -1,7 +1,7 @@
 #ifndef LISTDIN_H
 #define LISTDIN_H
 
-#include "boolean.h"
+#include "../boolean.h"
 #include "../tree/tree.h"
 
 /*  Kamus Umum */
@@ -10,15 +10,18 @@
 #define IDX_UNDEF -1
 /* Indeks tak terdefinisi*/
 
+#ifndef LISTDIN_S
+#define LISTDIN_S
 /* Definisi elemen dan koleksi objek */
-typedef Address ElType; /* type elemen list */
+typedef struct node *ElType; /* type elemen list */
 typedef int IdxType;
-typedef struct
+typedef struct listdin
 {
   ElType *buffer; /* memori tempat penyimpan elemen (container) */
   int nEff;       /* >=0, banyaknya elemen efektif */
   int capacity;   /* ukuran elemen */
 } ListDin;
+#endif
 /* Indeks yang digunakan [0..capacity-1] */
 /* Jika l adalah : ListDin, cara deklarasi dan akses: */
 /* Deklarasi : l : ListDin */

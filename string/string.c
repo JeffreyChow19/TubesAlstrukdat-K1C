@@ -79,3 +79,12 @@ int countChar(String s, char c)
       res++;
   return res;
 }
+
+String getCopyString(String s)
+{
+  String res;
+  CreateEmptyString(&res, LENGTH(s));
+  for (int i = 0; i < LENGTH(s); i++)
+    appendChar(&res, CHAR(s, i));
+  return res;
+}
