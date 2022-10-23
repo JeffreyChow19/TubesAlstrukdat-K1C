@@ -33,7 +33,7 @@ void getFood(Sim S, Makanan *val, int id);
 /* *** Merubah posisi simulator berdasarkan arah mata angin *** */
 /* I.S. Posisi S terdefinisi dan valid */
 /* F.S. Posisi S bergeser sesuai dir yang diberikan */
-void move(Sim *S, String dir);
+void moveSim(Sim *S, String dir);
 
 /* ********** MENAMBAH MAKANAN ********** */
 /* *** Menambahkan makanan pada Inv *** */
@@ -58,5 +58,18 @@ void removeFoodID(Sim *S, Makanan *val, int id);
 /*      Banyaknya MAKANAN Inv berkurang satu */
 /*      Inv l mungkin menjadi kosong */
 void removeFoodLast(Sim *S, Makanan *val);
+
+/* ********** DISPLAY OUTPUT ********** */
+/* *** Menampilkan inv dari simulator *** */
+/* I.S. Inv bisa kosong */
+/* F.S. Jika Inv kosong, pesan "Inventory kosong" dimunculkan,
+        jika tidak, semua item di inventory akan ditampilkan.
+*/
+void openInv(Sim S);
+
+/* *** Menampilkan posisi simulator *** */
+/* I.S. Posisi terdefinisi */
+/* F.S. Koordinat posisi simulator ditampilkan di layar*/
+void currPos(Sim S);
 
 #endif

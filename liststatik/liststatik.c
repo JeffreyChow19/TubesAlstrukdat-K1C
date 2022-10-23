@@ -3,7 +3,7 @@
 
 void CreateListStatik(ListStatik *l)
 {
-    Neff(*l) = 0;
+    StNeff(*l) = 0;
 }
 
 int listLength(ListStatik l)
@@ -48,7 +48,7 @@ int indexOf(ListStatik l, int id)
     else
     {
         IdxType i = getFirstIdx(l);
-        while (i <= getLastIdx(l) && ELMT(l,i).id != id)
+        while (i <= getLastIdx(l) && StELMT(l,i).id != id)
         {
             i++;
         }
@@ -62,25 +62,25 @@ int indexOf(ListStatik l, int id)
 void inserLast(ListStatik *l, ElType val)
 {
     if (isEmpty(*l))
-        Neff(*l) = 1;
+        StNeff(*l) = 1;
     else
-        Neff(*l) += 1;
-    ELMT(*l, getLastIdx(*l) + 1) = val;
+        StNeff(*l) += 1;
+    StELMT(*l, getLastIdx(*l) + 1) = val;
 }
 
 void deleteID(ListStatik *l, ElType *val, int id)
 {
     int i = indexOf(*l, id);
-    *val = ELMT(*l,i);
+    *val = StELMT(*l,i);
     for (i; i < getLastIdx(*l); i++)
     {
-        ELMT(*l,i) = ELMT(*l, i + 1);
+        StELMT(*l,i) = StELMT(*l, i + 1);
     }
-    Neff(*l) -= 1;
+    StNeff(*l) -= 1;
 }
 
 void deleteLast(ListStatik *l, ElType *val)
 {
-    *val = ELMT(*l, getLastIdx(*l));
-    Neff(*l) -= 1;
+    *val = StELMT(*l, getLastIdx(*l));
+    StNeff(*l) -= 1;
 }

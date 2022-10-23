@@ -6,7 +6,7 @@
 #ifndef TIME_H
 #define TIME_H
 
-#include "boolean.h"
+#include "../boolean.h"
 
 typedef struct
 {

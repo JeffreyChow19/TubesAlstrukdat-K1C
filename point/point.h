@@ -21,7 +21,7 @@ typedef struct
 #define Absis(P) (P).X
 #define Ordinat(P) (P).Y
 
-#include "boolean.h"
+#include "../boolean.h"
 
 /* Primitif */
 /* Konstruktor Point*/
