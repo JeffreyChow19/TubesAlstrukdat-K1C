@@ -23,7 +23,7 @@ typedef struct
 /* Catatan implementasi: T[0] tidak pernah dipakai */
 
 /* ********* AKSES (Selektor) ********* */
-/* Jika e adalah ElType dan Q adalah Queue, maka akses elemen : */
+/* Jika Q adalah Queue, maka akses elemen : */
 #define Head(Q) (Q).idxHead
 #define Tail(Q) (Q).idxTail
 #define InfoHead(Q) (Q).buffer[(Q).idxHead]
@@ -60,10 +60,24 @@ void enqueue(PrioQueue *Q, ElType X);
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X menjadi TAIL yang baru, TAIL "maju";
         elemen baru disisipkan pada posisi yang tepat sesuai dengan prioritas */
+
 void dequeue(PrioQueue *Q, ElType *X);
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S.; memajukan elemen sisanya;
         Q mungkin kosong */
+
+/* Operasi Tambahan */
+void removeLast(PrioQueue *Q, ElType *X);
+/* Proses: Menghapus elemen akhir pada Q */
+/* I.S. Q tidak mungkin kosong */
+/* F.S. X = nilai elemen TAIL pd I.S.; TAIL "mundur";
+        Q mungkin kosong */
+
+int searchIdx(PrioQueue Q, int id);
+/* Mencari indeks pada Q sesuai ID elemen */
+
+void removeIdx(PrioQueue *Q, int id);
+/* Proses: Menghapus elemen pada indeks ditemukannya ID */
 
 #endif

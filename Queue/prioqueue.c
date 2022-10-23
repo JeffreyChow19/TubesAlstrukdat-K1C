@@ -100,3 +100,72 @@ void dequeue(PrioQueue *Q, ElType *X)
         Tail(*Q) -= 1;
     }
 }
+
+void removeLast(PrioQueue *Q, ElType *X)
+{
+    if (queueLength(*Q) == 1)
+    {
+        *X = InfoHead(*Q);
+        Head(*Q) = Nil;
+        Tail(*Q) = Nil;
+    }
+    else
+    {
+        *X = InfoTail(*Q);
+        Tail(*Q) -= 1;
+    }
+}
+
+int searchIdx(PrioQueue Q, int id)
+{
+    boolean found = false;
+    int i = 1;
+    while ((i < queueLength(Q) + 1) && (found == false))
+    {
+        if (ID(Elmt(Q, i)) == id)
+        {
+            found = true;
+        }
+        else
+        {
+            i += 1;
+        }
+    }
+    if (found == false)
+    {
+        return Nil;
+    }
+    else
+    {
+        return i;
+    }
+}
+
+void removeIdx(PrioQueue *Q, int id)
+{
+    int idx = searchIdx(*Q, id);
+    if (idx == Nil)
+    {
+        printf("ID tidak ditemukan dalam List Queue.");
+    }
+    else
+    {
+        if (queueLength(*Q) == 1)
+        {
+            Head(*Q) = Nil;
+            Tail(*Q) = Nil;
+        }
+        else
+        {
+            int i = idx;
+            if (i < Tail(*Q))
+            {
+                for (i; i < queueLength(*Q); i++)
+                {
+                    Elmt(*Q, i) = Elmt(*Q, i + 1);
+                }
+            }
+            Tail(*Q) -= 1;
+        }
+    }
+}
