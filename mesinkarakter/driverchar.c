@@ -30,7 +30,7 @@ int main()
 
     printf("\n\nDRIVER STDIN \n");
     printf("============ \n");
-    printf("Input sesuatu, MARK = '.' : ");
+    printf("Input sesuatu, lalu press enter : ");
     START();
 
     return 0;

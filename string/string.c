@@ -54,7 +54,8 @@ boolean isStringEqual(String s1, String s2)
 {
   if (LENGTH(s1) != LENGTH(s2))
     return false;
-  for (int i = 0; i < LENGTH(s1); i++)
+  int i;
+  for (i = 0; i < LENGTH(s1); i++)
     if (CHAR(s1, i) != CHAR(s2, i))
       return false;
   return true;
@@ -63,7 +64,8 @@ boolean isStringEqual(String s1, String s2)
 int stringToInt(String s)
 {
   int res = 0;
-  for (int i = 0; i < LENGTH(s); i++)
+  int i;
+  for (i = 0; i < LENGTH(s); i++)
   {
     res *= 10;
     res += CHAR(s, i) - '0';
@@ -74,7 +76,8 @@ int stringToInt(String s)
 int countChar(String s, char c)
 {
   int res = 0;
-  for (int i = 0; i < LENGTH(s); i++)
+  int i;
+  for (i = 0; i < LENGTH(s); i++)
     if (CHAR(s, i) == c)
       res++;
   return res;
@@ -84,7 +87,8 @@ String getCopyString(String s)
 {
   String res;
   CreateEmptyString(&res, LENGTH(s));
-  for (int i = 0; i < LENGTH(s); i++)
+  int i;
+  for (i = 0; i < LENGTH(s); i++)
     appendChar(&res, CHAR(s, i));
   return res;
 }
