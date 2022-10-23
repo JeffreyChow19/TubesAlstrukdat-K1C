@@ -59,4 +59,12 @@ void removeFoodID(Sim *S, Makanan *val, int id);
 /*      Inv l mungkin menjadi kosong */
 void removeFoodLast(Sim *S, Makanan *val);
 
+/* ********** DISPLAY OUTPUT ********** */
+/* *** Menampilkan inv dari simulator *** */
+/* I.S. Inv bisa kosong */
+/* F.S. Jika Inv kosong, pesan "Inventory kosong" dimunculkan,
+        jika tidak, semua item di inventory akan ditampilkan.
+*/
+void openInv(Sim S);
+
 #endif

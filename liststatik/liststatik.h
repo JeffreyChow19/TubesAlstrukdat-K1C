@@ -30,8 +30,8 @@ typedef struct
    Definisi elemen pertama: ELMT(l,i) dengan i=0 */
 
 /* ********** SELEKTOR ********** */
-#define ELMT(l, i) (l).buffer[(i)]
-#define Neff(l) (l).Neff
+#define StELMT(l, i) (l).buffer[(i)]
+#define StNeff(l) (l).Neff
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create List kosong  */

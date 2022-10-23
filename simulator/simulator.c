@@ -32,3 +32,19 @@ void removeFoodLast(Sim *S, Makanan *val)
     removeLast(&Inv(*S), &food);
     *val = food;
 }
+
+void openInv(Sim S)
+{
+    if (isQueueEmpty(Inv(S)))
+        printf("Inventory kosong\n");
+    else
+    {
+        int i = queueLength(Inv(S))-1;
+        while (i >= 0)
+        {
+            printf("%d. ", i + 1);
+            printWithExpired(Food(S, i));
+            i++;
+        }
+    }
+}
