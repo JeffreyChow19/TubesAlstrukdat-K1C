@@ -8,6 +8,18 @@ void CreateSim(Sim *S, String Name, Point Pos)
     CreateQueue(&Inv(*S), 50);
 }
 
+void moveSim(Sim *S, String dir)
+{
+    if (SBUFFER(dir) == "EAST")
+        nextPoint(&Pos(*S), 1, 0);
+    else if (SBUFFER(dir) == "WEST")
+        nextPoint(&Pos(*S), -1, 0);
+    else if (SBUFFER(dir) == "NORTH")
+        nextPoint(&Pos(*S), -1, 0);
+    else if (SBUFFER(dir) == "SOUTH")
+        nextPoint(&Pos(*S), 0, 1);
+}
+
 void getFood(Sim S, Makanan *val, int id)
 {
     int i = indexOf(Inv(S), id);

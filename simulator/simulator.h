@@ -33,7 +33,7 @@ void getFood(Sim S, Makanan *val, int id);
 /* *** Merubah posisi simulator berdasarkan arah mata angin *** */
 /* I.S. Posisi S terdefinisi dan valid */
 /* F.S. Posisi S bergeser sesuai dir yang diberikan */
-void move(Sim *S, String dir);
+void moveSim(Sim *S, String dir);
 
 /* ********** MENAMBAH MAKANAN ********** */
 /* *** Menambahkan makanan pada Inv *** */
