@@ -3,15 +3,17 @@
 /* Implementasi Mesin Karakter */
 
 #include "charmachine.h"
+#include "../boolean.h"
 #include <stdio.h>
 
 char currentChar;
 boolean EOP;
 
-static FILE *pita;
+FILE *pita;
 static int retval;
+static boolean isFile;
 
-void START()
+void START(FILE *input, boolean file)
 {
     /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
        Karakter pertama yang ada pada pita posisinya adalah pada jendela.
@@ -20,7 +22,8 @@ void START()
               Jika currentChar = MARK maka EOP akan menyala (true) */
 
     /* Algoritma */
-    pita = stdin;
+    pita = input;
+    isFile = file;
     ADV();
 }
 
@@ -34,36 +37,44 @@ void ADV()
                     Jika  currentChar = MARK maka EOP akan menyala (true) */
 
     /* Algoritma */
-    retval = fscanf(pita, "%c", &currentChar);
-    EOP = (currentChar == MARK);
-    if (EOP)
+    if (!isFile)
     {
-        fclose(pita);
+        retval = fscanf(pita, "%c", &currentChar);
+        EOP = (currentChar == MARK);
     }
-}
-
-void ReadFile(String filename, LString *ans)
-{
-    pita = fopen(SBUFFER(filename), "r");
-
-    boolean first = true;
-
-    while (!feof(pita))
+    else
     {
-        char temp[150];
-        String line;
-
-        CreateEmptyString(&line, 150);
-
-        fgets(temp, 150, pita);
-        setLiteral(&line, temp);
-
-        if (first)
+        currentChar = fgetc(pita);
+        EOP = feof(pita);
+        if (EOP)
         {
-            CreateLString(ans, 50);
-            first = false;
+            fclose(pita);
         }
-
-        insertLastString(ans, line);
     }
 }
+
+// void ReadFile(String filename, LString *ans)
+// {
+//     pita = fopen(SBUFFER(filename), "r");
+
+//     boolean first = true;
+
+//     while (!feof(pita))
+//     {
+//         char temp[150];
+//         String line;
+
+//         CreateEmptyString(&line, 150);
+
+//         fgets(temp, 150, pita);
+//         setLiteral(&line, temp);
+
+//         if (first)
+//         {
+//             CreateLString(ans, 50);
+//             first = false;
+//         }
+
+//         insertLastString(ans, line);
+//     }
+// }

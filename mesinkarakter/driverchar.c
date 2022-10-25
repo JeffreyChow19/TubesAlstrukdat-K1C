@@ -2,36 +2,44 @@
 /* FILE : test.txt */
 
 /* COMPILE MESSAGE
-gcc driverchar.c charmachine.c ../string/string.c ../liststring/liststring.c -o a
+gcc driverchar.c charmachine.c ../string/string.c -o a
 */
 
 #include "charmachine.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "../string/string.h"
+#include "../boolean.h"
 
 int main()
 {
     printf("DRIVER FILE \n");
     printf("=========== \n");
 
-    LString l;
     String filename;
     CreateEmptyString(&filename, 15);
     SBUFFER(filename) = "peta.txt";
-    ReadFile(filename, &l);
 
-    printf("Items : %d\n", l.nEff);
+    START(fopen(SBUFFER(filename), "r"), true);
 
-    int i;
-    for (i = 0; i < l.nEff; i++)
+    while (!EOP)
     {
-        printf("Index-%d : %s", i, SBUFFER(ELMTLString(l, i)));
+        printf("%c", currentChar);
+        ADV();
     }
+
+    printf("\n");
 
     printf("\n\nDRIVER STDIN \n");
     printf("============ \n");
     printf("Input sesuatu, lalu press enter : ");
-    START();
+    START(stdin, false);
+
+    while (!EOP)
+    {
+        printf("%c", currentChar);
+        ADV();
+    }
 
     return 0;
 }

@@ -6,14 +6,16 @@
 
 #include "../boolean.h"
 #include "../string/string.h"
-#include "../liststring/liststring.h"
+#include <stdio.h>
 
 #define MARK '\n'
+
 /* State Mesin */
 extern char currentChar;
 extern boolean EOP;
+extern FILE *pita;
 
-void START();
+void START(FILE *input, boolean file);
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
    I.S. : sembarang
@@ -28,7 +30,7 @@ void ADV();
           currentChar mungkin = MARK
           Jika  currentChar = MARK maka EOP akan menyala (true) */
 
-void ReadFile(String filename, LString *ans);
+// void ReadFile(String filename, LString *ans);
 /* Membaca dari suatu file txt kemudian memindahkannya ke list of string.
 I.S. filename terdefinisi, ans sembarang
 F.S. filename berhasil dibaca dan elemennya akan dipindahkan ke list of string per line. ans terdefinisi.
