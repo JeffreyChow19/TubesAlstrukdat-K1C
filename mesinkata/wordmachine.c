@@ -26,7 +26,7 @@ void STARTWORD()
        F.S. : EndWord = true, dan currentChar = MARK;
               atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
               currentChar karakter pertama sesudah karakter terakhir kata */
-    START();
+    START(stdin, false);
     IgnoreBlanks();
     if (currentChar == MARK)
     {
