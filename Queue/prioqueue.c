@@ -9,7 +9,7 @@ boolean isQueueEmpty(PrioQueue Q)
 
 boolean isQueueFull(PrioQueue Q)
 {
-    return (MaxEl(Q) == Tail(Q));
+    return (MaxQueue(Q) == Tail(Q));
 }
 
 int queueLength(PrioQueue Q)
@@ -30,19 +30,19 @@ void CreateQueue(PrioQueue *Q, int Max)
 
     if ((*Q).buffer != NULL)
     {
-        MaxEl(*Q) = Max;
+        MaxQueue(*Q) = Max;
         Head(*Q) = Nil;
         Tail(*Q) = Nil;
     }
     else /* alokasi gagal */
     {
-        MaxEl(*Q) = 0;
+        MaxQueue(*Q) = 0;
     }
 }
 
-void DeAlokasi(PrioQueue *Q)
+void dealocateQueue(PrioQueue *Q)
 {
-    MaxEl(*Q) = 0;
+    MaxQueue(*Q) = 0;
     free((*Q).buffer);
 }
 

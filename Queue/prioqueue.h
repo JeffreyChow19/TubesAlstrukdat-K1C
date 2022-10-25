@@ -17,7 +17,7 @@ typedef struct
         ElType *buffer; /* tabel penyimpan elemen */
         int idxHead;    /* alamat penghapusan */
         int idxTail;    /* alamat penambahan */
-        int MaxEl;      /* Max elemen queue */
+        int maxQueue;   /* Max elemen queue */
 } PrioQueue;
 /* Definisi Queue kosong: idxHead=Nil; idxTail=Nil. */
 /* Catatan implementasi: T[0] tidak pernah dipakai */
@@ -28,7 +28,7 @@ typedef struct
 #define Tail(Q) (Q).idxTail
 #define InfoHead(Q) (Q).buffer[(Q).idxHead]
 #define InfoTail(Q) (Q).buffer[(Q).idxTail]
-#define MaxEl(Q) (Q).MaxEl
+#define MaxQueue(Q) (Q).maxQueue
 #define Elmt(Q, i) (Q).buffer[(i)]
 
 /* ********* Prototype ********* */
@@ -49,10 +49,10 @@ void CreateQueue(PrioQueue *Q, int Max);
 /* Proses : Melakukan alokasi, membuat sebuah Q kosong */
 
 /* *** Destruktor *** */
-void DeAlokasi(PrioQueue *Q);
+void dealocateQueue(PrioQueue *Q);
 /* Proses: Mengembalikan memori Q */
 /* I.S. Q pernah dialokasi */
-/* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
+/* F.S. Q menjadi tidak terdefinisi lagi, MaxQueue(Q) diset 0 */
 
 /* *** Primitif Enqueue/Dequeue *** */
 void enqueue(PrioQueue *Q, ElType X);
