@@ -170,3 +170,12 @@ void removeIdx(PrioQueue *Q, Makanan *val, int id)
         }
     }
 }
+
+void copyQueue(PrioQueue Q, PrioQueue *Q2)
+{
+    CreateQueue(Q2, MaxEl(Q));
+    for (int i = 1; i < queueLength(Q) + 1; i++)
+    {
+        Elmt(*Q2, i) = Elmt(Q, i);
+    }
+}

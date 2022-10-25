@@ -14,10 +14,10 @@ typedef Makanan ElType;
 
 typedef struct
 {
-    ElType *buffer; /* tabel penyimpan elemen */
-    int idxHead;    /* alamat penghapusan */
-    int idxTail;    /* alamat penambahan */
-    int MaxEl;      /* Max elemen queue */
+        ElType *buffer; /* tabel penyimpan elemen */
+        int idxHead;    /* alamat penghapusan */
+        int idxTail;    /* alamat penambahan */
+        int MaxEl;      /* Max elemen queue */
 } PrioQueue;
 /* Definisi Queue kosong: idxHead=Nil; idxTail=Nil. */
 /* Catatan implementasi: T[0] tidak pernah dipakai */
@@ -79,5 +79,7 @@ int searchIdx(PrioQueue Q, int id);
 
 void removeIdx(PrioQueue *Q, ElType *val, int id);
 /* Proses: Menghapus elemen pada indeks ditemukannya ID */
+
+void copyQueue(PrioQueue Q, PrioQueue *Q2);
 
 #endif
