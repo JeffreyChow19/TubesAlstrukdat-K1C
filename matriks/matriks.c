@@ -59,56 +59,121 @@ void readMatrix(Matrix *m, String filename)
     /* Proses: Melakukan CreateMatrix(m,nRow,nCol) dan mengisi nilai efektifnya */
     /* Selanjutnya membaca nilai elemen per baris dan kolom dari file:filename dan memindahkannya ke matriks, dan jika membaca # dari file akan diganti dengan ' '*/
 
-    LString l;
-    ReadFile(filename, &l);
+    // LString l;
+    // ReadFile(filename, &l);
+
+    // int nRow = 0;
+    // int nCol = 0;
+
+    // boolean isRow = true;
+
+    // /* find nRow and nCols elemen */
+    // String toSearch;
+    // setLiteral(&toSearch, SBUFFER(ELMTLString(l, 0)));
+    // int len = LENGTH(toSearch);
+
+    // int i, j;
+    // for (i = 0; i < len - 1; i++)
+    // {
+    //     if (CHAR(toSearch, i) != ' ')
+    //     {
+    //         if (isRow)
+    //         {
+    //             nRow = (nRow * 10) + ((int)(CHAR(toSearch, i) - 48));
+    //         }
+    //         else
+    //         {
+    //             nCol = (nCol * 10) + ((int)(CHAR(toSearch, i) - 48));
+    //         }
+    //     }
+    //     else
+    //     {
+    //         isRow = false;
+    //     }
+    // }
+
+    /* pengisian matriks dan inisialisasi matriks */
+
+    // createMatrix(nRow, nCol, m);
+
+    // for (i = 0; i < nRow; i++)
+    // {
+    //     for (j = 0; j < nCol; j++)
+    //     {
+    //         if (CHAR(l.buffer[i + 1], j) != '#')
+    //         {
+    //             ELMTMat(*m, i, j) = CHAR(l.buffer[i + 1], j);
+    //         }
+    //         else
+    //         {
+    //             ELMTMat(*m, i, j) = ' ';
+    //         }
+    //     }
+    // }
+
+    START(fopen(SBUFFER(filename), "r"), true);
+
+    boolean firstLine = true;
+    boolean isRow = true;
+    boolean notYetCreate = true;
 
     int nRow = 0;
     int nCol = 0;
 
-    boolean isRow = true;
+    int i = 0;
+    int j = 0;
 
-    /* find nRow and nCols elemen */
-    String toSearch;
-    setLiteral(&toSearch, SBUFFER(ELMTLString(l, 0)));
-    int len = LENGTH(toSearch);
-
-    int i, j;
-    for (i = 0; i < len - 1; i++)
+    while (!EOP)
     {
-        if (CHAR(toSearch, i) != ' ')
+        if (firstLine)
         {
-            if (isRow)
+            if (currentChar == ' ' && isRow)
             {
-                nRow = (nRow * 10) + ((int)(CHAR(toSearch, i) - 48));
+                isRow = false;
+            }
+            else if (currentChar == '\n' && !isRow)
+            {
+                firstLine = false;
             }
             else
             {
-                nCol = (nCol * 10) + ((int)(CHAR(toSearch, i) - 48));
+                if (isRow)
+                {
+                    nRow = (nRow * 10) + ((int)(currentChar - 48));
+                }
+                else
+                {
+                    nCol = (nCol * 10) + ((int)(currentChar - 48));
+                }
             }
         }
         else
         {
-            isRow = false;
-        }
-    }
-
-    /* pengisian matriks dan inisialisasi matriks */
-
-    createMatrix(nRow, nCol, m);
-
-    for (i = 0; i < nRow; i++)
-    {
-        for (j = 0; j < nCol; j++)
-        {
-            if (CHAR(l.buffer[i + 1], j) != '#')
+            if (notYetCreate)
             {
-                ELMTMat(*m, i, j) = CHAR(l.buffer[i + 1], j);
+                createMatrix(nRow, nCol, m);
+                notYetCreate = false;
+            }
+
+            if (currentChar != '\n')
+            {
+                if (currentChar != '#')
+                {
+                    ELMTMat(*m, i, j) = currentChar;
+                }
+                else
+                {
+                    ELMTMat(*m, i, j) = ' ';
+                }
+                j++;
             }
             else
             {
-                ELMTMat(*m, i, j) = ' ';
+                i++;
+                j = 0;
             }
         }
+        ADV();
     }
 }
 

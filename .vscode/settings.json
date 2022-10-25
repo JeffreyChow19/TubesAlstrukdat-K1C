@@ -1,6 +1,7 @@
 {
   "files.associations": {
     "wordmachine.h": "c",
-    "boolean.h": "c"
+    "boolean.h": "c",
+    "liststring.h": "c"
   }
 }
