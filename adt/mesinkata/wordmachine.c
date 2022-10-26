@@ -3,32 +3,37 @@
 #include "../boolean.h"
 #include "../mesinkarakter/charmachine.h"
 #include "wordmachine.h"
+#include <stdio.h>
 
 boolean endWord;
 Word currentWord;
-char currentChar;
-boolean EOP;
+boolean isNewLine;
 
 void IgnoreBlanks()
 {
     /* Mengabaikan satu atau beberapa BLANK
        I.S. : currentChar sembarang
-       F.S. : currentChar ≠ BLANK atau currentChar = MARK */
-    while (currentChar == BLANK)
+       F.S. : (currentChar ≠ BLANK dan currentChar != NEWLINE) atau currentChar = MARK */
+    isNewLine = false;
+    while (currentChar == BLANK || (currentChar == NEWLINE && !EOP))
     {
+        if (currentChar == NEWLINE && !EOP)
+        {
+            isNewLine = true;
+        }
         ADV();
     }
 }
 
-void STARTWORD()
+void STARTWORD(FILE *input, boolean file)
 {
     /* I.S. : currentChar sembarang
        F.S. : EndWord = true, dan currentChar = MARK;
               atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
               currentChar karakter pertama sesudah karakter terakhir kata */
-    START(stdin, false);
+    START(input, file);
     IgnoreBlanks();
-    if (currentChar == MARK)
+    if (EOP)
     {
         endWord = true;
     }
@@ -47,6 +52,7 @@ void ADVWORD()
               Jika currentChar = MARK, EndWord = true.
        Proses : Akuisisi kata menggunakan procedure SalinWord */
 
+    IgnoreBlanks();
     if (currentChar == MARK)
     {
         endWord = true;
@@ -54,7 +60,6 @@ void ADVWORD()
     else
     {
         CopyWord();
-        IgnoreBlanks();
     }
 }
 

@@ -10,20 +10,30 @@ typedef struct
 {
     String Name;
     Point Pos;
+    Time Clock;
     PrioQueue Inv;
+    PrioQueue Delv;
 } Sim;
 
 /* ********** SELEKTOR ********** */
 #define Name(S) (S).Name
 #define Pos(S) (S).Pos
+#define Clock(S) (S).Clock
 #define Inv(S) (S).Inv
-#define Food(S, i) (S).Inv.buffer[(i)]
+#define FoodInv(S, i) (S).Inv.buffer[(i)]
+#define Delv(S) (S).Delv
+#define FoodDelv(S, i) (S).Delv.buffer[(i)]
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : membuat simulator*/
 /* I.S. S sembarang */
 /* F.S. Terbentuk Simulator dengan nama, posisi terdefinisi dan Inv kosong*/
 void CreateSim(Sim *S, String Name, Point Pos);
+
+/* Menyalin Simulator */
+/* I.S. Simulator terdefinisi */
+/* F.S. Terbentuk salinan simulator */
+void copySim(Sim S, Sim *SC);
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* Mendapatkan makanan dengan ID tertentu */
@@ -34,6 +44,17 @@ void getFood(Sim S, Makanan *val, int id);
 /* I.S. Posisi S terdefinisi dan valid */
 /* F.S. Posisi S bergeser sesuai dir yang diberikan */
 void moveSim(Sim *S, String dir);
+
+/* ********** MERUBAH WAKTU ********** */
+/* *** Menambahkan waktu pada simulator *** */
+/* I.S. Waktu S terdefinisi dan dd, hh, mm adalah waktu yang ingin ditambahkan */
+/* F.S. Waktu pada S bertambah sesuai lama waktu yang diberikan */
+void addTime(Sim *S, int dd, int hh, int mm);
+
+/* *** Mengurangkan waktu pada simulator *** */
+/* I.S. Waktu S terdefinisi dan dd, hh, mm adalah waktu yang ingin dikurangkan */
+/* F.S. Waktu pada S berkurang sesuai lama waktu yang diberikan */
+void removeTime(Sim *S, int dd, int hh, int mm);
 
 /* ********** MENAMBAH MAKANAN ********** */
 /* *** Menambahkan makanan pada Inv *** */

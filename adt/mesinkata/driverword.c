@@ -9,13 +9,9 @@ gcc driverword.c wordmachine.c ../mesinkarakter/charmachine.c ../string/string.c
 #include <stdio.h>
 #include <stdlib.h>
 
-boolean endWord;
-Word currentWord;
-char currentChar;
-
 int main()
 {
-    STARTWORD();
+    STARTWORD(stdin, false);
     IgnoreBlanks();
 
     while (!endWord)

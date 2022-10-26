@@ -40,7 +40,7 @@ boolean isIdxEff(Matrix m, IdxType i, IdxType j);
 void copyMatrix(Matrix mIn, Matrix *mOut);
 /* Melakukan assignment mOut <- mIn */
 
-void readMatrix(Matrix *m, String filename);
+void readMatrix(Matrix *m, char *filename);
 /* I.S. filename valid, m sembarang*/
 /* F.S. m terdefinisi nilai elemen efektifnya, berukuran nRow x nCol, nRow dan nCol dicari dari file */
 /* Proses: Melakukan CreateMatrix(m,nRow,nCol) dan mengisi nilai efektifnya */
