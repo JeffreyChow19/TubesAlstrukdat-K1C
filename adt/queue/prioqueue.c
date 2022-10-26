@@ -4,12 +4,12 @@
 
 boolean isQueueEmpty(PrioQueue Q)
 {
-    return ((Head(Q) == Nil) && (Tail(Q) == Nil));
+    return ((Head(Q) == IDX_UNDEF) && (Tail(Q) == IDX_UNDEF));
 }
 
 boolean isQueueFull(PrioQueue Q)
 {
-    return (MaxQueue(Q) == Tail(Q));
+    return (Tail(Q) == MaxQueue(Q) - 1);
 }
 
 int queueLength(PrioQueue Q)
@@ -20,19 +20,21 @@ int queueLength(PrioQueue Q)
     }
     else
     {
-        return Tail(Q);
+        return Tail(Q) + 1;
     }
 }
 
-void CreateQueue(PrioQueue *Q, int Max)
+void CreateQueue(PrioQueue *Q, int Max, boolean delivery, boolean expiry)
 {
     (*Q).buffer = (ElType *)malloc((Max + 1) * sizeof(ElType));
 
     if ((*Q).buffer != NULL)
     {
         MaxQueue(*Q) = Max;
-        Head(*Q) = Nil;
-        Tail(*Q) = Nil;
+        Head(*Q) = IDX_UNDEF;
+        Tail(*Q) = IDX_UNDEF;
+        forDelivery(*Q) = delivery;
+        forExpiry(*Q) = expiry;
     }
     else /* alokasi gagal */
     {
@@ -50,18 +52,28 @@ void enqueue(PrioQueue *Q, ElType X)
 {
     if (isQueueEmpty(*Q))
     {
-        Head(*Q) = 1;
-        Tail(*Q) = 1;
+        Head(*Q) = 0;
+        Tail(*Q) = 0;
         InfoTail(*Q) = X;
     }
     else
     {
         boolean found = false;
-        int i = queueLength(*Q);
+        int i = queueLength(*Q) - 1;
         while ((i > 0) && (found == false))
         {
-            int timeInput = TimeToMinute(EXPIRY(X));
-            int timeIdx = TimeToMinute(EXPIRY(Elmt(*Q, i)));
+            int timeInput;
+            int timeIdx;
+            if (isForExpiry(*Q))
+            {
+                timeInput = TimeToMinute(EXPIRY(X));
+                timeIdx = TimeToMinute(EXPIRY(Elmt(*Q, i)));
+            }
+            else if (isForDelivery(*Q))
+            {
+                timeInput = TimeToMinute(DELIVERY(X));
+                timeIdx = TimeToMinute(DELIVERY(Elmt(*Q, i)));
+            }
 
             if (timeInput < timeIdx)
             {
@@ -87,13 +99,13 @@ void dequeue(PrioQueue *Q, ElType *X)
     if (queueLength(*Q) == 1)
     {
         *X = InfoHead(*Q);
-        Head(*Q) = Nil;
-        Tail(*Q) = Nil;
+        Head(*Q) = IDX_UNDEF;
+        Tail(*Q) = IDX_UNDEF;
     }
     else
     {
         *X = InfoHead(*Q);
-        for (int i = 1; i < queueLength(*Q); i++)
+        for (int i = 0; i < queueLength(*Q) - 1; i++)
         {
             Elmt(*Q, i) = Elmt(*Q, i + 1);
         }
@@ -106,8 +118,8 @@ void removeLast(PrioQueue *Q, ElType *X)
     if (queueLength(*Q) == 1)
     {
         *X = InfoHead(*Q);
-        Head(*Q) = Nil;
-        Tail(*Q) = Nil;
+        Head(*Q) = IDX_UNDEF;
+        Tail(*Q) = IDX_UNDEF;
     }
     else
     {
@@ -119,8 +131,8 @@ void removeLast(PrioQueue *Q, ElType *X)
 int searchIdx(PrioQueue Q, int id)
 {
     boolean found = false;
-    int i = 1;
-    while ((i < queueLength(Q) + 1) && (found == false))
+    int i = 0;
+    while ((i < queueLength(Q)) && (found == false))
     {
         if (ID(Elmt(Q, i)) == id)
         {
@@ -133,7 +145,7 @@ int searchIdx(PrioQueue Q, int id)
     }
     if (found == false)
     {
-        return Nil;
+        return IDX_UNDEF;
     }
     else
     {
@@ -144,24 +156,24 @@ int searchIdx(PrioQueue Q, int id)
 void removeIdx(PrioQueue *Q, Makanan *val, int id)
 {
     int idx = searchIdx(*Q, id);
-    if (idx == Nil)
+    if (idx == IDX_UNDEF)
     {
         printf("ID tidak ditemukan dalam List Queue.");
     }
     else
     {
-        *val = InfoHead(*Q);
+        *val = Elmt(*Q, idx);
         if (queueLength(*Q) == 1)
         {
-            Head(*Q) = Nil;
-            Tail(*Q) = Nil;
+            Head(*Q) = IDX_UNDEF;
+            Tail(*Q) = IDX_UNDEF;
         }
         else
         {
             int i = idx;
             if (i < Tail(*Q))
             {
-                for (i; i < queueLength(*Q); i++)
+                for (i; i < queueLength(*Q) - 1; i++)
                 {
                     Elmt(*Q, i) = Elmt(*Q, i + 1);
                 }
@@ -173,9 +185,19 @@ void removeIdx(PrioQueue *Q, Makanan *val, int id)
 
 void copyQueue(PrioQueue Q, PrioQueue *Q2)
 {
-    CreateQueue(Q2, MaxQueue(Q));
-    for (int i = 1; i < queueLength(Q) + 1; i++)
+    CreateQueue(Q2, MaxQueue(Q), forDelivery(Q), forExpiry(Q));
+    for (int i = 0; i < queueLength(Q); i++)
     {
         Elmt(*Q2, i) = Elmt(Q, i);
     }
+}
+
+boolean isForDelivery(PrioQueue Q)
+{
+    return ((forDelivery(Q) == true) && (forExpiry(Q) == false));
+}
+
+boolean isForExpiry(PrioQueue Q)
+{
+    return ((forDelivery(Q) == false) && (forExpiry(Q) == true));
 }

@@ -7,17 +7,19 @@
 #include "../boolean.h"
 #include "../makanan/makanan.h"
 
-#define Nil 0
+#define IDX_UNDEF -1
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
 
 typedef Makanan ElType;
 
 typedef struct
 {
-        ElType *buffer; /* tabel penyimpan elemen */
-        int idxHead;    /* alamat penghapusan */
-        int idxTail;    /* alamat penambahan */
-        int maxQueue;   /* Max elemen queue */
+        ElType *buffer;      /* tabel penyimpan elemen */
+        int idxHead;         /* alamat penghapusan */
+        int idxTail;         /* alamat penambahan */
+        int maxQueue;        /* Max elemen queue */
+        boolean forDelivery; /* Apakah ini Queue untuk Delivery */
+        boolean forExpiry;   /* Apakah ini Queue untuk Expiry */
 } PrioQueue;
 /* Definisi Queue kosong: idxHead=Nil; idxTail=Nil. */
 /* Catatan implementasi: T[0] tidak pernah dipakai */
@@ -30,6 +32,8 @@ typedef struct
 #define InfoTail(Q) (Q).buffer[(Q).idxTail]
 #define MaxQueue(Q) (Q).maxQueue
 #define Elmt(Q, i) (Q).buffer[(i)]
+#define forDelivery(Q) (Q).forDelivery
+#define forExpiry(Q) (Q).forExpiry
 
 /* ********* Prototype ********* */
 boolean isQueueEmpty(PrioQueue Q);
@@ -41,7 +45,7 @@ int queueLength(PrioQueue Q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
 
 /* *** Kreator *** */
-void CreateQueue(PrioQueue *Q, int Max);
+void CreateQueue(PrioQueue *Q, int Max, boolean delivery, boolean expiry);
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk dan salah satu kondisi sbb: */
 /* Jika alokasi berhasil, Tabel memori dialokasi berukuran Max+1 */
@@ -81,5 +85,9 @@ void removeIdx(PrioQueue *Q, ElType *val, int id);
 /* Proses: Menghapus elemen pada indeks ditemukannya ID */
 
 void copyQueue(PrioQueue Q, PrioQueue *Q2);
+
+boolean isForDelivery(PrioQueue Q);
+
+boolean isForExpiry(PrioQueue Q);
 
 #endif
