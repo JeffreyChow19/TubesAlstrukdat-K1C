@@ -2,6 +2,7 @@
 #define STRING_H
 
 #include "../boolean.h"
+#include "../mesinkata/word.h"
 
 typedef struct
 {
@@ -43,6 +44,8 @@ boolean isStringFull(String s);
  */
 void appendChar(String *s, char c);
 
+void appendWord(String *s, Word w);
+
 /* Mengekspansi string
   I.S. s terdefinisi, literal merupakan char array yang diakhiri null terminator atau string literal
   F.S. mengisi buffer dengan literal
@@ -75,5 +78,9 @@ int countChar(String s, char c);
   Mengembalikan copy dari string s
  */
 String getCopyString(String s);
+
+String wordToString(Word w);
+
+int wordToInt(Word w);
 
 #endif

@@ -52,7 +52,7 @@ void copyMatrix(Matrix mIn, Matrix *mOut)
     }
 }
 
-void readMatrix(Matrix *m, String filename)
+void readMatrix(Matrix *m, char *filename)
 {
     /* I.S. filename valid, m sembarang */
     /* F.S. m terdefinisi nilai elemen efektifnya, berukuran nRow x nCol, nRow dan nCol dicari dari file */
@@ -111,7 +111,7 @@ void readMatrix(Matrix *m, String filename)
     //     }
     // }
 
-    START(fopen(SBUFFER(filename), "r"), true);
+    START(fopen(filename, "r"), true);
 
     boolean firstLine = true;
     boolean isRow = true;
