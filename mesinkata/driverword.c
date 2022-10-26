@@ -1,7 +1,7 @@
 /* DRIVER UNTUK WORDMACHINE.C */
 
 /* COMPILE MESSAGE
-gcc driverword.c wordmachine.c ../mesinkarakter/charmachine.c ../string/string.c ../liststring/liststring.c -o a
+gcc driverword.c wordmachine.c ../mesinkarakter/charmachine.c ../string/string.c -o a
 */
 
 #include "wordmachine.h"
