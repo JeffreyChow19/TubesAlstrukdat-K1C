@@ -6,8 +6,8 @@ void CreateSim(Sim *S, String Name, Point Pos)
     Name(*S) = Name;
     Pos(*S) = Pos;
     CreateTime(&Clock(*S), 0, 0, 0);
-    CreateQueue(&Inv(*S), 50);
-    CreateQueue(&Delv(*S), 50);
+    CreateQueue(&Inv(*S), 50, true);
+    CreateQueue(&Delv(*S), 50, false);
 }
 
 void copySim(Sim S, Sim *CS)
@@ -15,7 +15,8 @@ void copySim(Sim S, Sim *CS)
     Name(*CS) = Name(S);
     Pos(*CS) = Pos(S);
     Clock(*CS) = Clock(S);
-    /* masih perlu copy queue */
+    copyQueue(Inv(S), &Inv(*CS));
+    copyQueue(Delv(S), &Delv(*CS));
 }
 
 void moveSim(Sim *S, String dir)
@@ -71,6 +72,24 @@ void removeFoodLast(Sim *S, Makanan *val)
     *val = food;
 }
 
+void removeExp(Sim *S, Makanan *val)
+{
+    int exp = TimeToMinute(EXPIRY(InfoHead(Inv(*S))));
+    if (exp <= 0)
+    {
+        dequeue(&Inv(*S), val);
+    }
+}
+
+void removeDelv(Sim *S, Makanan *val)
+{
+    int delv = TimeToMinute(DELIVERY(InfoHead(Inv(*S))));
+    if (delv <= 0)
+    {
+        dequeue(&Delv(*S), val);
+    }
+}
+
 void openInv(Sim S)
 {
     if (isQueueEmpty(Inv(S)))
@@ -91,4 +110,9 @@ void openInv(Sim S)
 void currPos(Sim S)
 {
     WritePoint(Pos(S));
+}
+
+void currTime(Sim S)
+{
+    WriteTime(Clock(S));
 }

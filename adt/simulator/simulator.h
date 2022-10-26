@@ -80,6 +80,16 @@ void removeFoodID(Sim *S, Makanan *val, int id);
 /*      Inv l mungkin menjadi kosong */
 void removeFoodLast(Sim *S, Makanan *val);
 
+/* *** Menghapus makanan jika sudah expired *** */
+/* I.S. Inv tidak kosong */
+/* F.S. jika head queue memiliki expiry <= 0, dihapus */
+void removeExp(Sim *S, Makanan *val);
+
+/* *** Menghapus makanan jika sudah sampai *** */
+/* I.S. Delv tidak kosong */
+/* F.S. jika head queue memiliki delivery <= 0, dihapus */
+void removeDelv(Sim *S, Makanan *val);
+
 /* ********** DISPLAY OUTPUT ********** */
 /* *** Menampilkan inv dari simulator *** */
 /* I.S. Inv bisa kosong */
@@ -92,5 +102,10 @@ void openInv(Sim S);
 /* I.S. Posisi terdefinisi */
 /* F.S. Koordinat posisi simulator ditampilkan di layar*/
 void currPos(Sim S);
+
+/* *** Menampilkan waktu simulator *** */
+/* I.S. Waktu terdefinisi */
+/* F.S. Waktu simulator ditampilkan di layar */
+void currTime(Sim S);
 
 #endif
