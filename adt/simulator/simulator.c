@@ -78,7 +78,7 @@ void openInv(Sim S)
     else
     {
         printf("List Makanan di Inventory\n (nama - waktu sisa kedaluwarsa)");
-        int i = queueLength(Inv(S))-1;
+        int i = queueLength(Inv(S)) - 1;
         while (i >= 0)
         {
             printf("%d. ", i + 1);

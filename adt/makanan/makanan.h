@@ -10,7 +10,7 @@
 #define ACTION(m) (m).action
 #define DELIVERY(m) (m).delivery
 
-typedef struct
+typedef struct makanan
 {
   int id;
   String name;

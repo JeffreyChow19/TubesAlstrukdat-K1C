@@ -1,7 +1,14 @@
 {
   "files.associations": {
+    "*.html": "html",
     "wordmachine.h": "c",
     "boolean.h": "c",
-    "liststring.h": "c"
+    "liststring.h": "c",
+    "word.h": "c",
+    "time.h": "c",
+    "string.h": "c",
+    "data.h": "c",
+    "point.h": "c",
+    "stdio.h": "c"
   }
 }
