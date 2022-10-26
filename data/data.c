@@ -11,7 +11,7 @@ ListDin recipes;
 
 void initData(char *mapFile, char *foodsFile, char *recipesFile)
 {
-  // readMapConfig(mapFile);
+  readMapConfig(mapFile);
   readFoodsConfig(foodsFile);
   readRecipesConfig(recipesFile);
 }
@@ -102,14 +102,11 @@ void readRecipesConfig(char *filename)
   for (i = 0; i < nRecipes; i++)
   {
     int parentId = wordToInt(currentWord);
-    // printf("idx: %d\n", indexOf(foods, parentId));
+
     Makanan parent = StELMT(foods, indexOf(foods, parentId));
-    // printf("Parent: %s\n", SBUFFER(NAME(parent)));
-    // printf("parentId: %d\n", parentId);
 
     ADVWORD();
     int childCount = wordToInt(currentWord);
-    // printf("childs: %d\n", childCount);
 
     Tree parentTree = newNode(parent, childCount);
     boolean added = false;
@@ -118,7 +115,6 @@ void readRecipesConfig(char *filename)
     for (j = 0; j < childCount; j++)
     {
       int childId = wordToInt(currentWord);
-      // printf("childId: %d\n", childId);
       Tree childTree = findNodeInList(recipesTrees, childId);
       if (childTree == NULL)
       {
@@ -127,7 +123,6 @@ void readRecipesConfig(char *filename)
       }
       else
       {
-        // printf("child found: %d %s\n", ID(INFO(childTree)), SBUFFER(NAME(INFO(childTree))));
         int idx = indexOfDin(recipesTrees, childId);
         if (idx != -1)
         {
@@ -137,7 +132,6 @@ void readRecipesConfig(char *filename)
       }
       insertLastDin(&CHILDREN(parentTree), childTree);
       ADVWORD();
-      // printf("%d %s\n", childId, SBUFFER(NAME(INFO(childTree))));
     }
     if (!added)
     {
