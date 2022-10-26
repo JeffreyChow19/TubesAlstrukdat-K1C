@@ -15,17 +15,17 @@
 /* Definisi elemen dan koleksi objek*/
 typedef Makanan ElType;
 typedef int IdxType;
-typedef struct 
+typedef struct
 {
-    ElType buffer[CAPACITY]; /* memori tempat penyimpanan elemen */
-    int Neff;
+   ElType buffer[CAPACITY]; /* memori tempat penyimpanan elemen */
+   int Neff;
 } ListStatik;
 /* Indeks yang digunakan [0..CAPACITY-1] */
 /* Jika l adalah ListStatik, cara deklarasi dan akses: */
 /* Deklarasi : l : ListStatik */
-/* Maka cara akses: 
+/* Maka cara akses:
    ELMT(l,i) untuk mengakses elemen ke-i */
-/* Definisi : 
+/* Definisi :
    List kosong: semua elemen bernilai MARK
    Definisi elemen pertama: ELMT(l,i) dengan i=0 */
 

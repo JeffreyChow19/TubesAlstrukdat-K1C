@@ -6,26 +6,22 @@
 
 #include "../boolean.h"
 #include "../mesinkarakter/charmachine.h"
+#include "word.h"
 
-#define NMax 50
 #define BLANK ' '
-
-typedef struct
-{
-   char TabWord[NMax]; /* container penyimpan kata, indeks yang dipakai [0..NMax-1] */
-   int Length;
-} Word;
+#define NEWLINE '\n'
 
 /* State Mesin Word */
 extern boolean endWord;
 extern Word currentWord;
+extern boolean isNewLine;
 
 void IgnoreBlanks();
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : currentChar sembarang
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
 
-void STARTWORD();
+void STARTWORD(FILE *input, boolean file);
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,

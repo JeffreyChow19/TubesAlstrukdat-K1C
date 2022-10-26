@@ -31,6 +31,17 @@ void appendChar(String *s, char c)
   CHAR(*s, LENGTH(*s)) = '\0';
 }
 
+void appendWord(String *s, Word w)
+{
+  if (LENGTH(*s) != 0)
+    appendChar(s, ' ');
+  int i;
+  for (i = 0; i < w.Length; i++)
+  {
+    appendChar(s, w.TabWord[i]);
+  }
+}
+
 void setLiteral(String *s, char *literal)
 {
   LENGTH(*s) = 0;
@@ -90,5 +101,27 @@ String getCopyString(String s)
   int i;
   for (i = 0; i < LENGTH(s); i++)
     appendChar(&res, CHAR(s, i));
+  return res;
+}
+
+String wordToString(Word w)
+{
+  String res;
+  CreateEmptyString(&res, w.Length);
+  int i;
+  for (i = 0; i < w.Length; i++)
+    appendChar(&res, w.TabWord[i]);
+  return res;
+}
+
+int wordToInt(Word w)
+{
+  int res = 0;
+  int i;
+  for (i = 0; i < w.Length; i++)
+  {
+    res *= 10;
+    res += w.TabWord[i] - '0';
+  }
   return res;
 }

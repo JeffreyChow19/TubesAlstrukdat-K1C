@@ -14,6 +14,7 @@
 extern char currentChar;
 extern boolean EOP;
 extern FILE *pita;
+extern boolean isFile;
 
 void START(FILE *input, boolean file);
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.

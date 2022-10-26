@@ -5,125 +5,125 @@
 
 void CreateListDin(ListDin *l, int capacity)
 {
-  BUFFER(*l) = (ElType *)malloc(capacity * sizeof(ElType));
+  BUFFER(*l) = (ElTypeDin *)malloc(capacity * sizeof(ElTypeDin));
   CAPACITY(*l) = capacity;
   NEFF(*l) = 0;
 }
 
-void dealocateList(ListDin *l)
+void dealocateListDin(ListDin *l)
 {
   CAPACITY(*l) = 0;
   NEFF(*l) = 0;
   free(BUFFER(*l));
 }
 
-int listLength(ListDin l)
+int listLengthDin(ListDin l)
 {
   return NEFF(l);
 }
 
-IdxType getFirstIdx(ListDin l)
+IdxType getFirstIdxDin(ListDin l)
 {
   return IDX_MIN;
 }
 
-IdxType getLastIdx(ListDin l)
+IdxType getLastIdxDin(ListDin l)
 {
   return NEFF(l) - 1;
 }
 
-boolean isIdxValid(ListDin l, IdxType i)
+boolean isIdxValidDin(ListDin l, IdxType i)
 {
   return i >= IDX_MIN && i < CAPACITY(l);
 }
 
-boolean isIdxEff(ListDin l, IdxType i)
+boolean isIdxEffDin(ListDin l, IdxType i)
 {
-  if (isEmpty(l))
+  if (isEmptyDin(l))
     return false;
-  return i >= getFirstIdx(l) && i <= getLastIdx(l);
+  return i >= getFirstIdxDin(l) && i <= getLastIdxDin(l);
 }
 
-boolean isEmpty(ListDin l)
+boolean isEmptyDin(ListDin l)
 {
   return NEFF(l) == 0;
 }
 
-boolean isFull(ListDin l)
+boolean isFullDin(ListDin l)
 {
   return NEFF(l) == CAPACITY(l);
 }
 
-IdxType indexOf(ListDin l, int id)
+IdxType indexOfDin(ListDin l, int id)
 {
   IdxType i;
 
-  if (isEmpty(l))
+  if (isEmptyDin(l))
     return IDX_UNDEF;
 
-  i = getFirstIdx(l);
-  while (i <= getLastIdx(l) && ID(INFO(ELMT(l, i))) != id)
+  i = getFirstIdxDin(l);
+  while (i <= getLastIdxDin(l) && ID(INFO(ELMT(l, i))) != id)
     i++;
-  return i > getLastIdx(l) ? IDX_UNDEF : i;
+  return i > getLastIdxDin(l) ? IDX_UNDEF : i;
 }
 
-void copyList(ListDin lIn, ListDin *lOut)
+void copyListDin(ListDin lIn, ListDin *lOut)
 {
   IdxType i;
 
   CreateListDin(lOut, CAPACITY(lIn));
   NEFF(*lOut) = NEFF(lIn);
-  for (i = getFirstIdx(lIn); i <= getLastIdx(lIn); i++)
+  for (i = getFirstIdxDin(lIn); i <= getLastIdxDin(lIn); i++)
   {
     ELMT(*lOut, i) = ELMT(lIn, i);
   }
 }
 
-void insertLast(ListDin *l, ElType val)
+void insertLastDin(ListDin *l, ElTypeDin val)
 {
-  if (isFull(*l))
-    expandList(l, CAPACITY(*l));
-  if (isEmpty(*l))
+  if (isFullDin(*l))
+    expandListDin(l, CAPACITY(*l));
+  if (isEmptyDin(*l))
     NEFF(*l) = 1;
   else
     NEFF(*l) += 1;
 
-  ELMT(*l, getLastIdx(*l)) = val;
+  ELMT(*l, getLastIdxDin(*l)) = val;
 }
 
-void deleteLast(ListDin *l, ElType *val)
+void deleteLastDin(ListDin *l, ElTypeDin *val)
 {
-  *val = ELMT(*l, getLastIdx(*l));
+  *val = ELMT(*l, getLastIdxDin(*l));
   NEFF(*l) -= 1;
   if (NEFF(*l) < CAPACITY(*l) / 4)
-    shrinkList(l, CAPACITY(*l) / 2);
+    shrinkListDin(l, CAPACITY(*l) / 2);
 }
 
-void concatList(ListDin *l1, ListDin *l2)
+void concatListDin(ListDin *l1, ListDin *l2)
 {
   IdxType i;
 
-  for (i = getFirstIdx(*l2); i <= getLastIdx(*l2); i++)
+  for (i = getFirstIdxDin(*l2); i <= getLastIdxDin(*l2); i++)
   {
-    insertLast(l1, ELMT(*l2, i));
+    insertLastDin(l1, ELMT(*l2, i));
   }
-  dealocateList(l2);
+  dealocateListDin(l2);
 }
 
-void expandList(ListDin *l, int num)
+void expandListDin(ListDin *l, int num)
 {
   CAPACITY(*l) += num;
-  BUFFER(*l) = realloc(BUFFER(*l), CAPACITY(*l) * sizeof(ElType));
+  BUFFER(*l) = realloc(BUFFER(*l), CAPACITY(*l) * sizeof(ElTypeDin));
 }
 
-void shrinkList(ListDin *l, int num)
+void shrinkListDin(ListDin *l, int num)
 {
   CAPACITY(*l) -= num;
-  BUFFER(*l) = realloc(BUFFER(*l), CAPACITY(*l) * sizeof(ElType));
+  BUFFER(*l) = realloc(BUFFER(*l), CAPACITY(*l) * sizeof(ElTypeDin));
 }
 
-void compressList(ListDin *l)
+void compressListDin(ListDin *l)
 {
   CAPACITY(*l) = NEFF(*l);
-  BUFFER(*l) = realloc(BUFFER(*l), CAPACITY(*l) * sizeof(ElType));
+  BUFFER(*l) = realloc(BUFFER(*l), CAPACITY(*l) * sizeof(ElTypeDin));
 }

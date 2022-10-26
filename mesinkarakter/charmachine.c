@@ -10,8 +10,8 @@ char currentChar;
 boolean EOP;
 
 FILE *pita;
+boolean isFile;
 static int retval;
-static boolean isFile;
 
 void START(FILE *input, boolean file)
 {

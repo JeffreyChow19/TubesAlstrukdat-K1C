@@ -8,13 +8,13 @@
 #ifndef LISTDIN_S
 #define LISTDIN_S
 /* Definisi elemen dan koleksi objek */
-typedef struct node *ElType; /* type elemen list */
+typedef struct node *ElTypeDin; /* type elemen list */
 typedef int IdxType;
 typedef struct listdin
 {
-  ElType *buffer; /* memori tempat penyimpan elemen (container) */
-  int nEff;       /* >=0, banyaknya elemen efektif */
-  int capacity;   /* ukuran elemen */
+  ElTypeDin *buffer; /* memori tempat penyimpan elemen (container) */
+  int nEff;          /* >=0, banyaknya elemen efektif */
+  int capacity;      /* ukuran elemen */
 } ListDin;
 #endif
 
