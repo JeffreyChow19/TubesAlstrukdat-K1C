@@ -1,7 +1,7 @@
 #include "data.h"
-#include "../mesinkata/wordmachine.h"
-#include "../string/string.h"
-#include "../waktu/time.h"
+#include "../adt/mesinkata/wordmachine.h"
+#include "../adt/string/string.h"
+#include "../adt/waktu/time.h"
 #include <stdio.h>
 
 Matrix map;

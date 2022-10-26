@@ -1,6 +1,6 @@
-#include "../matriks/matriks.h"
-#include "../liststatik/liststatik.h"
-#include "../listdin/listdin.h"
+#include "../adt/matriks/matriks.h"
+#include "../adt/liststatik/liststatik.h"
+#include "../adt/listdin/listdin.h"
 #include <stdio.h>
 
 extern Matrix map;
