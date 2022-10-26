@@ -24,7 +24,7 @@ int queueLength(PrioQueue Q)
     }
 }
 
-void CreateQueue(PrioQueue *Q, int Max, boolean delivery, boolean expiry)
+void CreateQueue(PrioQueue *Q, int Max, boolean type)
 {
     (*Q).buffer = (ElType *)malloc((Max + 1) * sizeof(ElType));
 
@@ -33,8 +33,7 @@ void CreateQueue(PrioQueue *Q, int Max, boolean delivery, boolean expiry)
         MaxQueue(*Q) = Max;
         Head(*Q) = IDX_UNDEF;
         Tail(*Q) = IDX_UNDEF;
-        forDelivery(*Q) = delivery;
-        forExpiry(*Q) = expiry;
+        QueueType(*Q) = type;
     }
     else /* alokasi gagal */
     {
@@ -185,7 +184,7 @@ void removeIdx(PrioQueue *Q, Makanan *val, int id)
 
 void copyQueue(PrioQueue Q, PrioQueue *Q2)
 {
-    CreateQueue(Q2, MaxQueue(Q), forDelivery(Q), forExpiry(Q));
+    CreateQueue(Q2, MaxQueue(Q), QueueType(Q));
     for (int i = 0; i < queueLength(Q); i++)
     {
         Elmt(*Q2, i) = Elmt(Q, i);
@@ -194,10 +193,10 @@ void copyQueue(PrioQueue Q, PrioQueue *Q2)
 
 boolean isForDelivery(PrioQueue Q)
 {
-    return ((forDelivery(Q) == true) && (forExpiry(Q) == false));
+    return (QueueType(Q) == false);
 }
 
 boolean isForExpiry(PrioQueue Q)
 {
-    return ((forDelivery(Q) == false) && (forExpiry(Q) == true));
+    return (QueueType(Q) == true);
 }

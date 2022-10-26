@@ -14,12 +14,13 @@ typedef Makanan ElType;
 
 typedef struct
 {
-        ElType *buffer;      /* tabel penyimpan elemen */
-        int idxHead;         /* alamat penghapusan */
-        int idxTail;         /* alamat penambahan */
-        int maxQueue;        /* Max elemen queue */
-        boolean forDelivery; /* Apakah ini Queue untuk Delivery */
-        boolean forExpiry;   /* Apakah ini Queue untuk Expiry */
+        ElType *buffer;    /* tabel penyimpan elemen */
+        int idxHead;       /* alamat penghapusan */
+        int idxTail;       /* alamat penambahan */
+        int maxQueue;      /* Max elemen queue */
+        boolean QueueType; /* Ini Queue untuk jenis apa ?
+                              true jika untuk Expiry;
+                              false jika untuk Delivery; */
 } PrioQueue;
 /* Definisi Queue kosong: idxHead=Nil; idxTail=Nil. */
 /* Catatan implementasi: T[0] tidak pernah dipakai */
@@ -32,8 +33,7 @@ typedef struct
 #define InfoTail(Q) (Q).buffer[(Q).idxTail]
 #define MaxQueue(Q) (Q).maxQueue
 #define Elmt(Q, i) (Q).buffer[(i)]
-#define forDelivery(Q) (Q).forDelivery
-#define forExpiry(Q) (Q).forExpiry
+#define QueueType(Q) (Q).QueueType
 
 /* ********* Prototype ********* */
 boolean isQueueEmpty(PrioQueue Q);
@@ -45,7 +45,7 @@ int queueLength(PrioQueue Q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
 
 /* *** Kreator *** */
-void CreateQueue(PrioQueue *Q, int Max, boolean delivery, boolean expiry);
+void CreateQueue(PrioQueue *Q, int Max, boolean type);
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk dan salah satu kondisi sbb: */
 /* Jika alokasi berhasil, Tabel memori dialokasi berukuran Max+1 */
