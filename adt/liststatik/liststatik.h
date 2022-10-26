@@ -5,7 +5,7 @@
 #include "../makanan/makanan.h"
 
 /* Kasus Umum */
-#define CAPACITY 100
+#define StCAPACITY 100
 /* Kapasitas list */
 #define IDX_MIN 0
 /* Index minimum list*/
@@ -17,10 +17,10 @@ typedef Makanan ElType;
 typedef int IdxType;
 typedef struct
 {
-   ElType buffer[CAPACITY]; /* memori tempat penyimpanan elemen */
+   ElType buffer[StCAPACITY]; /* memori tempat penyimpanan elemen */
    int Neff;
 } ListStatik;
-/* Indeks yang digunakan [0..CAPACITY-1] */
+/* Indeks yang digunakan [0..StCAPACITY-1] */
 /* Jika l adalah ListStatik, cara deklarasi dan akses: */
 /* Deklarasi : l : ListStatik */
 /* Maka cara akses:
@@ -36,7 +36,7 @@ typedef struct
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create List kosong  */
 /* I.S. l sembarang */
-/* F.S. Terbentuk List l kosong (Neff = 0) dengan kapasitas CAPACITY */
+/* F.S. Terbentuk List l kosong (Neff = 0) dengan kapasitas StCAPACITY */
 void CreateListStatik(ListStatik *l);
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */

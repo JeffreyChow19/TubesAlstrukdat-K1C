@@ -45,7 +45,7 @@ void ADV()
     else
     {
         currentChar = fgetc(pita);
-        EOP = feof(pita);
+        EOP = currentChar == EOF;
         if (EOP)
         {
             fclose(pita);

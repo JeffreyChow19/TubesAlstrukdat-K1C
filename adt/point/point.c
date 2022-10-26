@@ -10,14 +10,10 @@ merepresentasikan lokasi. */
 /* Konstruktor Point*/
 void CreatePoint(Point *P, int X, int Y)
 /* Membuat sebuah Point dengan komponen Absis X dan Ordinat Y */
+/* Prekondisi: X,Y merupakan point yang valid */
 {
-    if (isPointValid(X, Y))
-    {
-        Absis(*P) = X;
-        Ordinat(*P) = Y;
-    }
-    else
-        printf("Point tidak valid\n");
+    Absis(*P) = X;
+    Ordinat(*P) = Y;
 }
 
 /* Input Output */
@@ -28,10 +24,10 @@ void WritePoint(Point P)
 }
 
 /* Validasi Point */
-boolean isPointValid(int X, int Y)
+boolean isPointValid(int X, int Y, int colCap, int rowCap)
 /* Menghasilkan true jika X dan Y dapat membentuk point yang valid */
 {
-    return (X >= 0 && X < COL_CAP && Y >= 0 && Y < ROW_CAP);
+    return (X >= 0 && X <= colCap && Y >= 0 && Y <= rowCap);
 }
 
 // boolean isBlock(Point P);
@@ -43,14 +39,10 @@ boolean isPointValid(int X, int Y)
 void nextPoint(Point *P, int nextX, int nextY)
 /* Penggeseran nextX point ke kanan dan nextYpoint kebawah */
 {
-    if (isPointValid(Absis(*P) + nextX, Ordinat(*P) + nextY))
-    {
-        Absis(*P) += nextX;
-        Ordinat(*P) += nextY;
-    }
-    else
-        printf("Point keluar batas!\n");
+    Absis(*P) += nextX;
+    Ordinat(*P) += nextY;
 }
+
 boolean isAdj(Point P, Point X)
 /* Menghasilkan true jika Point P adjacent dengan X*/
 {

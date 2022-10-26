@@ -5,63 +5,63 @@
 
 void CreateLString(LString *l, int capacity)
 {
-    CAPACITY(*l) = capacity;
-    BUFFER(*l) = (String *)malloc(sizeof(SElType) * capacity);
-    NEFF(*l) = 0;
+    LSCAPACITY(*l) = capacity;
+    LSBUFFER(*l) = (String *)malloc(sizeof(SElType) * capacity);
+    LSNEFF(*l) = 0;
 }
 
 void dealocateLString(LString *l)
 {
-    CAPACITY(*l) = 0;
-    NEFF(*l) = 0;
-    free(BUFFER(*l));
+    LSCAPACITY(*l) = 0;
+    LSNEFF(*l) = 0;
+    free(LSBUFFER(*l));
 }
 
 int lStringLength(LString l)
 {
-    return NEFF(l);
+    return LSNEFF(l);
 }
 
-IdxType getFirstIdx(LString l)
+IdxType getFirstIdxLString(LString l)
 {
     return 0;
 }
 
-IdxType getLastIdx(LString l)
+IdxType getLastIdxLString(LString l)
 {
-    return (NEFF(l) - 1);
+    return (LSNEFF(l) - 1);
 }
 
-boolean isEmpty(LString l)
+boolean isEmptyLString(LString l)
 {
-    return NEFF(l) == 0;
+    return LSNEFF(l) == 0;
 }
 
-boolean isFull(LString l)
+boolean isFullLString(LString l)
 {
-    return NEFF(l) == CAPACITY(l);
+    return LSNEFF(l) == LSCAPACITY(l);
 }
 
 void expandLString(LString *l, int num)
 {
-    CAPACITY(*l) += num;
-    BUFFER(*l) = realloc(BUFFER(*l), CAPACITY(*l) * sizeof(SElType));
+    LSCAPACITY(*l) += num;
+    LSBUFFER(*l) = realloc(LSBUFFER(*l), LSCAPACITY(*l) * sizeof(SElType));
 }
 
 void insertLastString(LString *l, SElType val)
 {
-    if (isFull(*l))
+    if (isFullLString(*l))
     {
-        expandLString(l, CAPACITY(*l));
+        expandLString(l, LSCAPACITY(*l));
     }
-    if (isEmpty(*l))
+    if (isEmptyLString(*l))
     {
-        NEFF(*l) = 1;
+        LSNEFF(*l) = 1;
     }
     else
     {
-        NEFF(*l) += 1;
+        LSNEFF(*l) += 1;
     }
 
-    SBUFFER(ELMTLString(*l, getLastIdx(*l))) = val.buffer;
+    SBUFFER(ELMTLString(*l, getLastIdxLString(*l))) = val.buffer;
 }

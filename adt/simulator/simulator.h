@@ -4,9 +4,9 @@
 #include "../string/string.h"
 #include "../makanan/makanan.h"
 #include "../point/point.h"
-#include "../Queue/prioqueue.h"
+#include "../queue/prioqueue.h"
 
-typedef struct 
+typedef struct
 {
     String Name;
     Point Pos;

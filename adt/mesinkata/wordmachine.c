@@ -53,7 +53,7 @@ void ADVWORD()
        Proses : Akuisisi kata menggunakan procedure SalinWord */
 
     IgnoreBlanks();
-    if (currentChar == MARK)
+    if (EOP)
     {
         endWord = true;
     }
@@ -72,7 +72,7 @@ void CopyWord()
               currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
               Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
     int i = 0;
-    while (currentChar != MARK && currentChar != BLANK && i < 50)
+    while (currentChar != MARK && currentChar != BLANK && i < 50 && currentChar != EOF)
     {
         currentWord.TabWord[i] = currentChar;
         i++;

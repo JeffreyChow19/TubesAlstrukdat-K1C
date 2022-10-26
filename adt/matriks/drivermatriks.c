@@ -15,9 +15,8 @@ int main()
 
     String filename;
     CreateEmptyString(&filename, 15);
-    setLiteral(&filename, "peta.txt");
 
-    readMatrix(&m, filename);
+    readMatrix(&m, "../../data/peta.txt");
 
     printf("\n");
 

@@ -1,12 +1,12 @@
 #include "tree.h"
 
-Address newNode(Makanan val)
+Address newNode(Makanan val, int childrenCapacity)
 {
   Address a = (Address)malloc(sizeof(Node));
   if (a != NULL)
   {
     INFO(a) = val;
-    CreateListDin(&CHILDREN(a), 10);
+    CreateListDin(&CHILDREN(a), childrenCapacity);
   }
   return a;
 }
@@ -18,7 +18,8 @@ Address findNodeInTree(Address t, int id)
   if (ID(INFO(t)) == id)
     return t;
   Address res;
-  for (int i = getFirstIdx(CHILDREN(t)); i <= getLastIdx(CHILDREN(t)); ++i)
+  int i;
+  for (i = getFirstIdxDin(CHILDREN(t)); i <= getLastIdxDin(CHILDREN(t)); ++i)
   {
     res = findNodeInTree(ELMT(CHILDREN(t), i), id);
     if (res != NULL)
@@ -35,6 +36,7 @@ Address findNodeInList(ListDin l, int id)
     Address e = findNodeInTree(ELMT(l, i), id);
     if (e != NULL)
       return e;
+    i++;
   }
   return NULL;
 }
@@ -43,12 +45,13 @@ ListDin getAllRecipeNodes(ListDin l)
 {
   ListDin res;
   CreateListDin(&res, 10);
-  for (int i = getFirstIdx(l); i <= getLastIdx(l); ++i)
+  int i;
+  for (i = getFirstIdxDin(l); i <= getLastIdxDin(l); ++i)
   {
     if (NEFF(CHILDREN(ELMT(l, i))) > 0)
-      insertLast(&res, ELMT(l, i));
+      insertLastDin(&res, ELMT(l, i));
     ListDin childRecipes = getAllRecipeNodes(CHILDREN(ELMT(l, i)));
-    concatList(&res, &childRecipes);
+    concatListDin(&res, &childRecipes);
   }
   return res;
 }

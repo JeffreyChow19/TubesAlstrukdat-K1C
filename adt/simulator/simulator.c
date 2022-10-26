@@ -33,7 +33,7 @@ void moveSim(Sim *S, String dir)
 
 void addTime(Sim *S, int dd, int hh, int mm)
 {
-    Time add; 
+    Time add;
     CreateTime(&add, dd, hh, mm);
     int added = TimeToMinute(add);
     incNTime(&Clock(*S), added);
@@ -49,7 +49,7 @@ void removeTime(Sim *S, int dd, int hh, int mm)
 
 void getFood(Sim S, Makanan *val, int id)
 {
-    int i = indexOf(Inv(S), id);
+    int i = searchIdx(Inv(S), id);
     *val = (FoodInv(S, i));
 }
 

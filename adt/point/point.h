@@ -7,10 +7,6 @@ merepresentasikan lokasi. */
 #ifndef POINT_H
 #define POINT_H
 
-/* Ukuran maksimum baris dan kolom */
-#define ROW_CAP 15
-#define COL_CAP 15
-
 typedef struct
 {
     int X; /* Absis */
@@ -27,6 +23,7 @@ typedef struct
 /* Konstruktor Point*/
 void CreatePoint(Point *P, int X, int Y);
 /* Membuat sebuah Point dengan komponen Absis X dan Ordinat Y */
+/* Prekondisi: X,Y merupakan point yang valid */
 
 /* Input Output */
 // void ReadPoint(Point *P); (perlu kah?)
@@ -35,8 +32,8 @@ void WritePoint(Point P);
 /* Menuliskan Point P ke layar dengan format (X,Y) */
 
 /* Validasi Time */
-boolean isPointValid(int X, int Y);
-/* Menghasilkan true jika X dan Y dapat membentuk point yang valid */
+boolean isPointValid(int X, int Y, int colCap, int rowCap);
+/* Menghasilkan true jika X dan Y dapat membentuk point yang valid (0 <= X < colCap dan 0 <= Y < rowCap) */
 
 // boolean isBlock(Point P);
 /* Mengirimkan true jika point P merupakan batasan/titik lokasi suatu tempat */
@@ -46,6 +43,8 @@ boolean isPointValid(int X, int Y);
 /* Operasi Point */
 void nextPoint(Point *P, int nextX, int nextY);
 /* Penggeseran nextX point ke kanan dan nextYpoint kebawah */
+/* Prekondisi: P dengan X += nextX dan Y += nextY merupakan point yang valid */
+
 boolean isAdj(Point P, Point X);
 /* Menghasilkan true jika Point P adjacent dengan X*/
 

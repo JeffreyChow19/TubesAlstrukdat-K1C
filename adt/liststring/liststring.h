@@ -16,10 +16,10 @@ typedef struct
 } LString;
 
 /* SELEKTOR */
-#define NEFF(l) (l).nEff
-#define BUFFER(l) (l).buffer
+#define LSNEFF(l) (l).nEff
+#define LSBUFFER(l) (l).buffer
 #define ELMTLString(l, i) (l).buffer[i]
-#define CAPACITY(l) (l).capacity
+#define LSCAPACITY(l) (l).capacity
 
 /* KONSTRUKTOR */
 void CreateLString(LString *l, int capacity);
@@ -38,16 +38,16 @@ int lStringLength(LString l);
 /* Mengirimkan banyaknya elemen efektif list*/
 
 /* SELEKTOR INDEKS */
-IdxType getFirstIdx(LString l);
+IdxType getFirstIdxLString(LString l);
 /*  Prekondisi : LString l tidak kosong */
 /*  Mengirimkan indeks elemen l pertama */
-IdxType getLastIdx(LString l);
+IdxType getLastIdxLString(LString l);
 /* Prekondisi : List l tidak kosong */
 /* Mengirimkan indeks elemen l terakhir */
 
-boolean isEmpty(LString l);
+boolean isEmptyLString(LString l);
 /* Mengirimkan true jika list l kosong, mengirimkan false jika tidak */
-boolean isFull(LString l);
+boolean isFullLString(LString l);
 /* Mengirimkan true jika list l penuh, mengirimkan false jika tidak */
 
 /* ********* MENGUBAH UKURAN ARRAY ********* */

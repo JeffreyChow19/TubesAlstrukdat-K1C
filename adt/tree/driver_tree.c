@@ -20,7 +20,7 @@ Address createNode(int id, char *name, int dex, int hex, int mex, char *action, 
 
   CreateMakanan(&m, id, sname, expiry, saction, delivery);
 
-  a = newNode(m);
+  a = newNode(m, 5);
   return a;
 }
 

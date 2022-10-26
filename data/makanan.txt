@@ -1,0 +1,46 @@
+9
+11
+Ayam Mentah
+1 0 0
+0 0 15
+BUY
+21
+Ayam Potong
+0 2 0
+0 0 0
+CHOP
+10
+Tepung
+0 1 0
+0 0 30
+BUY
+15
+Minyak Goreng
+0 1 30
+0 1 0
+BUY
+31
+Ayam Tepung
+0 0 30
+0 0 0
+MIX
+37
+Ayam Goreng
+0 0 15
+0 0 0
+FRY
+38
+Beras
+0 5 0
+0 0 5
+BUY
+39
+Nasi
+0 0 30
+0 0 0
+BOIL
+40
+Nasi Ayam
+0 0 30
+0 0 0
+FRY

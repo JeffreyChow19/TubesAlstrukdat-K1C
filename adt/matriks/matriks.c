@@ -30,7 +30,7 @@ IdxType getLastIdxCol(Matrix m)
     return (COL_EFF(m) - 1);
 }
 
-boolean isIdxEff(Matrix m, IdxType i, IdxType j)
+boolean isIdxEffMat(Matrix m, IdxType i, IdxType j)
 {
     /* Mengirimkan true jika i, j adalah Index efektif bagi m */
     return (i >= 0 && i < ROW_EFF(m) && j >= 0 && j < COL_EFF(m));

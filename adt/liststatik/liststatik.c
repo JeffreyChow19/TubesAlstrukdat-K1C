@@ -8,7 +8,7 @@ void CreateListStatik(ListStatik *l)
 
 int listLength(ListStatik l)
 {
-    return Neff(l);
+    return StNeff(l);
 }
 
 IdxType getFirstIdx(ListStatik l)
@@ -23,7 +23,7 @@ IdxType getLastIdx(ListStatik l)
 
 boolean isIdxValid(ListStatik l, IdxType i)
 {
-    return (i >= IDX_MIN && i < CAPACITY);
+    return (i >= IDX_MIN && i < StCAPACITY);
 }
 
 boolean isIdxEff(ListStatik l, IdxType i)
@@ -38,7 +38,7 @@ boolean isEmpty(ListStatik l)
 
 boolean isFull(ListStatik l)
 {
-    return (listLength(l) == CAPACITY);
+    return (listLength(l) == StCAPACITY);
 }
 
 int indexOf(ListStatik l, int id)
@@ -48,7 +48,7 @@ int indexOf(ListStatik l, int id)
     else
     {
         IdxType i = getFirstIdx(l);
-        while (i <= getLastIdx(l) && StELMT(l,i).id != id)
+        while (i <= getLastIdx(l) && StELMT(l, i).id != id)
         {
             i++;
         }
@@ -56,25 +56,25 @@ int indexOf(ListStatik l, int id)
             return IDX_UNDEF;
         else
             return i;
-    };  
+    };
 }
 
-void inserLast(ListStatik *l, ElType val)
+void insertLast(ListStatik *l, ElType val)
 {
     if (isEmpty(*l))
         StNeff(*l) = 1;
     else
         StNeff(*l) += 1;
-    StELMT(*l, getLastIdx(*l) + 1) = val;
+    StELMT(*l, getLastIdx(*l)) = val;
 }
 
 void deleteID(ListStatik *l, ElType *val, int id)
 {
     int i = indexOf(*l, id);
-    *val = StELMT(*l,i);
+    *val = StELMT(*l, i);
     for (i; i < getLastIdx(*l); i++)
     {
-        StELMT(*l,i) = StELMT(*l, i + 1);
+        StELMT(*l, i) = StELMT(*l, i + 1);
     }
     StNeff(*l) -= 1;
 }

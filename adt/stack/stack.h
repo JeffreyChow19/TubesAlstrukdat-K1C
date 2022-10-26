@@ -6,12 +6,12 @@
 
 #define IDX_UNDEF -1
 
-typedef Sim ElType;
+typedef Sim ElTypeStack;
 typedef struct
 {
-    ElType *buffer; /* tabel penyimpan elemen */
-    int Top;        /* alamat TOP: elemen puncak */
-    int maxStack;   /* Max elemen stack */
+    ElTypeStack *buffer; /* tabel penyimpan elemen */
+    int Top;             /* alamat TOP: elemen puncak */
+    int maxStack;        /* Max elemen stack */
 } Stack;
 
 /* ********* AKSES (Selektor) ********* */
@@ -40,13 +40,13 @@ boolean isStackFull(Stack S);
 /* Mengirim true jika tabel penampung nilai S stack penuh */
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
-void push(Stack *S, ElType state);
+void push(Stack *S, ElTypeStack state);
 /* Menambahkan val sebagai elemen Stack s */
 /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
 /* F.S. val menjadi InfoTop yang baru,IDX_TOP bertambah 1 */
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void pop(Stack *S, ElType *state);
+void pop(Stack *S, ElTypeStack *state);
 /* Menghapus val dari Stack s */
 /* I.S. s tidak mungkin kosong */
 /* F.S. val adalah nilai elemen InfoTop yang lama, IDX_TOP berkurang 1 */

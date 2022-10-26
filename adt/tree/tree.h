@@ -25,6 +25,8 @@ typedef struct node
   ListDin children;
 } Node;
 
+typedef Address Tree;
+
 /* ********** SELEKTOR ********** */
 #define INFO(n) (n)->info
 #define CHILDREN(n) (n)->children
@@ -33,15 +35,17 @@ typedef struct node
 /*
  * Mengembalikan sebuah node baru dengan info = val dan children = list kosong
  */
-Address newNode(Makanan val);
+Tree newNode(Makanan val, int childrenCapacity);
 
 /*
  * Mengembalikan node dengan info id tertentu, jika tidak ditemukan mengembalikan NULL
  */
-Address findNodeInTree(Address t, int id);
+Tree findNodeInTree(Tree t, int id);
 
 /* Mengembalikan node dengan id yang dicari, deep search ke semua root tree */
-Address findNodeInList(ListDin l, int id);
+Tree findNodeInList(ListDin l, int id);
+
+Tree findParentInList(ListDin l, int id);
 
 /* Mengembalikan semua node yang memiliki children (merupakan sebuah resep) */
 ListDin getAllRecipeNodes(ListDin l);

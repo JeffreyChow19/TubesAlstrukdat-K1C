@@ -21,7 +21,7 @@ int main()
     WritePoint(P);
 
     /* Validasi Point */
-    printf("Valid? %d\n", isPointValid(x, y));
+    printf("Valid? %d\n", isPointValid(x, y, 15, 15));
 
     /* Operasi Point*/
     nextPoint(&P, 1, 0);

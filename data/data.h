@@ -5,6 +5,7 @@
 
 extern Matrix map;
 extern ListStatik foods;
+extern ListDin recipesTrees;
 extern ListDin recipes;
 
 void initData(char *mapFile, char *foodsFile, char *recipesFile);

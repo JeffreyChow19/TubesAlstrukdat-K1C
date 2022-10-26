@@ -18,7 +18,7 @@ int main()
 
     String filename;
     CreateEmptyString(&filename, 15);
-    SBUFFER(filename) = "peta.txt";
+    SBUFFER(filename) = "../../data/peta.txt";
 
     START(fopen(SBUFFER(filename), "r"), true);
 
