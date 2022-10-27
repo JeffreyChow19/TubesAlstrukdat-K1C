@@ -126,8 +126,13 @@ void readRecipesConfig(char *filename)
         int idx = indexOfDin(recipesTrees, childId);
         if (idx != -1)
         {
-          added = true;
-          ELMT(recipesTrees, idx) = parentTree;
+          if (added)
+            deleteAt(&recipesTrees, idx);
+          else
+          {
+            ELMT(recipesTrees, idx) = parentTree;
+            added = true;
+          }
         }
       }
       insertLastDin(&CHILDREN(parentTree), childTree);
