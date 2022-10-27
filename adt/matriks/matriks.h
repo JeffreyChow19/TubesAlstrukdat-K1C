@@ -5,6 +5,7 @@
 #include "../string/string.h"
 #include "../liststring/liststring.h"
 #include "../mesinkarakter/charmachine.h"
+#include "../point/point.h"
 
 #define ROW_CAP 100
 #define COL_CAP 100
@@ -46,8 +47,8 @@ void readMatrix(Matrix *m, char *filename);
 /* Proses: Melakukan CreateMatrix(m,nRow,nCol) dan mengisi nilai efektifnya */
 /* Selanjutnya membaca nilai elemen per baris dan kolom dari file:filename dan memindahkannya ke matriks*/
 
-void displayMatrix(Matrix m);
-/* I.S. m terdefinisi */
+void displayMatrix(Matrix m, Point simPoint);
+/* I.S. m dan s terdefinisi */
 /* F.S. Nilai m(i,j) ditulis ke layar per baris per kolom, matriks diberi border berupa '*' dan jika membaca # dari file akan diganti dengan ' '*/
 /* Proses: Menulis nilai setiap elemen m ke layar dengan traversal per baris dan per kolom */
 

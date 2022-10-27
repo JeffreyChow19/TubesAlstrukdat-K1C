@@ -177,7 +177,7 @@ void readMatrix(Matrix *m, char *filename)
     }
 }
 
-void displayMatrix(Matrix m)
+void displayMatrix(Matrix m, Point simPoint)
 {
     /* I.S. m terdefinisi */
     /* F.S. Nilai m(i,j) ditulis ke layar per baris per kolom, matriks diberi border berupa '*'*/
@@ -186,23 +186,26 @@ void displayMatrix(Matrix m)
 
     for (i = 0; i < m.colEff + 2; i++)
     {
-        printf("*");
+        printf("* ");
     }
     printf("\n");
 
     for (i = 0; i < m.rowEff; i++)
     {
-        printf("*");
+        printf("* ");
         for (j = 0; j < m.colEff; j++)
         {
-            printf("%c", ELMTMat(m, i, j));
+            if (i == Absis(simPoint) && j == Ordinat(simPoint))
+                printf("S ");
+            else
+                printf("%c ", ELMTMat(m, i, j));
         }
         printf("*\n");
     }
 
     for (i = 0; i < m.colEff + 2; i++)
     {
-        printf("*");
+        printf("* ");
     }
     printf("\n");
 }
