@@ -43,7 +43,7 @@ void getFood(Sim S, Makanan *val, int id);
 /* *** Merubah posisi simulator berdasarkan arah mata angin *** */
 /* I.S. Posisi S terdefinisi dan valid */
 /* F.S. Posisi S bergeser sesuai dir yang diberikan */
-void moveSim(Sim *S, String dir);
+void moveSim(Sim *S, char dir);
 
 /* ********** MERUBAH WAKTU ********** */
 /* *** Menambahkan waktu pada simulator *** */
@@ -97,6 +97,13 @@ void removeDelv(Sim *S, Makanan *val);
         jika tidak, semua item di inventory akan ditampilkan.
 */
 void openInv(Sim S);
+
+/* *** Menampilkan delivery list dari simulator *** */
+/* I.S. Delv bisa kosong */
+/* F.S. Jika Delv kosong, pesan "Delivery list kosong" dimunculkan,
+        jika tidak, semua item di delivery list akan ditampilkan.
+*/
+void openDelv(Sim S);
 
 /* *** Menampilkan posisi simulator *** */
 /* I.S. Posisi terdefinisi */

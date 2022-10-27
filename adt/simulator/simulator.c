@@ -19,15 +19,15 @@ void copySim(Sim S, Sim *CS)
     copyQueue(Delv(S), &Delv(*CS));
 }
 
-void moveSim(Sim *S, String dir)
+void moveSim(Sim *S, char dir)
 {
-    if (SBUFFER(dir) == "EAST")
+    if (dir == 'E')
         nextPoint(&Pos(*S), 1, 0);
-    else if (SBUFFER(dir) == "WEST")
+    else if (dir == 'W')
         nextPoint(&Pos(*S), -1, 0);
-    else if (SBUFFER(dir) == "NORTH")
+    else if (dir == 'N')
         nextPoint(&Pos(*S), -1, 0);
-    else if (SBUFFER(dir) == "SOUTH")
+    else if (dir == 'S')
         nextPoint(&Pos(*S), 0, 1);
 }
 
@@ -96,12 +96,29 @@ void openInv(Sim S)
         printf("Inventory kosong\n");
     else
     {
-        printf("List Makanan di Inventory\n (nama - waktu sisa kedaluwarsa)");
+        printf("List Makanan di Inventory\n nama (waktu sisa kedaluwarsa)");
         int i = queueLength(Inv(S)) - 1;
         while (i >= 0)
         {
             printf("%d. ", i + 1);
             printWithExpired(FoodInv(S, i));
+            i++;
+        }
+    }
+}
+
+void openDelv(Sim S)
+{
+    if (isQueueEmpty(Delv(S)))
+        printf("Delivery list kosong\n");
+    else
+    {
+        printf("List Makanan di Delivery list\n nama (waktu sisa delivery)");
+        int i = queueLength(Delv(S)) - 1;
+        while (i >= 0)
+        {
+            printf("%d. ", i + 1);
+            printWithDelivery(FoodDelv(S, i));
             i++;
         }
     }
