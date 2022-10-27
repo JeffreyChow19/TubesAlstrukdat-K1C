@@ -21,6 +21,8 @@ void IgnoreBlanks();
    I.S. : currentChar sembarang
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
 
+void IgnoreWords();
+
 void STARTWORD(FILE *input, boolean file);
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;

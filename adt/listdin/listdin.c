@@ -99,6 +99,18 @@ void deleteLastDin(ListDin *l, ElTypeDin *val)
     shrinkListDin(l, CAPACITY(*l) / 2);
 }
 
+void deleteAtDin(ListDin *l, IdxType i)
+{
+  IdxType j;
+  for (j = i; j < getLastIdxDin(*l); j++)
+  {
+    ELMT(*l, j) = ELMT(*l, j + 1);
+  }
+  NEFF(*l) -= 1;
+  if (NEFF(*l) < CAPACITY(*l) / 4)
+    shrinkListDin(l, CAPACITY(*l) / 2);
+}
+
 void concatListDin(ListDin *l1, ListDin *l2)
 {
   IdxType i;

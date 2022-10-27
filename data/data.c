@@ -127,7 +127,7 @@ void readRecipesConfig(char *filename)
         if (idx != -1)
         {
           if (added)
-            deleteAt(&recipesTrees, idx);
+            deleteAtDin(&recipesTrees, idx);
           else
           {
             ELMT(recipesTrees, idx) = parentTree;

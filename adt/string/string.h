@@ -63,6 +63,8 @@ void expandString(String *s, int num);
  */
 boolean isStringEqual(String s1, String s2);
 
+boolean isStringEqualLiteral(String s, char *literal);
+
 /*
   Mengembalikan nilai integer dari string.
   Prekondisi: string merupakan angka
@@ -82,5 +84,11 @@ String getCopyString(String s);
 String wordToString(Word w);
 
 int wordToInt(Word w);
+
+void toUpper(String *s);
+
+boolean startsWithLiteral(String s, char *literal);
+
+boolean startsWith(String s1, String s2);
 
 #endif

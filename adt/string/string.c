@@ -72,6 +72,20 @@ boolean isStringEqual(String s1, String s2)
   return true;
 }
 
+boolean isStringEqualLiteral(String s, char *literal)
+{
+  int i = 0;
+  while (literal[i] != '\0')
+  {
+    if (i >= LENGTH(s))
+      return false;
+    if (CHAR(s, i) != literal[i])
+      return false;
+    i++;
+  }
+  return i == LENGTH(s);
+}
+
 int stringToInt(String s)
 {
   int res = 0;
@@ -124,4 +138,40 @@ int wordToInt(Word w)
     res += w.TabWord[i] - '0';
   }
   return res;
+}
+
+void toUpper(String *s)
+{
+  int i;
+  for (i = 0; i < LENGTH(*s); i++)
+    if (CHAR(*s, i) >= 'a' && CHAR(*s, i) <= 'z')
+      CHAR(*s, i) -= 'a' - 'A';
+}
+
+boolean startsWithLiteral(String s, char *literal)
+{
+  int i = 0;
+  while (literal[i] != '\0')
+  {
+    if (i >= LENGTH(s))
+      return false;
+    if (CHAR(s, i) != literal[i])
+      return false;
+    i++;
+  }
+  return true;
+}
+
+boolean startsWith(String s1, String s2)
+{
+  int i = 0;
+  if (LENGTH(s2) > LENGTH(s1))
+    return false;
+  while (i < LENGTH(s2))
+  {
+    if (CHAR(s1, i) != CHAR(s2, i))
+      return false;
+    i++;
+  }
+  return true;
 }

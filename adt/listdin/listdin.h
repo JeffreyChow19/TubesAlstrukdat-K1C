@@ -120,6 +120,8 @@ void insertLastDin(ListDin *l, ElTypeDin val);
 /*      < seperempat kapasitas, maka kapasitas akan dikurangi setengahnya */
 void deleteLastDin(ListDin *l, ElTypeDin *val);
 
+void deleteAtDin(ListDin *l, IdxType i);
+
 /*
   Menambahkan seluruh elemen l2 ke l1 lalu dealokasi l2.
   I.S. l1 dan l2 terdefinisi, mungkin kosong

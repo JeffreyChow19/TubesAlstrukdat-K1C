@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "data/data.h"
 #include "adt/mesinkata/wordmachine.h"
+#include "command/command.h"
 
 Sim initSim()
 {
@@ -28,26 +29,35 @@ void printStatus(Sim s)
   // TODO: Print notifikasi
   printf("Notifikasi: -\n\n");
   displayMatrix(map, Pos(s));
-  printf("\nEnter Command: ");
-
-  STARTWORD(stdin, false);
-  String command;
-  CreateEmptyString(&command, 5);
-
-  while (!endWord)
-  {
-    appendWord(&command, currentWord);
-    ADVWORD();
-  }
-
-  dealocateString(&command);
 }
 
 int main()
 {
 
-  printf("Welcome to BNMO :)\nPress enter to start");
-  scanf("%*c");
+  printf("Welcome to BNMO :)\nType START to start, EXIT to exit the program\n");
+  STARTWORD(stdin, false);
+  boolean valid = false;
+  do
+  {
+    String command = wordToString(currentWord);
+    IgnoreWords();
+    toUpper(&command);
+    if (isStringEqualLiteral(command, "START"))
+    {
+      valid = true;
+    }
+    else if (isStringEqualLiteral(command, "EXIT"))
+    {
+      printf("Goodbye :)\n");
+      return 0;
+    }
+    else
+    {
+      printf("Invalid command\n");
+    }
+    dealocateString(&command);
+  } while (!valid);
+
   initData("./data/peta.txt", "./data/makanan.txt", "./data/resep.txt");
 
   Sim sim = initSim();
@@ -56,6 +66,7 @@ int main()
   while (running)
   {
     printStatus(sim);
+    running = !startCommand(&sim);
   }
 
   return 0;

@@ -25,6 +25,12 @@ void IgnoreBlanks()
     }
 }
 
+void IgnoreWords()
+{
+    while (!endWord)
+        ADVWORD();
+}
+
 void STARTWORD(FILE *input, boolean file)
 {
     /* I.S. : currentChar sembarang
