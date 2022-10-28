@@ -62,4 +62,7 @@ void shrinkStack(Stack *S, int num);
 /* I.S. Stack sudah terdefinisi, ukuran MaxStack > num */
 /* F.S. Ukuran Stack berkurang sebanyak num. */
 
+/* Operasi Tambahan */
+void clearStack(Stack *S);
+
 #endif
