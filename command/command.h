@@ -4,4 +4,6 @@
 
 boolean startCommand(Sim *s);
 
+void enterToContinue();
+
 #endif
