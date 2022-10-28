@@ -1,6 +1,7 @@
 #include "command.h"
 #include <stdio.h>
 #include "../adt/mesinkata/wordmachine.h"
+#include "../catalog/catalog.h"
 
 boolean startCommand(Sim *s)
 {
@@ -28,6 +29,10 @@ boolean startCommand(Sim *s)
   }
   else if (isStringEqualLiteral(command, "MOVE WEST"))
   {
+  }
+  else if (isStringEqualLiteral(command, "CATALOG"))
+  {
+    displayCatalog();
   }
   else if (isStringEqualLiteral(command, "EXIT"))
   {
