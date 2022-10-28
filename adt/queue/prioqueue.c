@@ -104,7 +104,8 @@ void dequeue(PrioQueue *Q, ElType *X)
     else
     {
         *X = InfoHead(*Q);
-        for (int i = 0; i < queueLength(*Q) - 1; i++)
+        int i;
+        for (i = 0; i < queueLength(*Q) - 1; i++)
         {
             Elmt(*Q, i) = Elmt(*Q, i + 1);
         }
@@ -185,7 +186,8 @@ void removeIdx(PrioQueue *Q, Makanan *val, int id)
 void copyQueue(PrioQueue Q, PrioQueue *Q2)
 {
     CreateQueue(Q2, MaxQueue(Q), QueueType(Q));
-    for (int i = 0; i < queueLength(Q); i++)
+    int i;
+    for (i = 0; i < queueLength(Q); i++)
     {
         Elmt(*Q2, i) = Elmt(Q, i);
     }
