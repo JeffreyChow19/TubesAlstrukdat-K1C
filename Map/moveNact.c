@@ -8,15 +8,15 @@ boolean isBlocked(Sim S, char dir, Matrix M)
     if (dir == 'E')
     {
         X += 1;
-        if (ELMTMat(M, Y, X) == 'X' || ELMTMat(M, Y, X) == 'T' || ELMTMat(M, Y, X) == 'M' || ELMTMat(M, Y, X) == 'C' || ELMTMat(M, Y, X) == 'F' || ELMTMat(M, Y, X) == 'B' || !isIdxEff(M, Y, X))
+        if (ELMTMat(M, Y, X) == 'X' || ELMTMat(M, Y, X) == 'T' || ELMTMat(M, Y, X) == 'M' || ELMTMat(M, Y, X) == 'C' || ELMTMat(M, Y, X) == 'F' || ELMTMat(M, Y, X) == 'B' || !isIdxEffMat(M, Y, X))
             return true;
         else
             return false;
-    }  
+    }
     else if (dir == 'W')
     {
         X += -1;
-        if (ELMTMat(M, Y, X) == 'X' || ELMTMat(M, Y, X) == 'T' || ELMTMat(M, Y, X) == 'M' || ELMTMat(M, Y, X) == 'C' || ELMTMat(M, Y, X) == 'F' || ELMTMat(M, Y, X) == 'B' || !isIdxEff(M, Y, X))
+        if (ELMTMat(M, Y, X) == 'X' || ELMTMat(M, Y, X) == 'T' || ELMTMat(M, Y, X) == 'M' || ELMTMat(M, Y, X) == 'C' || ELMTMat(M, Y, X) == 'F' || ELMTMat(M, Y, X) == 'B' || !isIdxEffMat(M, Y, X))
             return true;
         else
             return false;
@@ -24,7 +24,7 @@ boolean isBlocked(Sim S, char dir, Matrix M)
     else if (dir == 'N')
     {
         Y += -1;
-        if (ELMTMat(M, Y, X) == 'X' || ELMTMat(M, Y, X) == 'T' || ELMTMat(M, Y, X) == 'M' || ELMTMat(M, Y, X) == 'C' || ELMTMat(M, Y, X) == 'F' || ELMTMat(M, Y, X) == 'B' || !isIdxEff(M, Y, X))
+        if (ELMTMat(M, Y, X) == 'X' || ELMTMat(M, Y, X) == 'T' || ELMTMat(M, Y, X) == 'M' || ELMTMat(M, Y, X) == 'C' || ELMTMat(M, Y, X) == 'F' || ELMTMat(M, Y, X) == 'B' || !isIdxEffMat(M, Y, X))
             return true;
         else
             return false;
@@ -32,7 +32,7 @@ boolean isBlocked(Sim S, char dir, Matrix M)
     else if (dir == 'S')
     {
         Y += 1;
-        if (ELMTMat(M, Y, X) == 'X' || ELMTMat(M, Y, X) == 'T' || ELMTMat(M, Y, X) == 'M' || ELMTMat(M, Y, X) == 'C' || ELMTMat(M, Y, X) == 'F' || ELMTMat(M, Y, X) == 'B' || !isIdxEff(M, Y, X))
+        if (ELMTMat(M, Y, X) == 'X' || ELMTMat(M, Y, X) == 'T' || ELMTMat(M, Y, X) == 'M' || ELMTMat(M, Y, X) == 'C' || ELMTMat(M, Y, X) == 'F' || ELMTMat(M, Y, X) == 'B' || !isIdxEffMat(M, Y, X))
             return true;
         else
             return false;
@@ -47,7 +47,7 @@ boolean isOutOfBound(Sim S, char dir, Matrix M)
     if (dir == 'E')
     {
         X += 1;
-        if (!isIdxEff(M, Y, X))
+        if (!isIdxEffMat(M, Y, X))
             return true;
         else
         {
@@ -57,7 +57,7 @@ boolean isOutOfBound(Sim S, char dir, Matrix M)
     else if (dir == 'W')
     {
         X -= 1;
-        if (!isIdxEff(M, Y, X))
+        if (!isIdxEffMat(M, Y, X))
             return true;
         else
             return false;
@@ -65,7 +65,7 @@ boolean isOutOfBound(Sim S, char dir, Matrix M)
     else if (dir == 'N')
     {
         Y -= 1;
-        if (!isIdxEff(M, Y, X))
+        if (!isIdxEffMat(M, Y, X))
             return true;
         else
             return false;
@@ -73,7 +73,7 @@ boolean isOutOfBound(Sim S, char dir, Matrix M)
     else if (dir == 'S')
     {
         Y += 1;
-        if (!isIdxEff(M, Y, X))
+        if (!isIdxEffMat(M, Y, X))
             return true;
         else
             return false;
