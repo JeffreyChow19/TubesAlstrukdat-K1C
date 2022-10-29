@@ -62,4 +62,10 @@ void insertLastString(LString *l, SElType val);
 /* I.S. List l boleh kosong */
 /* F.S. val adalah elemen terakhir l yang baru, jika list penuh maka akan dialokasikan 2 kali kapasitas sebelumnya */
 
+/* *** Menghapus semua elemen *** */
+void clearListString(LString *l);
+/* Proses: Menghapus semua elemen pada string */
+/* I.S. List l terdefinisi */
+/* F.S. neff l = 0, semua elemen string didealokasi */
+
 #endif

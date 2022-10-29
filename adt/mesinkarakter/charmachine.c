@@ -52,29 +52,3 @@ void ADV()
         }
     }
 }
-
-// void ReadFile(String filename, LString *ans)
-// {
-//     pita = fopen(SBUFFER(filename), "r");
-
-//     boolean first = true;
-
-//     while (!feof(pita))
-//     {
-//         char temp[150];
-//         String line;
-
-//         CreateEmptyString(&line, 150);
-
-//         fgets(temp, 150, pita);
-//         setLiteral(&line, temp);
-
-//         if (first)
-//         {
-//             CreateLString(ans, 50);
-//             first = false;
-//         }
-
-//         insertLastString(ans, line);
-//     }
-// }

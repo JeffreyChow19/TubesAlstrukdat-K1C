@@ -13,6 +13,7 @@ typedef struct
     Time Clock;
     PrioQueue Inv;
     PrioQueue Delv;
+    PrioQueue Proc;
 } Sim;
 
 /* ********** SELEKTOR ********** */
@@ -23,6 +24,8 @@ typedef struct
 #define FoodInv(S, i) (S).Inv.buffer[(i)]
 #define Delv(S) (S).Delv
 #define FoodDelv(S, i) (S).Delv.buffer[(i)]
+#define Proc(S) (S).Proc
+#define FoodProc(S, i) (S).Proc.buffer[(i)]
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : membuat simulator*/
@@ -63,6 +66,10 @@ void removeTime(Sim *S, int dd, int hh, int mm);
 /* F.S. val adalah MAKANAN terakhir Inv yang baru */
 void addFood(Sim *S, Makanan val);
 
+void addDelv(Sim *S, Makanan val);
+
+void addProc(Sim *S, Makanan val);
+
 /* ********** MENGHAPUS MAKANAN ********** */
 /* *** Menghapus MAKANAN dengan id tertentu *** */
 /* Proses : Menghapus MAKANAN pada index idx List */
@@ -90,6 +97,11 @@ void removeExp(Sim *S, Makanan *val);
 /* F.S. jika head queue memiliki delivery <= 0, dihapus */
 void removeDelv(Sim *S, Makanan *val);
 
+/* *** Menghapus makanan jika sudah selesai diproses *** */
+/* I.S. Proc tidak kosong */
+/* F.S. jika head queue memiliki delivery <= 0, dihapus */
+void removeProc(Sim *S, Makanan *val);
+
 /* ********** DISPLAY OUTPUT ********** */
 /* *** Menampilkan inv dari simulator *** */
 /* I.S. Inv bisa kosong */
@@ -104,6 +116,13 @@ void openInv(Sim S);
         jika tidak, semua item di delivery list akan ditampilkan.
 */
 void openDelv(Sim S);
+
+/* *** Menampilkan on process list dari simulator *** */
+/* I.S. Proc bisa kosong */
+/* F.S. Jika Delv kosong, pesan "Tidak ada makanan yang diproses" dimunculkan,
+        jika tidak, semua item di Process list akan ditampilkan.
+*/
+void openProc(Sim S);
 
 /* *** Menampilkan posisi simulator *** */
 /* I.S. Posisi terdefinisi */
