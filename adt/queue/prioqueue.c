@@ -162,7 +162,7 @@ void removeIdx(PrioQueue *Q, Makanan *val, int id)
     int idx = searchIdx(*Q, id);
     if (idx == IDX_UNDEF)
     {
-        printf("ID tidak ditemukan dalam List Queue.");
+        printf("ID tidak ditemukan dalam List Queue\n");
     }
     else
     {
@@ -221,14 +221,14 @@ void expandQueue(PrioQueue *Q, int num)
 void reduceAllTime(PrioQueue *Q)
 {
     int i;
-    if (QueueType(*Q) == true)
+    if (QueueType(*Q) == 'e')
     {
         for (i = 0; i < queueLength(*Q); i++)
         {
             decDuration(&EXPIRY(Elmt(*Q, i)));
         }
     }
-    else
+    else if (QueueType(*Q) == 'd' || QueueType(*Q) == 'p')
     {
         for (i = 0; i < queueLength(*Q); i++)
         {

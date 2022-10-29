@@ -19,9 +19,9 @@ typedef struct
         int idxTail;     /* alamat penambahan */
         int maxQueue;    /* Max elemen queue */
         char QueueType;  /* Ini Queue untuk jenis apa ?
-                               i jika untuk Inventory;
-                               d jika untuk Delivery;
-                               p jika untuk Process*/
+                            i jika untuk Inventory;
+                            d jika untuk Delivery;
+                            p jika untuk Process;  */
 } PrioQueue;
 /* Definisi Queue kosong: idxHead=Nil; idxTail=Nil. */
 /* Catatan implementasi: T[0] tidak pernah dipakai */
