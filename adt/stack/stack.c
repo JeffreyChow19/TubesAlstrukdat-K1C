@@ -56,5 +56,12 @@ void shrinkStack(Stack *S, int num)
 
 void clearStack(Stack *S)
 {
-    IDX_TOP(*S) = IDX_UNDEF;
+    while (!isStackEmpty(*S))
+    {
+        Sim temp;
+        pop(S, &temp);
+        dealocateQueue(&(Inv(temp)));
+        dealocateQueue(&(Delv(temp)));
+        dealocateQueue(&(Proc(temp)));
+    }
 }
