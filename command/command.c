@@ -113,7 +113,7 @@ boolean startCommand(Sim *s)
     delivery(s);
     enterToContinue();
   }
-    else if (isStringEqualLiteral(command, "INVENTORY"))
+  else if (isStringEqualLiteral(command, "INVENTORY"))
   {
     openInv(simulator);
     enterToContinue();
