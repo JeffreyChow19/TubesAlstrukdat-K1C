@@ -92,4 +92,6 @@ boolean isForExpiry(PrioQueue Q);
 
 void expandQueue(PrioQueue *Q, int num);
 
+void reduceAllTime(PrioQueue *Q);
+
 #endif
