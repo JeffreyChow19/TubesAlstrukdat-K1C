@@ -52,6 +52,8 @@ void appendWord(String *s, Word w);
  */
 void setLiteral(String *s, char *literal);
 
+void clearString(String *s);
+
 /* Menambahkan capacity s sebanyak num
   I.S. s terdefinisi
   F.S. Capacity s bertambah sebanyak num
@@ -64,6 +66,10 @@ void expandString(String *s, int num);
 boolean isStringEqual(String s1, String s2);
 
 boolean isStringEqualLiteral(String s, char *literal);
+
+boolean isKataEqualLiteral(Word w, char *literal);
+
+boolean isStringInt(String s);
 
 /*
   Mengembalikan nilai integer dari string.

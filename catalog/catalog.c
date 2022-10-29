@@ -12,10 +12,6 @@ void displayCatalog()
     for (i = 0; i < foods.Neff; i++)
     {
         printf("%d. ", i + 1);
-        printf("%s - ", foods.buffer[i].name.buffer);
-        WriteDuration(foods.buffer[i].expiry);
-        printf(" - %s - ", foods.buffer[i].action.buffer);
-        WriteDuration(foods.buffer[i].delivery);
-        printf("\n");
+        printMakananDetails(foods.buffer[i]);
     }
 }

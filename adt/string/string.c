@@ -42,10 +42,15 @@ void appendWord(String *s, Word w)
   }
 }
 
-void setLiteral(String *s, char *literal)
+void clearString(String *s)
 {
   LENGTH(*s) = 0;
   CHAR(*s, 0) = '\0';
+}
+
+void setLiteral(String *s, char *literal)
+{
+  clearString(s);
   int i = 0;
   while (literal[i] != '\0')
   {
@@ -84,6 +89,34 @@ boolean isStringEqualLiteral(String s, char *literal)
     i++;
   }
   return i == LENGTH(s);
+}
+
+boolean isKataEqualLiteral(Word w, char *literal)
+{
+  int i = 0;
+  while (literal[i] != '\0')
+  {
+    if (i >= w.Length)
+      return false;
+    if (w.TabWord[i] != literal[i])
+      return false;
+    i++;
+  }
+  return i == w.Length;
+}
+
+boolean isStringInt(String s)
+{
+  if (LENGTH(s) == 0)
+    return false;
+
+  int i;
+  for (i = 0; i < LENGTH(s); i++)
+  {
+    if (CHAR(s, i) < '0' || CHAR(s, i) > '9')
+      return false;
+  }
+  return true;
 }
 
 int stringToInt(String s)
