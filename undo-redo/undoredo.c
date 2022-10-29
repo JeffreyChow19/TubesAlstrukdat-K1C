@@ -1,31 +1,32 @@
 #include "undoredo.h"
 #include <stdio.h>
+#include "../data/data.h"
 
-void undo(Sim *sim, Stack *utama, Stack *penampung)
+void undo()
 {
     Sim temp;
-    pop(utama, &temp);
-    push(penampung, temp);
-    if (isStackEmpty(*utama))
+    pop(&undoStack, &temp);
+    push(&redoStack, temp);
+    if (isStackEmpty(undoStack))
     {
         printf("Anda belum memulai melakukan command\n");
-        push(utama, temp);
-        clearStack(penampung);
+        push(&undoStack, temp);
+        clearStack(&redoStack);
     }
     else
     {
-        *sim = InfoTop(*utama);
+        simulator = InfoTop(undoStack);
     }
 }
 
-void redo(Sim *sim, Stack *utama, Stack *penampung)
+void redo()
 {
-    if (!isStackEmpty(*penampung))
+    if (!isStackEmpty(redoStack))
     {
         Sim temp;
-        pop(penampung, &temp);
-        push(utama, temp);
-        *sim = temp;
+        pop(&redoStack, &temp);
+        push(&undoStack, temp);
+        simulator = temp;
     }
     else
     {
