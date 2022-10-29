@@ -66,6 +66,10 @@ void removeTime(Sim *S, int dd, int hh, int mm);
 /* F.S. val adalah MAKANAN terakhir Inv yang baru */
 void addFood(Sim *S, Makanan val);
 
+void addDelv(Sim *S, Makanan val);
+
+void addProc(Sim *S, Makanan val);
+
 /* ********** MENGHAPUS MAKANAN ********** */
 /* *** Menghapus MAKANAN dengan id tertentu *** */
 /* Proses : Menghapus MAKANAN pada index idx List */

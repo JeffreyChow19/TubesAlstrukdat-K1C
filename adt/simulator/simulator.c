@@ -60,6 +60,16 @@ void addFood(Sim *S, Makanan val)
     enqueue(&Inv(*S), val);
 }
 
+void addDelv(Sim *S, Makanan val)
+{
+    enqueue(&Delv(*S), val);
+}
+
+void addProc(Sim *S, Makanan val)
+{
+    enqueue(&Proc(*S), val);
+}
+
 void removeFoodID(Sim *S, Makanan *val, int id)
 {
     Makanan food;
