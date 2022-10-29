@@ -4,7 +4,7 @@
 int main()
 {
     PrioQueue Q;
-    CreateQueue(&Q, 5, true);
+    CreateQueue(&Q, 5, 'e');
     String name, act;
     Time exp, del;
 

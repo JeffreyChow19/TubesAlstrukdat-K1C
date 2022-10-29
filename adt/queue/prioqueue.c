@@ -24,7 +24,7 @@ int queueLength(PrioQueue Q)
     }
 }
 
-void CreateQueue(PrioQueue *Q, int Max, boolean type)
+void CreateQueue(PrioQueue *Q, int Max, char type)
 {
     (*Q).buffer = (QElType *)malloc((Max) * sizeof(QElType));
 
@@ -72,7 +72,7 @@ void enqueue(PrioQueue *Q, QElType X)
                 timeInput = TimeToMinute(EXPIRY(X));
                 timeIdx = TimeToMinute(EXPIRY(Elmt(*Q, i)));
             }
-            else if (isForDelivery(*Q))
+            else if (isForDelivery(*Q) || isForProcess(*Q))
             {
                 timeInput = TimeToMinute(DELIVERY(X));
                 timeIdx = TimeToMinute(DELIVERY(Elmt(*Q, i)));
@@ -162,7 +162,7 @@ void removeIdx(PrioQueue *Q, Makanan *val, int id)
     int idx = searchIdx(*Q, id);
     if (idx == IDX_UNDEF)
     {
-        printf("ID tidak ditemukan dalam List Queue.");
+        printf("ID tidak ditemukan dalam List Queue\n");
     }
     else
     {
@@ -199,16 +199,40 @@ void copyQueue(PrioQueue Q, PrioQueue *Q2)
 
 boolean isForDelivery(PrioQueue Q)
 {
-    return (QueueType(Q) == false);
+    return (QueueType(Q) == 'd');
 }
 
 boolean isForExpiry(PrioQueue Q)
 {
-    return (QueueType(Q) == true);
+    return (QueueType(Q) == 'e');
+}
+
+boolean isForProcess(PrioQueue Q)
+{
+    return (QueueType(Q) == 'p');
 }
 
 void expandQueue(PrioQueue *Q, int num)
 {
     MaxQueue(*Q) += num;
     (*Q).buffer = realloc((*Q).buffer, MaxQueue(*Q) * sizeof(QElType));
+}
+
+void reduceAllTime(PrioQueue *Q)
+{
+    int i;
+    if (QueueType(*Q) == 'e')
+    {
+        for (i = 0; i < queueLength(*Q); i++)
+        {
+            decDuration(&EXPIRY(Elmt(*Q, i)));
+        }
+    }
+    else if (QueueType(*Q) == 'd' || QueueType(*Q) == 'p')
+    {
+        for (i = 0; i < queueLength(*Q); i++)
+        {
+            decDuration(&DELIVERY(Elmt(*Q, i)));
+        }
+    }
 }
