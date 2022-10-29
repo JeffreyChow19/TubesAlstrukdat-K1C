@@ -9,6 +9,7 @@ Matrix map;
 ListStatik foods;
 ListDin recipesTrees;
 ListDin recipes;
+Sim simulator;
 
 void initData(char *mapFile, char *foodsFile, char *recipesFile)
 {
@@ -149,4 +150,18 @@ void readRecipesConfig(char *filename)
   }
   if (!endWord)
     throwError("File konfigurasi resep tidak valid\nJumlah resep lebih banyak daripada yang dispesifikasikan\n");
+}
+
+void initSimulator()
+{
+  String name;
+  Point pos;
+
+  CreateEmptyString(&name, 4);
+  setLiteral(&name, "BNMO");
+
+  CreatePoint(&pos, 0, 0);
+
+  CreateSim(&simulator, name, pos);
+  return simulator;
 }

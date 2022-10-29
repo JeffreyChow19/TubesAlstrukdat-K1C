@@ -4,21 +4,6 @@
 #include "adt/mesinkata/wordmachine.h"
 #include "command/command.h"
 
-Sim initSim()
-{
-  Sim s;
-  String name;
-  Point pos;
-
-  CreateEmptyString(&name, 4);
-  setLiteral(&name, "BNMO");
-
-  CreatePoint(&pos, 0, 0);
-
-  CreateSim(&s, name, pos);
-  return s;
-}
-
 void printStatus(Sim s)
 {
   printf("%s di posisi: ", SBUFFER(Name(s)));
@@ -61,13 +46,12 @@ int main()
 
   initData("./data/peta.txt", "./data/makanan.txt", "./data/resep.txt");
 
-  Sim sim = initSim();
   boolean running = true;
 
   while (running)
   {
-    printStatus(sim);
-    running = !startCommand(&sim);
+    printStatus(simulator);
+    running = !startCommand(&simulator);
   }
 
   return 0;
