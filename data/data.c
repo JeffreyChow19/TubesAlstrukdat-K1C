@@ -2,6 +2,7 @@
 #include "../adt/mesinkata/wordmachine.h"
 #include "../adt/string/string.h"
 #include "../adt/waktu/time.h"
+#include "../error/error.h"
 #include <stdio.h>
 
 Matrix map;
@@ -36,6 +37,8 @@ void readFoodsConfig(char *filename)
   ADVWORD();
   for (i = 0; i < nFoods; i++)
   {
+    if (endWord)
+      throwError("File konfigurasi makanan tidak valid\nJumlah food lebih sedikit daripada yang dispesifikasikan\n");
     String name, action;
     Time expiry, deliv;
     Makanan newFood;
@@ -78,10 +81,8 @@ void readFoodsConfig(char *filename)
     ADVWORD();
   }
 
-  while (!endWord)
-  {
-    ADVWORD();
-  }
+  if (!endWord)
+    throwError("File konfigurasi makanan tidak valid\nJumlah food lebih banyak daripada yang dispesifikasikan\n");
 }
 
 void readRecipesConfig(char *filename)
@@ -101,6 +102,8 @@ void readRecipesConfig(char *filename)
   int i;
   for (i = 0; i < nRecipes; i++)
   {
+    if (endWord)
+      throwError("File konfigurasi resep tidak valid\nJumlah resep lebih sedikit daripada yang dispesifikasikan\n");
     int parentId = wordToInt(currentWord);
 
     Makanan parent = StELMT(foods, indexOf(foods, parentId));
@@ -144,4 +147,6 @@ void readRecipesConfig(char *filename)
     }
     insertLastDin(&recipes, parentTree);
   }
+  if (!endWord)
+    throwError("File konfigurasi resep tidak valid\nJumlah resep lebih banyak daripada yang dispesifikasikan\n");
 }
