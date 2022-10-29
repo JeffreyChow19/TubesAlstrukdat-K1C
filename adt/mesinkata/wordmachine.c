@@ -90,15 +90,25 @@ void CopyWord()
 int readIntWithRange(int min, int max)
 {
     int res;
+    boolean valid = false;
     do
     {
         STARTWORD(stdin, false);
-        scanf("%d", &res);
-        if (res < min || res > max)
+        if (!isWordInt(currentWord) || !endWord)
+        {
+
+            valid = false;
+            IgnoreWords();
+        }
+        else
+        {
+            res = wordToInt(currentWord);
+            valid = res >= min && res <= max;
+        }
+        if (!valid)
         {
             printf("Input tidak valid. Silahkan coba lagi.\n", min, max);
         }
-        IgnoreWords();
-    } while (res < min || res > max);
+    } while (!valid);
     return res;
 }
