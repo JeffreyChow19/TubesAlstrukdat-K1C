@@ -10,12 +10,19 @@ ListStatik foods;
 ListDin recipesTrees;
 ListDin recipes;
 Sim simulator;
+Stack undoStack;
+Stack redoStack;
+LString notifs;
 
 void initData(char *mapFile, char *foodsFile, char *recipesFile)
 {
+  initSimulator();
   readMapConfig(mapFile);
   readFoodsConfig(foodsFile);
   readRecipesConfig(recipesFile);
+  CreateStack(&undoStack, 10);
+  CreateStack(&redoStack, 10);
+  CreateLString(&notifs, 10);
 }
 
 void readMapConfig(char *filename)
