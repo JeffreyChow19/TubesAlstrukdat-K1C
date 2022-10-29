@@ -12,9 +12,9 @@ void CreateEmptyString(String *s, int capacity)
 
 void dealocateString(String *s)
 {
+  free(SBUFFER(*s));
   SCAPACITY(*s) = 0;
   LENGTH(*s) = 0;
-  free(SBUFFER(*s));
 }
 
 boolean isStringFull(String s)

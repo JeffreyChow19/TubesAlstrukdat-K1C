@@ -39,5 +39,7 @@ int main()
   x = stringToInt(num);
   printf("x = 124 is %s\n", x == 124 ? "true" : "false");
 
+  dealocateString(&num);
+
   return 0;
 }
