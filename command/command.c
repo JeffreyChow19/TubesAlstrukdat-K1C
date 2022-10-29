@@ -3,8 +3,11 @@
 #include "../adt/mesinkata/wordmachine.h"
 #include "../catalog/catalog.h"
 #include "../cookbook/cookbook.h"
+#include "../olah/olah.h"
 #include "../Map/moveNact.h"
 #include "../data/data.h"
+#include "../buy/buy.h"
+#include "../delivery/delivery.h"
 
 boolean startCommand(Sim *s)
 {
@@ -79,9 +82,41 @@ boolean startCommand(Sim *s)
     displayCookbook();
     enterToContinue();
   }
+  else if (isStringEqualLiteral(command, "BUY"))
+  {
+    buy(s);
+    STARTWORD(stdin, false);
+    IgnoreWords();
+  }
+  else if (isStringEqualLiteral(command, "DELIVERY"))
+  {
+    delivery(s);
+    enterToContinue();
+  }
+  else if (isStringEqualLiteral(command, "FRY"))
+  {
+    processFood(command);
+    enterToContinue();
+  }
+  else if (isStringEqualLiteral(command, "CHOP"))
+  {
+    processFood(command);
+    enterToContinue();
+  }
+  else if (isStringEqualLiteral(command, "MIX"))
+  {
+    processFood(command);
+    enterToContinue();
+  }
+  else if (isStringEqualLiteral(command, "BOIL"))
+  {
+    processFood(command);
+    enterToContinue();
+  }
   else if (isStringEqualLiteral(command, "INVENTORY"))
   {
     openInv(simulator);
+    enterToContinue();
   }
   else if (isStringEqualLiteral(command, "EXIT"))
   {
