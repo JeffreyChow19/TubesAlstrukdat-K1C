@@ -8,6 +8,7 @@
 #include "../data/data.h"
 #include "../buy/buy.h"
 #include "../delivery/delivery.h"
+#include "../schedule/schedule.h"
 
 boolean startCommand(Sim *s)
 {
@@ -17,7 +18,6 @@ boolean startCommand(Sim *s)
 
   if (isKataEqualLiteral(currentWord, "WAIT"))
   {
-    // handle wait
     ADVWORD();
     String str = wordToString(currentWord);
     if (endWord || !isStringInt(str))
@@ -42,7 +42,13 @@ boolean startCommand(Sim *s)
     int m = stringToInt(str);
     dealocateString(&str);
     IgnoreWords();
-    // TODO: call wait handling
+    Time t;
+    CreateTime(&t, 0, h, m);
+
+    tickWithTime(h, m);
+    printf("Waktu telah berjalan ");
+    WriteDuration(t);
+    printf("\n\n");
 
     return false;
   }
@@ -59,18 +65,22 @@ boolean startCommand(Sim *s)
   if (isStringEqualLiteral(command, "MOVE NORTH"))
   {
     setPos(s, 'N', map);
+    tick();
   }
   else if (isStringEqualLiteral(command, "MOVE EAST"))
   {
     setPos(s, 'E', map);
+    tick();
   }
   else if (isStringEqualLiteral(command, "MOVE SOUTH"))
   {
     setPos(s, 'S', map);
+    tick();
   }
   else if (isStringEqualLiteral(command, "MOVE WEST"))
   {
     setPos(s, 'W', map);
+    tick();
   }
   else if (isStringEqualLiteral(command, "CATALOG"))
   {
@@ -85,6 +95,7 @@ boolean startCommand(Sim *s)
   else if (isStringEqualLiteral(command, "BUY"))
   {
     buy(s);
+    tick();
     STARTWORD(stdin, false);
     IgnoreWords();
   }
@@ -96,21 +107,25 @@ boolean startCommand(Sim *s)
   else if (isStringEqualLiteral(command, "FRY"))
   {
     processFood(command);
+    tick();
     enterToContinue();
   }
   else if (isStringEqualLiteral(command, "CHOP"))
   {
     processFood(command);
+    tick();
     enterToContinue();
   }
   else if (isStringEqualLiteral(command, "MIX"))
   {
     processFood(command);
+    tick();
     enterToContinue();
   }
   else if (isStringEqualLiteral(command, "BOIL"))
   {
     processFood(command);
+    tick();
     enterToContinue();
   }
   else if (isStringEqualLiteral(command, "INVENTORY"))

@@ -14,6 +14,7 @@ void tick()
     char text[27 + LENGTH(NAME(accept))];
     sprintf(text, "%s sudah diterima oleh BNMO!", SBUFFER(NAME(accept)));
     String notif;
+    CreateEmptyString(&notif, 27 + LENGTH(NAME(accept)));
     setLiteral(&notif, text);
     insertLastString(&notifs, notif);
   }
@@ -27,6 +28,7 @@ void tick()
     char text[27 + LENGTH(NAME(accept))];
     sprintf(text, "%s sudah diterima oleh BNMO!", SBUFFER(NAME(accept)));
     String notif;
+    CreateEmptyString(&notif, 27 + LENGTH(NAME(accept)));
     setLiteral(&notif, text);
     insertLastString(&notifs, notif);
   }
@@ -39,6 +41,7 @@ void tick()
     char text[18 + LENGTH(NAME(expire))];
     sprintf(text, "%s kedaluwarsa.. :(", SBUFFER(NAME(expire)));
     String notif;
+    CreateEmptyString(&notif, 18 + LENGTH(NAME(expire)));
     setLiteral(&notif, text);
     insertLastString(&notifs, notif);
   }
