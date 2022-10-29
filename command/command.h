@@ -6,4 +6,6 @@ boolean startCommand(Sim *s);
 
 void enterToContinue();
 
+void addToStack();
+
 #endif

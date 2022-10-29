@@ -9,6 +9,15 @@
 #include "../buy/buy.h"
 #include "../delivery/delivery.h"
 #include "../schedule/schedule.h"
+#include "../undoredo/undoredo.h"
+
+void addToStack()
+{
+  Sim s;
+  copySim(simulator, &s);
+  push(&undoStack, s);
+  clearStack(&redoStack);
+}
 
 boolean startCommand(Sim *s)
 {
@@ -45,6 +54,7 @@ boolean startCommand(Sim *s)
     Time t;
     CreateTime(&t, 0, h, m);
 
+    addToStack();
     tickWithTime(h, m);
     printf("Waktu telah berjalan ");
     WriteDuration(t);
@@ -64,21 +74,25 @@ boolean startCommand(Sim *s)
 
   if (isStringEqualLiteral(command, "MOVE NORTH"))
   {
+    addToStack();
     setPos(s, 'N', map);
     tick();
   }
   else if (isStringEqualLiteral(command, "MOVE EAST"))
   {
+    addToStack();
     setPos(s, 'E', map);
     tick();
   }
   else if (isStringEqualLiteral(command, "MOVE SOUTH"))
   {
+    addToStack();
     setPos(s, 'S', map);
     tick();
   }
   else if (isStringEqualLiteral(command, "MOVE WEST"))
   {
+    addToStack();
     setPos(s, 'W', map);
     tick();
   }
@@ -94,6 +108,7 @@ boolean startCommand(Sim *s)
   }
   else if (isStringEqualLiteral(command, "BUY"))
   {
+    addToStack();
     buy(s);
     tick();
     STARTWORD(stdin, false);
@@ -106,26 +121,40 @@ boolean startCommand(Sim *s)
   }
   else if (isStringEqualLiteral(command, "FRY"))
   {
+    addToStack();
     processFood(command);
     tick();
     enterToContinue();
   }
   else if (isStringEqualLiteral(command, "CHOP"))
   {
+    addToStack();
     processFood(command);
     tick();
     enterToContinue();
   }
   else if (isStringEqualLiteral(command, "MIX"))
   {
+    addToStack();
     processFood(command);
     tick();
     enterToContinue();
   }
   else if (isStringEqualLiteral(command, "BOIL"))
   {
+    addToStack();
     processFood(command);
     tick();
+    enterToContinue();
+  }
+  else if (isStringEqualLiteral(command, "UNDO"))
+  {
+    undo();
+    enterToContinue();
+  }
+  else if (isStringEqualLiteral(command, "REDO"))
+  {
+    redo();
     enterToContinue();
   }
   else if (isStringEqualLiteral(command, "INVENTORY"))

@@ -195,6 +195,8 @@ void copyQueue(PrioQueue Q, PrioQueue *Q2)
     {
         Elmt(*Q2, i) = Elmt(Q, i);
     }
+    Head(*Q2) = Head(Q);
+    Tail(*Q2) = Tail(Q);
 }
 
 boolean isForDelivery(PrioQueue Q)
