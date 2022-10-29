@@ -15,7 +15,7 @@ void undo()
     }
     else
     {
-        simulator = InfoTop(undoStack);
+        copySim(InfoTop(undoStack), &simulator);
     }
 }
 
@@ -26,7 +26,7 @@ void redo()
         Sim temp;
         pop(&redoStack, &temp);
         push(&undoStack, temp);
-        simulator = temp;
+        copySim(temp, &simulator);
     }
     else
     {
