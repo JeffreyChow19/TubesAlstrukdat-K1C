@@ -19,7 +19,20 @@ void addToStack()
   clearStack(&redoStack);
 }
 
-boolean startCommand(Sim *s)
+void move(char dir)
+{
+  addToStack();
+  boolean moved = setPos(&simulator, dir, map);
+  if (moved)
+    tick();
+  else
+  {
+    dealocateSim(&simulator);
+    pop(&undoStack, &simulator);
+  }
+}
+
+boolean startCommand()
 {
   printf("\nEnter Command: ");
 
@@ -34,7 +47,7 @@ boolean startCommand(Sim *s)
       printf("Command invalid. Jam harus merupakan angka. Silahkan coba lagi\n");
       IgnoreWords();
       dealocateString(&str);
-      return startCommand(s);
+      return startCommand();
     }
 
     int h = stringToInt(str);
@@ -46,7 +59,7 @@ boolean startCommand(Sim *s)
       printf("Command invalid. Menit harus merupakan angka. Silahkan coba lagi\n");
       IgnoreWords();
       dealocateString(&str);
-      return startCommand(s);
+      return startCommand();
     }
     int m = stringToInt(str);
     dealocateString(&str);
@@ -74,27 +87,19 @@ boolean startCommand(Sim *s)
 
   if (isStringEqualLiteral(command, "MOVE NORTH"))
   {
-    addToStack();
-    setPos(s, 'N', map);
-    tick();
+    move('N');
   }
   else if (isStringEqualLiteral(command, "MOVE EAST"))
   {
-    addToStack();
-    setPos(s, 'E', map);
-    tick();
+    move('E');
   }
   else if (isStringEqualLiteral(command, "MOVE SOUTH"))
   {
-    addToStack();
-    setPos(s, 'S', map);
-    tick();
+    move('S');
   }
   else if (isStringEqualLiteral(command, "MOVE WEST"))
   {
-    addToStack();
-    setPos(s, 'W', map);
-    tick();
+    move('W');
   }
   else if (isStringEqualLiteral(command, "CATALOG"))
   {
@@ -108,15 +113,22 @@ boolean startCommand(Sim *s)
   }
   else if (isStringEqualLiteral(command, "BUY"))
   {
+
+    if (!isActionAdj(map, Pos(simulator), 'T'))
+    {
+      printf("\nBNMO tidak berada di area telepon!\n\n");
+      return false;
+    }
+
     addToStack();
-    buy(s);
+    buy(&simulator);
     tick();
     STARTWORD(stdin, false);
     IgnoreWords();
   }
   else if (isStringEqualLiteral(command, "DELIVERY"))
   {
-    delivery(s);
+    delivery(&simulator);
     enterToContinue();
   }
   else if (isStringEqualLiteral(command, "FRY"))
@@ -128,6 +140,11 @@ boolean startCommand(Sim *s)
   }
   else if (isStringEqualLiteral(command, "CHOP"))
   {
+    if (!isActionAdj(map, Pos(simulator), 'C'))
+    {
+      printf("\nBNMO tidak berada di area chop!\n\n");
+      return false;
+    }
     addToStack();
     processFood(command);
     tick();
@@ -135,6 +152,11 @@ boolean startCommand(Sim *s)
   }
   else if (isStringEqualLiteral(command, "MIX"))
   {
+    if (!isActionAdj(map, Pos(simulator), 'M'))
+    {
+      printf("\nBNMO tidak berada di area mix!\n\n");
+      return false;
+    }
     addToStack();
     processFood(command);
     tick();
@@ -142,6 +164,11 @@ boolean startCommand(Sim *s)
   }
   else if (isStringEqualLiteral(command, "BOIL"))
   {
+    if (!isActionAdj(map, Pos(simulator), 'B'))
+    {
+      printf("\nBNMO tidak berada di area boil!\n\n");
+      return false;
+    }
     addToStack();
     processFood(command);
     tick();
@@ -175,7 +202,7 @@ boolean startCommand(Sim *s)
   {
     printf("Command tidak valid. Silakan coba lagi.\n");
     dealocateString(&command);
-    return startCommand(s);
+    return startCommand();
   }
 
   dealocateString(&command);

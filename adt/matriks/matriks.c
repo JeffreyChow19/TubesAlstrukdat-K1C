@@ -141,3 +141,21 @@ void displayMatrix(Matrix m, Point simPoint)
     }
     printf("\n");
 }
+
+boolean isActionAdj(Matrix m, Point simPoint, char action)
+{
+    int i, j;
+
+    for (i = Ordinat(simPoint) - 1; i <= Ordinat(simPoint) + 1; i++)
+    {
+        for (j = Absis(simPoint) - 1; j <= Absis(simPoint) + 1; j++)
+        {
+            if (!(i == Ordinat(simPoint) && j == Absis(simPoint)) && isIdxEffMat(m, i, j) && ELMTMat(m, i, j) == action)
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}

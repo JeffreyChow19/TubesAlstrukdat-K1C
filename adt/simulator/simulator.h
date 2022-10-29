@@ -33,6 +33,8 @@ typedef struct
 /* F.S. Terbentuk Simulator dengan nama, posisi terdefinisi dan Inv kosong*/
 void CreateSim(Sim *S, String Name, Point Pos);
 
+void dealocateSim(Sim *S);
+
 /* Menyalin Simulator */
 /* I.S. Simulator terdefinisi */
 /* F.S. Terbentuk salinan simulator */
