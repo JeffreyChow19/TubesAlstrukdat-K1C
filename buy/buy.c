@@ -30,24 +30,14 @@ void buy(Sim *S)
         printf("Enter Command (0-%d): ", listLength(rawFoods));
         scanf("%d", &com);
 
-        while (com != 0)
+        if ((com < 1) || (com > listLength(rawFoods)))
+            printf("Invalid command.\n");
+        else
         {
-            if ((com < 1) || (com > listLength(rawFoods)))
-                printf("Invalid command.\n");
-            else
-            {
-                addDelv(S, StELMT(rawFoods, com - 1));
-                printf("Berhasil memesan %s. %s akan diantar dalam ", SBUFFER(NAME(StELMT(rawFoods, com - 1))), SBUFFER(NAME(StELMT(rawFoods, com - 1))));
-                WriteDuration(DELIVERY(StELMT(rawFoods, com - 1)));
-                printf(".\n\n");
-                // openDelv(S);
-                // printf("\n");
-            }
-
-            printf("Enter Command (0-%d): ", listLength(rawFoods));
-            scanf("%d", &com);
+            addDelv(S, StELMT(rawFoods, com - 1));
+            printf("Berhasil memesan %s. %s akan diantar dalam ", SBUFFER(NAME(StELMT(rawFoods, com - 1))), SBUFFER(NAME(StELMT(rawFoods, com - 1))));
+            WriteDuration(DELIVERY(StELMT(rawFoods, com - 1)));
+            printf(".\n\n");
         }
-        /* com == 0 */
-        // openDelv(*S);
     }
 }
