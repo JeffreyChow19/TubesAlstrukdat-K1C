@@ -6,6 +6,7 @@
 #include "../liststring/liststring.h"
 #include "../mesinkarakter/charmachine.h"
 #include "../point/point.h"
+#include "../simulator/simulator.h"
 
 #define ROW_CAP 100
 #define COL_CAP 100
@@ -41,7 +42,7 @@ boolean isIdxEffMat(Matrix m, IdxType i, IdxType j);
 void copyMatrix(Matrix mIn, Matrix *mOut);
 /* Melakukan assignment mOut <- mIn */
 
-void readMatrix(Matrix *m, char *filename);
+void readMatrix(Matrix *m, char *filename, Sim *s);
 /* I.S. filename valid, m sembarang*/
 /* F.S. m terdefinisi nilai elemen efektifnya, berukuran nRow x nCol, nRow dan nCol dicari dari file */
 /* Proses: Melakukan CreateMatrix(m,nRow,nCol) dan mengisi nilai efektifnya */

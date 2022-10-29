@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include "../string/string.h"
 #include "../liststring/liststring.h"
-#include "../mesinkarakter/charmachine.h"
+#include "../mesinkata/wordmachine.h"
+#include "../../error/error.h"
 #include <stdlib.h>
 
 /* Constructor */
@@ -52,76 +53,59 @@ void copyMatrix(Matrix mIn, Matrix *mOut)
     }
 }
 
-void readMatrix(Matrix *m, char *filename)
+void readMatrix(Matrix *m, char *filename, Sim *s)
 {
     /* I.S. filename valid, m sembarang */
     /* F.S. m terdefinisi nilai elemen efektifnya, berukuran nRow x nCol, nRow dan nCol dicari dari file */
     /* Proses: Melakukan CreateMatrix(m,nRow,nCol) dan mengisi nilai efektifnya */
     /* Selanjutnya membaca nilai elemen per baris dan kolom dari file:filename dan memindahkannya ke matriks, dan jika membaca # dari file akan diganti dengan ' '*/
 
-    START(fopen(filename, "r"), true);
+    STARTWORD(fopen(filename, "r"), true);
 
     boolean firstLine = true;
     boolean isRow = true;
-    boolean notYetCreate = true;
 
-    int nRow = 0;
-    int nCol = 0;
+    int nRow = wordToInt(currentWord);
+    ADVWORD();
+    int nCol = wordToInt(currentWord);
+
+    createMatrix(nRow, nCol, m);
 
     int i = 0;
     int j = 0;
 
-    while (!EOP)
-    {
-        if (firstLine)
-        {
-            if (currentChar == ' ' && isRow)
-            {
-                isRow = false;
-            }
-            else if (currentChar == '\n' && !isRow)
-            {
-                firstLine = false;
-            }
-            else
-            {
-                if (isRow)
-                {
-                    nRow = (nRow * 10) + ((int)(currentChar - 48));
-                }
-                else
-                {
-                    nCol = (nCol * 10) + ((int)(currentChar - 48));
-                }
-            }
-        }
-        else
-        {
-            if (notYetCreate)
-            {
-                createMatrix(nRow, nCol, m);
-                notYetCreate = false;
-            }
+    ADVWORD();
 
-            if (currentChar != '\n')
+    for (i = 0; i < nRow; i++)
+    {
+        if (endWord)
+            throwError("File konfigurasi peta tidak valid\nJumlah baris lebih sedikit daripada yang dispesifikasikan\n");
+        if (currentWord.Length != nCol)
+        {
+            throwError("File konfigurasi peta tidak valid\nTerdapat jumlah kolom tidak sesuai dengan yang dispesifikasikan\n");
+        }
+        for (j = 0; j < nCol; j++)
+        {
+            if (currentWord.TabWord[j] == '#' || currentWord.TabWord[j] == 'S')
             {
-                if (currentChar != '#')
+                if (currentWord.TabWord[j] == 'S')
                 {
-                    ELMTMat(*m, i, j) = currentChar;
+                    Absis(Pos(*s)) = i;
+                    Ordinat(Pos(*s)) = j;
                 }
-                else
-                {
-                    ELMTMat(*m, i, j) = ' ';
-                }
-                j++;
+                ELMTMat(*m, i, j) = ' ';
             }
             else
             {
-                i++;
-                j = 0;
+                ELMTMat(*m, i, j) = currentWord.TabWord[j];
             }
         }
-        ADV();
+
+        ADVWORD();
+    }
+    if (!endWord)
+    {
+        throwError("File konfigurasi peta tidak valid\nJumlah baris lebih banyak daripada yang dispesifikasikan\n");
     }
 }
 
@@ -143,7 +127,7 @@ void displayMatrix(Matrix m, Point simPoint)
         printf("* ");
         for (j = 0; j < m.colEff; j++)
         {
-            if (i == Absis(simPoint) && j == Ordinat(simPoint))
+            if (j == Absis(simPoint) && i == Ordinat(simPoint))
                 printf("S ");
             else
                 printf("%c ", ELMTMat(m, i, j));

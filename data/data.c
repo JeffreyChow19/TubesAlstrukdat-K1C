@@ -2,23 +2,32 @@
 #include "../adt/mesinkata/wordmachine.h"
 #include "../adt/string/string.h"
 #include "../adt/waktu/time.h"
+#include "../error/error.h"
 #include <stdio.h>
 
 Matrix map;
 ListStatik foods;
 ListDin recipesTrees;
 ListDin recipes;
+Sim simulator;
+Stack undoStack;
+Stack redoStack;
+LString notifs;
 
 void initData(char *mapFile, char *foodsFile, char *recipesFile)
 {
+  initSimulator();
   readMapConfig(mapFile);
   readFoodsConfig(foodsFile);
   readRecipesConfig(recipesFile);
+  CreateStack(&undoStack, 10);
+  CreateStack(&redoStack, 10);
+  CreateLString(&notifs, 10);
 }
 
 void readMapConfig(char *filename)
 {
-  readMatrix(&map, filename);
+  readMatrix(&map, filename, &simulator);
 }
 
 void readFoodsConfig(char *filename)
@@ -36,6 +45,8 @@ void readFoodsConfig(char *filename)
   ADVWORD();
   for (i = 0; i < nFoods; i++)
   {
+    if (endWord)
+      throwError("File konfigurasi makanan tidak valid\nJumlah food lebih sedikit daripada yang dispesifikasikan\n");
     String name, action;
     Time expiry, deliv;
     Makanan newFood;
@@ -78,10 +89,8 @@ void readFoodsConfig(char *filename)
     ADVWORD();
   }
 
-  while (!endWord)
-  {
-    ADVWORD();
-  }
+  if (!endWord)
+    throwError("File konfigurasi makanan tidak valid\nJumlah food lebih banyak daripada yang dispesifikasikan\n");
 }
 
 void readRecipesConfig(char *filename)
@@ -101,6 +110,8 @@ void readRecipesConfig(char *filename)
   int i;
   for (i = 0; i < nRecipes; i++)
   {
+    if (endWord)
+      throwError("File konfigurasi resep tidak valid\nJumlah resep lebih sedikit daripada yang dispesifikasikan\n");
     int parentId = wordToInt(currentWord);
 
     Makanan parent = StELMT(foods, indexOf(foods, parentId));
@@ -144,4 +155,19 @@ void readRecipesConfig(char *filename)
     }
     insertLastDin(&recipes, parentTree);
   }
+  if (!endWord)
+    throwError("File konfigurasi resep tidak valid\nJumlah resep lebih banyak daripada yang dispesifikasikan\n");
+}
+
+void initSimulator()
+{
+  String name;
+  Point pos;
+
+  CreateEmptyString(&name, 4);
+  setLiteral(&name, "BNMO");
+
+  CreatePoint(&pos, 0, 0);
+
+  CreateSim(&simulator, name, pos);
 }

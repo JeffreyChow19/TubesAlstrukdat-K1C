@@ -35,5 +35,9 @@ int main()
   int x = stringToInt(num);
   printf("x = 123 is %s\n", x == 123 ? "true" : "false");
 
+  setLiteral(&num, "000124");
+  x = stringToInt(num);
+  printf("x = 124 is %s\n", x == 124 ? "true" : "false");
+
   return 0;
 }
