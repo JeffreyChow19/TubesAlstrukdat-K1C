@@ -15,6 +15,7 @@ extern Sim simulator;
 extern Stack undoStack;
 extern Stack redoStack;
 extern LString notifs;
+extern ListStatik rawFoods;
 
 void initData(char *mapFile, char *foodsFile, char *recipesFile);
 
@@ -25,3 +26,5 @@ void readFoodsConfig(char *filename);
 void readRecipesConfig(char *filename);
 
 void initSimulator();
+
+void filterRaw();
