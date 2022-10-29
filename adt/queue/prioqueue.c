@@ -63,7 +63,7 @@ void enqueue(PrioQueue *Q, QElType X)
     {
         boolean found = false;
         int i = queueLength(*Q) - 1;
-        while ((i > 0) && (found == false))
+        while ((i >= 0) && (found == false))
         {
             int timeInput;
             int timeIdx;
