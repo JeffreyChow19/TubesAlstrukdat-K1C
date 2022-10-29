@@ -2,6 +2,7 @@
 #include "../data/data.h"
 #include "../adt/liststring/liststring.h"
 #include "../adt/boolean.h"
+#include "../adt/mesinkata/wordmachine.h"
 #include <stdio.h>
 
 void processFood(String process)
@@ -46,21 +47,8 @@ void processFood(String process)
         }
     }
 
-    // input option
-    int command = -9999;
-
-    while (command > menus.nEff || command < 0)
-    {
-        if (command != -9999)
-        {
-            printf("Inputan salah, ulangi input\n");
-        }
-
-        printf("Enter option: ");
-        scanf("%d", &command);
-
-        printf("\n");
-    }
+    // input command
+    int command = readIntWithRange(0, menus.nEff);
 
     if (command != 0)
     {
@@ -104,12 +92,11 @@ void processFood(String process)
                 removeIdx(&(simulator.Inv), &val, idToRemove);
             }
 
-            // add makanan to inventory
-            // enqueue(&(simulator.Inv), recipe->info);
+            // add makanan to queue
+            enqueue(&(simulator.Proc), recipe->info);
 
-            // wait for process
-            // int wait = TimeToMinute(recipe->info.delivery);
-            // decNDuration(&(simulator.Clock), wait);
+            // add 1 minutes because of process
+            // incTime(&(simulator.Clock));
         }
 
         printf("\n");
