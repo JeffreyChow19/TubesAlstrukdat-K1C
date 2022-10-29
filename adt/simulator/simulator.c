@@ -6,8 +6,9 @@ void CreateSim(Sim *S, String Name, Point Pos)
     Name(*S) = Name;
     Pos(*S) = Pos;
     CreateTime(&Clock(*S), 0, 0, 0);
-    CreateQueue(&Inv(*S), 50, true);
-    CreateQueue(&Delv(*S), 50, false);
+    CreateQueue(&Inv(*S), 50, 'i');
+    CreateQueue(&Delv(*S), 50, 'd');
+    CreateQueue(&Delv(*S), 50, 'p');
 }
 
 void copySim(Sim S, Sim *CS)
@@ -17,6 +18,7 @@ void copySim(Sim S, Sim *CS)
     Clock(*CS) = Clock(S);
     copyQueue(Inv(S), &Inv(*CS));
     copyQueue(Delv(S), &Delv(*CS));
+    copyQueue(Proc(S), &Proc(*CS));
 }
 
 void moveSim(Sim *S, char dir)
@@ -83,7 +85,16 @@ void removeExp(Sim *S, Makanan *val)
 
 void removeDelv(Sim *S, Makanan *val)
 {
-    int delv = TimeToMinute(DELIVERY(InfoHead(Inv(*S))));
+    int delv = TimeToMinute(DELIVERY(InfoHead(Delv(*S))));
+    if (delv <= 0)
+    {
+        dequeue(&Delv(*S), val);
+    }
+}
+
+void removeProc(Sim *S, Makanan *val)
+{
+    int delv = TimeToMinute(DELIVERY(InfoHead(Proc(*S))));
     if (delv <= 0)
     {
         dequeue(&Delv(*S), val);
@@ -119,6 +130,23 @@ void openDelv(Sim S)
         {
             printf("%d. ", i + 1);
             printWithDelivery(FoodDelv(S, i));
+            i++;
+        }
+    }
+}
+
+void openProc(Sim S)
+{
+    if (isQueueEmpty(Proc(S)))
+        printf("Process list kosong\n");
+    else
+    {
+        printf("List Makanan di Process list\n nama (waktu sisa proses)");
+        int i = queueLength(Proc(S)) - 1;
+        while (i >= 0)
+        {
+            printf("%d. ", i + 1);
+            printWithDelivery(FoodProc(S, i));
             i++;
         }
     }
