@@ -133,6 +133,11 @@ boolean startCommand(Sim *s)
     openInv(simulator);
     enterToContinue();
   }
+  else if (isStringEqualLiteral(command, "PROCESS"))
+  {
+    openProc(simulator);
+    enterToContinue();
+  }
   else if (isStringEqualLiteral(command, "EXIT"))
   {
     return true;

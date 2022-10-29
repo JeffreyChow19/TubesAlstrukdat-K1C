@@ -94,9 +94,6 @@ void processFood(String process)
 
             // add makanan to queue
             enqueue(&(simulator.Proc), recipe->info);
-
-            // add 1 minutes because of process
-            // incTime(&(simulator.Clock));
         }
 
         printf("\n");

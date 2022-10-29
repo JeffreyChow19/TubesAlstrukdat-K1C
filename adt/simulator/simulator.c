@@ -117,9 +117,9 @@ void openInv(Sim S)
         printf("Inventory kosong\n");
     else
     {
-        printf("List Makanan di Inventory\n nama (waktu sisa kedaluwarsa)");
-        int i = queueLength(Inv(S)) - 1;
-        while (i >= 0)
+        printf("List Makanan di Inventory\nnama (waktu sisa kedaluwarsa)\n");
+        int i = 0;
+        while (i < queueLength(Inv(S)))
         {
             printf("%d. ", i + 1);
             printWithExpired(FoodInv(S, i));
@@ -150,9 +150,9 @@ void openProc(Sim S)
         printf("Process list kosong\n");
     else
     {
-        printf("List Makanan di Process list\n nama (waktu sisa proses)");
-        int i = queueLength(Proc(S)) - 1;
-        while (i >= 0)
+        printf("List Makanan di Process list\nnama (waktu sisa proses)\n");
+        int i = 0;
+        while (i < queueLength(Proc(S)))
         {
             printf("%d. ", i + 1);
             printWithDelivery(FoodProc(S, i));

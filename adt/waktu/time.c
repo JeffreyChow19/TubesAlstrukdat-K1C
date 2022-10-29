@@ -86,8 +86,11 @@ void decDuration(Time *T)
 /* Durasi berkurang 1 menit */
 {
     int mm = TimeToMinute(*T);
-    mm--;
-    *T = MinutetoTime(mm);
+    if (mm > 0)
+    {
+        mm--;
+        *T = MinutetoTime(mm);
+    }
 }
 void decNDuration(Time *T, int N)
 /* Durasi berkurang N menit */
