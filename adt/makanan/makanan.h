@@ -3,12 +3,14 @@
 
 #include "../string/string.h"
 #include "../waktu/time.h"
+#include "../point/point.h"
 
 #define ID(m) (m).id
 #define NAME(m) (m).name
 #define EXPIRY(m) (m).expiry
 #define ACTION(m) (m).action
 #define DELIVERY(m) (m).delivery
+#define SIZE(m) (m).size
 
 typedef struct makanan
 {
@@ -17,6 +19,7 @@ typedef struct makanan
   Time expiry;
   String action;
   Time delivery;
+  Point size;
 } Makanan;
 
 /* ********** KONSTRUKTOR ********** */
