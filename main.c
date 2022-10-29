@@ -44,6 +44,7 @@ int main()
     IgnoreWords();
   } while (!valid);
 
+  initSimulator();
   initData("./data/peta.txt", "./data/makanan.txt", "./data/resep.txt");
 
   boolean running = true;

@@ -3,6 +3,8 @@
 #include "../adt/mesinkata/wordmachine.h"
 #include "../catalog/catalog.h"
 #include "../cookbook/cookbook.h"
+#include "../Map/moveNact.h"
+#include "../data/data.h"
 
 boolean startCommand(Sim *s)
 {
@@ -53,15 +55,19 @@ boolean startCommand(Sim *s)
 
   if (isStringEqualLiteral(command, "MOVE NORTH"))
   {
+    setPos(s, 'N', map);
   }
   else if (isStringEqualLiteral(command, "MOVE EAST"))
   {
+    setPos(s, 'E', map);
   }
   else if (isStringEqualLiteral(command, "MOVE SOUTH"))
   {
+    setPos(s, 'S', map);
   }
   else if (isStringEqualLiteral(command, "MOVE WEST"))
   {
+    setPos(s, 'W', map);
   }
   else if (isStringEqualLiteral(command, "CATALOG"))
   {

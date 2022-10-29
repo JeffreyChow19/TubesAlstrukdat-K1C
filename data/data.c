@@ -20,7 +20,7 @@ void initData(char *mapFile, char *foodsFile, char *recipesFile)
 
 void readMapConfig(char *filename)
 {
-  readMatrix(&map, filename);
+  readMatrix(&map, filename, &simulator);
 }
 
 void readFoodsConfig(char *filename)
@@ -163,5 +163,4 @@ void initSimulator()
   CreatePoint(&pos, 0, 0);
 
   CreateSim(&simulator, name, pos);
-  return simulator;
 }

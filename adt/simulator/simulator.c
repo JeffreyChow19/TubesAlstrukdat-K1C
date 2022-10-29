@@ -26,7 +26,7 @@ void moveSim(Sim *S, char dir)
     else if (dir == 'W')
         nextPoint(&Pos(*S), -1, 0);
     else if (dir == 'N')
-        nextPoint(&Pos(*S), -1, 0);
+        nextPoint(&Pos(*S), 0, -1);
     else if (dir == 'S')
         nextPoint(&Pos(*S), 0, 1);
 }

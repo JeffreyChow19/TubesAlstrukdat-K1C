@@ -53,7 +53,7 @@ void copyMatrix(Matrix mIn, Matrix *mOut)
     }
 }
 
-void readMatrix(Matrix *m, char *filename)
+void readMatrix(Matrix *m, char *filename, Sim *s)
 {
     /* I.S. filename valid, m sembarang */
     /* F.S. m terdefinisi nilai elemen efektifnya, berukuran nRow x nCol, nRow dan nCol dicari dari file */
@@ -86,13 +86,18 @@ void readMatrix(Matrix *m, char *filename)
         }
         for (j = 0; j < nCol; j++)
         {
-            if (currentWord.TabWord[j] != '#')
+            if (currentWord.TabWord[j] == '#' || currentWord.TabWord[j] == 'S')
             {
-                ELMTMat(*m, i, j) = currentWord.TabWord[j];
+                if (currentWord.TabWord[j] == 'S')
+                {
+                    Absis(Pos(*s)) = i;
+                    Ordinat(Pos(*s)) = j;
+                }
+                ELMTMat(*m, i, j) = ' ';
             }
             else
             {
-                ELMTMat(*m, i, j) = ' ';
+                ELMTMat(*m, i, j) = currentWord.TabWord[j];
             }
         }
 
@@ -122,7 +127,7 @@ void displayMatrix(Matrix m, Point simPoint)
         printf("* ");
         for (j = 0; j < m.colEff; j++)
         {
-            if (i == Absis(simPoint) && j == Ordinat(simPoint))
+            if (j == Absis(simPoint) && i == Ordinat(simPoint))
                 printf("S ");
             else
                 printf("%c ", ELMTMat(m, i, j));
