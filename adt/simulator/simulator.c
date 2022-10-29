@@ -94,8 +94,8 @@ void removeDelv(Sim *S, Makanan *val)
 
 void removeProc(Sim *S, Makanan *val)
 {
-    int delv = TimeToMinute(DELIVERY(InfoHead(Proc(*S))));
-    if (delv <= 0)
+    int proc = TimeToMinute(DELIVERY(InfoHead(Proc(*S))));
+    if (proc <= 0)
     {
         dequeue(&Proc(*S), val);
     }
