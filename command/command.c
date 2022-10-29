@@ -18,6 +18,7 @@ boolean startCommand(Sim *s)
     if (endWord || !isStringInt(str))
     {
       printf("Command invalid. Jam harus merupakan angka. Silahkan coba lagi\n");
+      IgnoreWords();
       dealocateString(&str);
       return startCommand(s);
     }
@@ -29,12 +30,13 @@ boolean startCommand(Sim *s)
     if (endWord || !isStringInt(str))
     {
       printf("Command invalid. Menit harus merupakan angka. Silahkan coba lagi\n");
+      IgnoreWords();
       dealocateString(&str);
       return startCommand(s);
     }
     int m = stringToInt(str);
     dealocateString(&str);
-
+    IgnoreWords();
     // TODO: call wait handling
 
     return false;
