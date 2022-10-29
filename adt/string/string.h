@@ -71,6 +71,8 @@ boolean isKataEqualLiteral(Word w, char *literal);
 
 boolean isStringInt(String s);
 
+boolean isWordInt(Word w);
+
 /*
   Mengembalikan nilai integer dari string.
   Prekondisi: string merupakan angka
