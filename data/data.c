@@ -177,7 +177,8 @@ void initSimulator()
 void filterRaw()
 {
   CreateListStatik(&rawFoods);
-  for (int i = 0; i < listLength(foods); i++)
+  int i;
+  for (i = 0; i < listLength(foods); i++)
   {
     if (isStringEqualLiteral((ACTION(StELMT(foods, i))), "BUY"))
     {
