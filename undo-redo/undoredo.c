@@ -9,6 +9,8 @@ void undo(Sim *sim, Stack *utama, Stack *penampung)
     if (isStackEmpty(*utama))
     {
         printf("Anda belum memulai melakukan command\n");
+        push(utama, temp);
+        clearStack(penampung);
     }
     else
     {
