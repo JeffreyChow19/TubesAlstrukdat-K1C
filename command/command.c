@@ -3,6 +3,7 @@
 #include "../adt/mesinkata/wordmachine.h"
 #include "../catalog/catalog.h"
 #include "../cookbook/cookbook.h"
+#include "../olah/olah.h"
 
 boolean startCommand(Sim *s)
 {
@@ -39,6 +40,11 @@ boolean startCommand(Sim *s)
   else if (isStringEqualLiteral(command, "COOKBOOK"))
   {
     displayCookbook();
+    enterToContinue();
+  }
+  else if (isStringEqualLiteral(command, "FRY"))
+  {
+    fry();
     enterToContinue();
   }
   else if (isStringEqualLiteral(command, "EXIT"))
