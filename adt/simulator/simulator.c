@@ -8,7 +8,7 @@ void CreateSim(Sim *S, String Name, Point Pos)
     CreateTime(&Clock(*S), 0, 0, 0);
     CreateQueue(&Inv(*S), 50, 'i');
     CreateQueue(&Delv(*S), 50, 'd');
-    CreateQueue(&Delv(*S), 50, 'p');
+    CreateQueue(&Proc(*S), 50, 'p');
 }
 
 void copySim(Sim S, Sim *CS)
@@ -97,7 +97,7 @@ void removeProc(Sim *S, Makanan *val)
     int delv = TimeToMinute(DELIVERY(InfoHead(Proc(*S))));
     if (delv <= 0)
     {
-        dequeue(&Delv(*S), val);
+        dequeue(&Proc(*S), val);
     }
 }
 
