@@ -14,13 +14,14 @@ typedef Makanan QElType;
 
 typedef struct
 {
-        QElType *buffer;   /* tabel penyimpan elemen */
-        int idxHead;       /* alamat penghapusan */
-        int idxTail;       /* alamat penambahan */
-        int maxQueue;      /* Max elemen queue */
-        boolean QueueType; /* Ini Queue untuk jenis apa ?
-                              true jika untuk Expiry;
-                              false jika untuk Delivery; */
+        QElType *buffer; /* tabel penyimpan elemen */
+        int idxHead;     /* alamat penghapusan */
+        int idxTail;     /* alamat penambahan */
+        int maxQueue;    /* Max elemen queue */
+        char QueueType;  /* Ini Queue untuk jenis apa ?
+                            i jika untuk Inventory;
+                            d jika untuk Delivery;
+                            p jika untuk Process;  */
 } PrioQueue;
 /* Definisi Queue kosong: idxHead=Nil; idxTail=Nil. */
 /* Catatan implementasi: T[0] tidak pernah dipakai */
@@ -45,7 +46,7 @@ int queueLength(PrioQueue Q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
 
 /* *** Kreator *** */
-void CreateQueue(PrioQueue *Q, int Max, boolean type);
+void CreateQueue(PrioQueue *Q, int Max, char type);
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk dan salah satu kondisi sbb: */
 /* Jika alokasi berhasil, Tabel memori dialokasi berukuran Max+1 */
@@ -90,6 +91,10 @@ boolean isForDelivery(PrioQueue Q);
 
 boolean isForExpiry(PrioQueue Q);
 
+boolean isForProcess(PrioQueue Q);
+
 void expandQueue(PrioQueue *Q, int num);
+
+void reduceAllTime(PrioQueue *Q);
 
 #endif

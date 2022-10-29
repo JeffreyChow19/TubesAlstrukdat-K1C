@@ -65,3 +65,13 @@ void insertLastString(LString *l, SElType val)
 
     SBUFFER(ELMTLString(*l, getLastIdxLString(*l))) = val.buffer;
 }
+
+void clearListString(LString *l)
+{
+    int i;
+    for (i = getFirstIdxLString(*l); i <= getLastIdxLString(*l); i++)
+    {
+        dealocateString(&(ELMTLString(*l, i)));
+    }
+    LSNEFF(*l) = 0;
+}

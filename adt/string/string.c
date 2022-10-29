@@ -119,6 +119,20 @@ boolean isStringInt(String s)
   return true;
 }
 
+boolean isWordInt(Word w)
+{
+  if (w.Length == 0)
+    return false;
+
+  int i;
+  for (i = 0; i < w.Length; i++)
+  {
+    if (w.TabWord[i] < '0' || w.TabWord[i] > '9')
+      return false;
+  }
+  return true;
+}
+
 int stringToInt(String s)
 {
   int res = 0;

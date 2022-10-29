@@ -92,6 +92,10 @@ boolean startCommand(Sim *s)
     delivery(s);
     enterToContinue();
   }
+    else if (isStringEqualLiteral(command, "INVENTORY"))
+  {
+    openInv(simulator);
+  }
   else if (isStringEqualLiteral(command, "EXIT"))
   {
     return true;
