@@ -34,6 +34,7 @@ boolean startCommand(Sim *s)
   else if (isStringEqualLiteral(command, "CATALOG"))
   {
     displayCatalog();
+    enterToContinue();
   }
   else if (isStringEqualLiteral(command, "COOKBOOK"))
   {
@@ -46,4 +47,11 @@ boolean startCommand(Sim *s)
 
   dealocateString(&command);
   return false;
+}
+
+void enterToContinue()
+{
+  printf("Press ENTER to continue...");
+  STARTWORD(stdin, false);
+  IgnoreWords();
 }

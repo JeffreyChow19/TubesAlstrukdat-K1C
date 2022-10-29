@@ -35,10 +35,10 @@ int main()
 {
 
   printf("Welcome to BNMO :)\nType START to start, EXIT to exit the program\n");
-  STARTWORD(stdin, false);
   boolean valid = false;
   do
   {
+    STARTWORD(stdin, false);
     String command = wordToString(currentWord);
     IgnoreWords();
     toUpper(&command);
@@ -56,6 +56,7 @@ int main()
       printf("Invalid command\n");
     }
     dealocateString(&command);
+    IgnoreWords();
   } while (!valid);
 
   initData("./data/peta.txt", "./data/makanan.txt", "./data/resep.txt");

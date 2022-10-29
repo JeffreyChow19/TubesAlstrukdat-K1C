@@ -10,11 +10,11 @@
 #define IDX_UNDEF -1
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
 
-typedef Makanan ElType;
+typedef Makanan QElType;
 
 typedef struct
 {
-        ElType *buffer;    /* tabel penyimpan elemen */
+        QElType *buffer;   /* tabel penyimpan elemen */
         int idxHead;       /* alamat penghapusan */
         int idxTail;       /* alamat penambahan */
         int maxQueue;      /* Max elemen queue */
@@ -59,20 +59,20 @@ void dealocateQueue(PrioQueue *Q);
 /* F.S. Q menjadi tidak terdefinisi lagi, MaxQueue(Q) diset 0 */
 
 /* *** Primitif Enqueue/Dequeue *** */
-void enqueue(PrioQueue *Q, ElType X);
+void enqueue(PrioQueue *Q, QElType X);
 /* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut membesar berdasarkan time expiry*/
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X menjadi TAIL yang baru, TAIL "maju";
         elemen baru disisipkan pada posisi yang tepat sesuai dengan prioritas */
 
-void dequeue(PrioQueue *Q, ElType *X);
+void dequeue(PrioQueue *Q, QElType *X);
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S.; memajukan elemen sisanya;
         Q mungkin kosong */
 
 /* Operasi Tambahan */
-void removeLast(PrioQueue *Q, ElType *X);
+void removeLast(PrioQueue *Q, QElType *X);
 /* Proses: Menghapus elemen akhir pada Q */
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen TAIL pd I.S.; TAIL "mundur";
@@ -81,7 +81,7 @@ void removeLast(PrioQueue *Q, ElType *X);
 int searchIdx(PrioQueue Q, int id);
 /* Mencari indeks pada Q sesuai ID elemen */
 
-void removeIdx(PrioQueue *Q, ElType *val, int id);
+void removeIdx(PrioQueue *Q, QElType *val, int id);
 /* Proses: Menghapus elemen pada indeks ditemukannya ID */
 
 void copyQueue(PrioQueue Q, PrioQueue *Q2);
@@ -89,5 +89,7 @@ void copyQueue(PrioQueue Q, PrioQueue *Q2);
 boolean isForDelivery(PrioQueue Q);
 
 boolean isForExpiry(PrioQueue Q);
+
+void expandQueue(PrioQueue *Q, int num);
 
 #endif

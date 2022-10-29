@@ -26,7 +26,7 @@ int queueLength(PrioQueue Q)
 
 void CreateQueue(PrioQueue *Q, int Max, boolean type)
 {
-    (*Q).buffer = (ElType *)malloc((Max + 1) * sizeof(ElType));
+    (*Q).buffer = (QElType *)malloc((Max) * sizeof(QElType));
 
     if ((*Q).buffer != NULL)
     {
@@ -47,8 +47,12 @@ void dealocateQueue(PrioQueue *Q)
     free((*Q).buffer);
 }
 
-void enqueue(PrioQueue *Q, ElType X)
+void enqueue(PrioQueue *Q, QElType X)
 {
+    if (isQueueFull(*Q))
+    {
+        expandQueue(Q, MaxQueue(*Q));
+    }
     if (isQueueEmpty(*Q))
     {
         Head(*Q) = 0;
@@ -93,7 +97,7 @@ void enqueue(PrioQueue *Q, ElType X)
     }
 }
 
-void dequeue(PrioQueue *Q, ElType *X)
+void dequeue(PrioQueue *Q, QElType *X)
 {
     if (queueLength(*Q) == 1)
     {
@@ -113,7 +117,7 @@ void dequeue(PrioQueue *Q, ElType *X)
     }
 }
 
-void removeLast(PrioQueue *Q, ElType *X)
+void removeLast(PrioQueue *Q, QElType *X)
 {
     if (queueLength(*Q) == 1)
     {
@@ -201,4 +205,10 @@ boolean isForDelivery(PrioQueue Q)
 boolean isForExpiry(PrioQueue Q)
 {
     return (QueueType(Q) == true);
+}
+
+void expandQueue(PrioQueue *Q, int num)
+{
+    MaxQueue(*Q) += num;
+    (*Q).buffer = realloc((*Q).buffer, MaxQueue(*Q) * sizeof(QElType));
 }

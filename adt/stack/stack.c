@@ -53,3 +53,8 @@ void shrinkStack(Stack *S, int num)
     MaxStack(*S) -= num;
     (*S).buffer = realloc((*S).buffer, MaxStack(*S) * sizeof(ElTypeStack));
 }
+
+void clearStack(Stack *S)
+{
+    IDX_TOP(*S) = IDX_UNDEF;
+}
