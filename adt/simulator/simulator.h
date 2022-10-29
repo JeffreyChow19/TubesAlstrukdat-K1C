@@ -5,6 +5,7 @@
 #include "../makanan/makanan.h"
 #include "../point/point.h"
 #include "../queue/prioqueue.h"
+#include "../kulkas/kulkas.h"
 
 typedef struct
 {
@@ -14,6 +15,7 @@ typedef struct
     PrioQueue Inv;
     PrioQueue Delv;
     PrioQueue Proc;
+    Kulkas Fridge;
 } Sim;
 
 /* ********** SELEKTOR ********** */
@@ -26,6 +28,7 @@ typedef struct
 #define FoodDelv(S, i) (S).Delv.buffer[(i)]
 #define Proc(S) (S).Proc
 #define FoodProc(S, i) (S).Proc.buffer[(i)]
+#define Fridge(S) (S).Fridge
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : membuat simulator*/

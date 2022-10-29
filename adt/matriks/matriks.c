@@ -53,7 +53,7 @@ void copyMatrix(Matrix mIn, Matrix *mOut)
     }
 }
 
-void readMatrix(Matrix *m, char *filename, Sim *s)
+void readMatrix(Matrix *m, char *filename, Point *simPoint)
 {
     /* I.S. filename valid, m sembarang */
     /* F.S. m terdefinisi nilai elemen efektifnya, berukuran nRow x nCol, nRow dan nCol dicari dari file */
@@ -90,8 +90,8 @@ void readMatrix(Matrix *m, char *filename, Sim *s)
             {
                 if (currentWord.TabWord[j] == 'S')
                 {
-                    Absis(Pos(*s)) = i;
-                    Ordinat(Pos(*s)) = j;
+                    Absis(*simPoint) = i;
+                    Ordinat(*simPoint) = j;
                 }
                 ELMTMat(*m, i, j) = ' ';
             }

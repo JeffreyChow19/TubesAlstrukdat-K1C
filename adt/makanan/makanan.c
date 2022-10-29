@@ -2,13 +2,14 @@
 #include <stdio.h>
 #include "../waktu/time.h"
 
-void CreateMakanan(Makanan *m, int id, String name, Time expiry, String action, Time delivery)
+void CreateMakanan(Makanan *m, int id, String name, Time expiry, String action, Time delivery, Point size)
 {
   ID(*m) = id;
   NAME(*m) = name;
   EXPIRY(*m) = expiry;
   ACTION(*m) = action;
   DELIVERY(*m) = delivery;
+  SIZE(*m) = size;
 }
 
 void dealocateMakanan(Makanan *m)

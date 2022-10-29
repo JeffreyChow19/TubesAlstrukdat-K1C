@@ -1,4 +1,6 @@
 #include "kulkas.h"
+#include "../point/point.h"
+#include <stdio.h>
 
 void CreateKulkas(Kulkas *k)
 {
@@ -30,9 +32,9 @@ void addItemKulkas(Kulkas *k, Makanan m, int x, int y)
   KNEFF(*k) += 1;
 
   int i, j;
-  for (i = y; i < y + ORDINAT(SIZE(m)); i++)
+  for (i = y; i < y + Ordinat(SIZE(m)); i++)
   {
-    for (j = x; j < x + ABSIS(SIZE(m)); j++)
+    for (j = x; j < x + Absis(SIZE(m)); j++)
     {
       ELMTMat(KMAT(*k), i, j) = true;
     }
@@ -54,12 +56,12 @@ void removeItemKulkas(Kulkas *k, int idx)
     KBUFFER(*k) = (InfoKulkas *)realloc(KBUFFER(*k), KCAPACITY(*k) * sizeof(InfoKulkas));
   }
 
-  x = ABSIS(KPOS(e));
-  y = ORDINAT(KPOS(e));
+  x = Absis(KPOS(e));
+  y = Ordinat(KPOS(e));
 
-  for (i = y; i < y + ORDINAT(SIZE(KFOOD(e))); i++)
+  for (i = y; i < y + Ordinat(SIZE(KFOOD(e))); i++)
   {
-    for (j = x; j < x + ABSIS(SIZE(KFOOD(e))); j++)
+    for (j = x; j < x + Absis(SIZE(KFOOD(e))); j++)
     {
       ELMTMat(KMAT(*k), i, j) = false;
     }
@@ -69,9 +71,9 @@ void removeItemKulkas(Kulkas *k, int idx)
 boolean canAddInKulkas(Kulkas k, Makanan m, int x, int y)
 {
   int i, j;
-  for (i = x; i < x + ABSIS(SIZE(m)); i++)
+  for (i = x; i < x + Absis(SIZE(m)); i++)
   {
-    for (j = y; j < y + ORDINAT(SIZE(m)); j++)
+    for (j = y; j < y + Ordinat(SIZE(m)); j++)
     {
       if (ELMTMat(KMAT(k), i, j))
       {
@@ -80,4 +82,38 @@ boolean canAddInKulkas(Kulkas k, Makanan m, int x, int y)
     }
   }
   return true;
+}
+
+void displayKulkas(Kulkas k)
+{
+  int i, j;
+  printf("* ");
+  for (i = 0; i < COL_EFF(KMAT(k)); i++)
+  {
+    printf("%d ", i % 10);
+  }
+  printf("*");
+  printf("\n");
+  for (i = 0; i < ROW_EFF(KMAT(k)); i++)
+  {
+    printf("%d ", i % 10);
+    for (j = 0; j < COL_EFF(KMAT(k)); j++)
+    {
+      if (ELMTMat(KMAT(k), i, j))
+      {
+        printf("X ");
+      }
+      else
+      {
+        printf("- ");
+      }
+    }
+    printf("*\n");
+  }
+
+  for (i = 0; i < COL_EFF(KMAT(k)) + 2; i++)
+  {
+    printf("* ");
+  }
+  printf("\n");
 }

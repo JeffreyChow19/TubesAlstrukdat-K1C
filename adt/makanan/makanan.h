@@ -28,7 +28,7 @@ typedef struct makanan
   I.S. m sembarang
   F.S. terbentuk makanan dengan id dan nama yang sesuai
  */
-void CreateMakanan(Makanan *m, int id, String name, Time expiry, String action, Time delivery);
+void CreateMakanan(Makanan *m, int id, String name, Time expiry, String action, Time delivery, Point size);
 
 /*
   I.S. m terdefinisi

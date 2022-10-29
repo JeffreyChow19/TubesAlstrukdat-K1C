@@ -39,4 +39,6 @@ void removeItemKulkas(Kulkas *k, int idx);
 
 boolean canAddInKulkas(Kulkas k, Makanan m, int x, int y);
 
+void displayKulkas(Kulkas k);
+
 #endif

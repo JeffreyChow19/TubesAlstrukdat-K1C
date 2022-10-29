@@ -9,6 +9,7 @@ void CreateSim(Sim *S, String Name, Point Pos)
     CreateQueue(&Inv(*S), 50, 'i');
     CreateQueue(&Delv(*S), 50, 'd');
     CreateQueue(&Proc(*S), 50, 'p');
+    CreateKulkas(&Fridge(*S));
 }
 
 void copySim(Sim S, Sim *CS)
