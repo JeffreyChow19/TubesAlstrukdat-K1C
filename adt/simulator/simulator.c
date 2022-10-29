@@ -134,13 +134,12 @@ void openDelv(Sim S)
         printf("Delivery list kosong\n");
     else
     {
-        printf("List Makanan di Delivery list\n nama (waktu sisa delivery)");
-        int i = queueLength(Delv(S)) - 1;
-        while (i >= 0)
+        printf("List Makanan di Delivery list\nnama (waktu sisa delivery)\n");
+        int len = queueLength(Delv(S));
+        for (int i = 0; i < len; i++)
         {
             printf("%d. ", i + 1);
             printWithDelivery(FoodDelv(S, i));
-            i++;
         }
     }
 }
