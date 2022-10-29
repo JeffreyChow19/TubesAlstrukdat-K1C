@@ -1,6 +1,7 @@
 #include "../adt/queue/prioqueue.h"
 #include "../data/data.h"
 #include "schedule.h"
+#include <stdio.h>
 
 void tick()
 {
@@ -9,12 +10,26 @@ void tick()
   {
     Makanan accept;
     dequeue(&(Delv(simulator)), &accept);
+    char text[100];
+    sprintf(text, "%s sudah diterima oleh BNMO!", SBUFFER(NAME(accept)));
+    String notif;
+    setLiteral(&notif, text);
+    insertLastString(&notifs, notif);
   }
-  // cek yang 0, kalo ada masukin notif
-  // if (head(0)) enqueue, addLast(notifs, string)
 
-  // sama, buat delivery
   reduceAllTime(&(Inv(simulator)));
+  while (isDurZero(EXPIRY(InfoHead(Inv(simulator)))))
+  {
+    Makanan expire;
+    dequeue(&(Inv(simulator)), &expire);
+    char text[100];
+    sprintf(text, "%s kedaluwarsa.. :(", SBUFFER(NAME(expire)));
+    String notif;
+    setLiteral(&notif, text);
+    insertLastString(&notifs, notif);
+  }
+
+  reduceAllTime(&(Proc(simulator)));
 
   incTime(&(Clock(simulator)));
 }
