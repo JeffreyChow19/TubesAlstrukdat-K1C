@@ -4,16 +4,32 @@
 #include "adt/mesinkata/wordmachine.h"
 #include "command/command.h"
 
-void printStatus(Sim s)
+void printNotifications()
 {
-  printf("%s di posisi: ", SBUFFER(Name(s)));
-  WritePoint(Pos(s));
-  printf("Waktu: ");
-  WriteTime(Clock(s));
+  printf("Notifikasi: ");
+  if (isEmptyLString(notifs))
+  {
+    printf("-\n\n");
+    return;
+  }
+  printf("\n");
+  for (int i = getFirstIdxLString(notifs); i <= getLastIdxLString(notifs); i++)
+  {
+    printf("%d. %s\n", i + 1, BUFFER(ELMTLString(notifs, i)));
+  }
+  printf("\n");
+  clearListString(&notifs);
+}
 
-  // TODO: Print notifikasi
-  printf("Notifikasi: -\n\n");
-  displayMatrix(map, Pos(s));
+void printStatus()
+{
+  printf("%s di posisi: ", SBUFFER(Name(simulator)));
+  WritePoint(Pos(simulator));
+  printf("Waktu: ");
+  WriteTime(Clock(simulator));
+
+  printNotifications();
+  displayMatrix(map, Pos(simulator));
 }
 
 int main()
@@ -50,7 +66,7 @@ int main()
 
   while (running)
   {
-    printStatus(simulator);
+    printStatus();
     running = !startCommand(&simulator);
   }
 
