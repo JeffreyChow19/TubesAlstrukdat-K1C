@@ -39,6 +39,7 @@ boolean startCommand(Sim *s)
   else if (isStringEqualLiteral(command, "COOKBOOK"))
   {
     displayCookbook();
+    enterToContinue();
   }
   else if (isStringEqualLiteral(command, "EXIT"))
   {
