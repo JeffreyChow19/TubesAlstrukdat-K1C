@@ -82,12 +82,28 @@ boolean startCommand(Sim *s)
   }
   else if (isStringEqualLiteral(command, "FRY"))
   {
-    fry();
+    processFood(command);
+    enterToContinue();
+  }
+  else if (isStringEqualLiteral(command, "CHOP"))
+  {
+    processFood(command);
+    enterToContinue();
+  }
+  else if (isStringEqualLiteral(command, "MIX"))
+  {
+    processFood(command);
+    enterToContinue();
+  }
+  else if (isStringEqualLiteral(command, "BOIL"))
+  {
+    processFood(command);
     enterToContinue();
   }
   else if (isStringEqualLiteral(command, "INVENTORY"))
   {
     openInv(simulator);
+    enterToContinue();
   }
   else if (isStringEqualLiteral(command, "EXIT"))
   {
