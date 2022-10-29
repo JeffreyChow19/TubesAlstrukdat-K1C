@@ -86,3 +86,19 @@ void CopyWord()
     }
     currentWord.Length = i;
 }
+
+int readIntWithRange(int min, int max)
+{
+    int res;
+    do
+    {
+        STARTWORD(stdin, false);
+        scanf("%d", &res);
+        if (res < min || res > max)
+        {
+            printf("Input tidak valid. Silahkan coba lagi.\n", min, max);
+        }
+        IgnoreWords();
+    } while (res < min || res > max);
+    return res;
+}
