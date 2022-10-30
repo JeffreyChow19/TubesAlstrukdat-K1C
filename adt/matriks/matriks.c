@@ -90,8 +90,8 @@ void readMatrix(Matrix *m, char *filename, Sim *s)
             {
                 if (currentWord.TabWord[j] == 'S')
                 {
-                    Absis(Pos(*s)) = i;
-                    Ordinat(Pos(*s)) = j;
+                    Absis(Pos(*s)) = j;
+                    Ordinat(Pos(*s)) = i;
                 }
                 ELMTMat(*m, i, j) = ' ';
             }

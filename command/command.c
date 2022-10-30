@@ -133,6 +133,11 @@ boolean startCommand()
   }
   else if (isStringEqualLiteral(command, "FRY"))
   {
+    if (!isActionAdj(map, Pos(simulator), 'F'))
+    {
+      printf("\nBNMO tidak berada di area fry!\n\n");
+      return false;
+    }
     addToStack();
     processFood(command);
     tick();
