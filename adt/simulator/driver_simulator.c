@@ -10,19 +10,17 @@ int main()
     CreatePoint(&Pos, 0, 0);
 
     CreateSim(&Sim, Name, Pos);
-
+    
     moveSim(&Sim, 'N');
     printf("Posisi simulator sekarang adalah ");
-    currPos(Sim);
-    printf("\n");
+    currPos(Sim); printf("\n");
     moveSim(&Sim, 'E');
     printf("Posisi simulator sekarang adalah ");
-    currPos(Sim);
-    printf("\n");
+    currPos(Sim); printf("\n");
     moveSim(&Sim, 'S');
     printf("Posisi simulator sekarang adalah ");
-    currPos(Sim);
-    printf("\n");
+    currPos(Sim); printf("\n");
+    
     moveSim(&Sim, 'W');
     printf("Posisi simulator sekarang adalah ");
     currPos(Sim);
