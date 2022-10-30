@@ -10,23 +10,17 @@ int main()
     CreatePoint(&Pos, 0, 0);
 
     CreateSim(&Sim, Name, Pos);
-
-    String N, E, W, S;
-    setLiteral(&N, "NORTH");
-    setLiteral(&E, "EAST");
-    setLiteral(&W, "WEST");
-    setLiteral(&S, "SOUTH");
-
-    moveSim(&S, N);
+    
+    moveSim(&Sim, 'N');
     printf("Posisi simulator sekarang adalah ");
     currPos(Sim); printf("\n");
-    moveSim(&S, E);
+    moveSim(&Sim, 'E');
     printf("Posisi simulator sekarang adalah ");
     currPos(Sim); printf("\n");
-    moveSim(&S, S);
+    moveSim(&Sim, 'S');
     printf("Posisi simulator sekarang adalah ");
     currPos(Sim); printf("\n");
-    moveSim(&S, W);
+    moveSim(&Sim, 'W');
     printf("Posisi simulator sekarang adalah ");
     currPos(Sim); printf("\n");
 
