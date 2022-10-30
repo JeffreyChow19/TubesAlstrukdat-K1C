@@ -11,6 +11,7 @@
 #include "../schedule/schedule.h"
 #include "../undoredo/undoredo.h"
 #include "../fridge/fridge.h"
+#include "../recommendation/recommendation.h"
 
 void addToStack()
 {
@@ -205,6 +206,11 @@ boolean startCommand()
   else if (isStringEqualLiteral(command, "FRIDGE"))
   {
     showFridgeMenu();
+    enterToContinue();
+  }
+  else if (isStringEqualLiteral(command, "RECOMMENDATION"))
+  {
+    showRecommendation();
     enterToContinue();
   }
   else if (isStringEqualLiteral(command, "EXIT"))

@@ -28,16 +28,26 @@ void dealocateSet(MultiSet *m);
 
 int indexOfSet(MultiSet m, int id);
 
-void addElmtSet(MultiSet *m, int id);
+void addElmtSet(MultiSet *m, int id, int n);
 
-void removeElmtSet(MultiSet *m, int id);
+void removeElmtSet(MultiSet *m, int id, int n);
+
+void combineSet(MultiSet *m1, MultiSet *m2);
+
+void multiplySet(MultiSet *m, int n);
+
+boolean isSubset(MultiSet m1, MultiSet m2);
 
 int getOccurence(MultiSet m, int id);
 
 boolean hasOccurence(MultiSet m, int id, int num);
 
+void subtractSet(MultiSet *m1, MultiSet m2);
+
 void expandSet(MultiSet *m, int num);
 
 void shrinkSet(MultiSet *m, int num);
+
+void displaySet(MultiSet m);
 
 #endif
