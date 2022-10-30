@@ -1,5 +1,6 @@
 #include "kulkas.h"
 #include "../point/point.h"
+#include "../../color/color.h"
 #include <stdio.h>
 
 void CreateKulkas(Kulkas *k)
@@ -136,6 +137,8 @@ void displayKulkas(Kulkas k)
   }
   printf("*");
   printf("\n");
+  boolean lastRed = false;
+  boolean lastGreen = false;
   for (i = 0; i < ROW_EFF(KMAT(k)); i++)
   {
     printf("%d ", i % 10);
@@ -143,11 +146,37 @@ void displayKulkas(Kulkas k)
     {
       if (ELMTMat(KMAT(k), i, j))
       {
+        if (lastGreen)
+        {
+          reset();
+          lastGreen = false;
+        }
+        if (!lastRed)
+        {
+          red(false);
+          lastRed = true;
+        }
         printf("X ");
       }
       else
       {
+        if (lastRed)
+        {
+          reset();
+          lastRed = false;
+        }
+        if (!lastGreen)
+        {
+          green(false);
+          lastGreen = true;
+        }
         printf("- ");
+      }
+      if (j == COL_EFF(KMAT(k)) - 1)
+      {
+        reset();
+        lastRed = false;
+        lastGreen = false;
       }
     }
     printf("*\n");

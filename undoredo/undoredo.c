@@ -1,12 +1,15 @@
 #include "undoredo.h"
 #include <stdio.h>
 #include "../data/data.h"
+#include "../color/color.h"
 
 boolean undo()
 {
     if (isStackEmpty(undoStack))
     {
-        printf("Anda belum memulai melakukan command\n");
+        red(false);
+        printf("\nAnda belum memulai melakukan command\n\n");
+        reset();
         return false;
     }
     else
@@ -27,7 +30,9 @@ boolean redo()
     }
     else
     {
-        printf("Anda belum melakukan undo setelah command terakhir\n");
+        red(false);
+        printf("\nAnda belum melakukan undo setelah command terakhir\n\n");
+        reset();
         return false;
     }
 }

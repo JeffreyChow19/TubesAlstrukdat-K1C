@@ -1,6 +1,7 @@
 #include "fridge.h"
 #include "../data/data.h"
 #include "../adt/mesinkata/wordmachine.h"
+#include "../color/color.h"
 
 void printAllBahanKulkas()
 {
@@ -16,11 +17,14 @@ void printAllBahanKulkas()
 
 void showFridgeMenu()
 {
+  printf("\n");
   displayKulkas(Fridge(simulator));
   printf("\nList Makanan dalam kulkas:\n");
   if (KNEFF(Fridge(simulator)) == 0)
   {
+    red(false);
     printf("Kulkas kosong\n");
+    reset();
   }
   else
   {
@@ -50,7 +54,9 @@ void addFoodToFridge()
 {
   if (queueLength(Inv(simulator)) == 0)
   {
+    red(false);
     printf("\nTidak ada bahan di inventory\n\n");
+    reset();
     return;
   }
 
@@ -70,8 +76,9 @@ void addFoodToFridge()
     return;
 
   Makanan m = FoodInv(simulator, chosen - 1);
+  printf("\n");
   displayKulkas(Fridge(simulator));
-  printf("Masukkan posisi makanan dalam kulkas (ukuran makanan %dx%d): \n", Absis(SIZE(m)), Ordinat(SIZE(m)));
+  printf("\nMasukkan posisi makanan dalam kulkas (ukuran makanan %dx%d): \n", Absis(SIZE(m)), Ordinat(SIZE(m)));
   int x, y;
   boolean valid = false;
   do
@@ -109,11 +116,15 @@ void addFoodToFridge()
   {
     removeByIndex(&Inv(simulator), &m, chosen - 1);
     addItemKulkas(&Fridge(simulator), m, x, y);
+    green(false);
     printf("\n%s berhasil dimasukkan ke kulkas\n\n", SBUFFER(NAME(m)));
+    reset();
   }
   else
   {
+    red(false);
     printf("\n%s tidak dapat dimasukkan ke kulkas\n\n", SBUFFER(NAME(m)));
+    reset();
   }
 }
 
@@ -121,7 +132,9 @@ void removeFoodFromFridge()
 {
   if (KNEFF(Fridge(simulator)) == 0)
   {
+    red(false);
     printf("\nKulkas kosong. Tidak ada makanan yang dapat dikeluarkan.\n\n");
+    reset();
     return;
   }
 
@@ -136,5 +149,7 @@ void removeFoodFromFridge()
   Makanan m;
   removeItemKulkasByIndex(&Fridge(simulator), &m, chosen - 1);
   enqueue(&Inv(simulator), m);
+  green(false);
   printf("\n%s berhasil dikeluarkan dari kulkas\n\n", SBUFFER(NAME(m)));
+  reset();
 }

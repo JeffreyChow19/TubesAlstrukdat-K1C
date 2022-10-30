@@ -12,6 +12,7 @@
 #include "../undoredo/undoredo.h"
 #include "../fridge/fridge.h"
 #include "../recommendation/recommendation.h"
+#include "../color/color.h"
 
 void addToStack()
 {
@@ -46,7 +47,9 @@ boolean startCommand()
     String str = wordToString(currentWord);
     if (endWord || !isStringInt(str))
     {
+      red(false);
       printf("Command invalid. Jam harus merupakan angka. Silahkan coba lagi\n");
+      reset();
       IgnoreWords();
       dealocateString(&str);
       return startCommand();
@@ -58,7 +61,9 @@ boolean startCommand()
     appendWord(&str, currentWord);
     if (endWord || !isStringInt(str))
     {
+      red(false);
       printf("Command invalid. Menit harus merupakan angka. Silahkan coba lagi\n");
+      reset();
       IgnoreWords();
       dealocateString(&str);
       return startCommand();
@@ -71,8 +76,10 @@ boolean startCommand()
 
     addToStack();
     tickWithTime(h, m);
-    printf("Waktu telah berjalan ");
+    green(false);
+    printf("\nWaktu telah berjalan ");
     WriteDuration(t);
+    reset();
     printf("\n\n");
 
     return false;
@@ -118,15 +125,15 @@ boolean startCommand()
 
     if (!isActionAdj(map, Pos(simulator), 'T'))
     {
+      red(false);
       printf("\nBNMO tidak berada di area telepon!\n\n");
+      reset();
       return false;
     }
 
     addToStack();
     buy(&simulator);
     tick();
-    STARTWORD(stdin, false);
-    IgnoreWords();
   }
   else if (isStringEqualLiteral(command, "DELIVERY"))
   {
@@ -137,7 +144,9 @@ boolean startCommand()
   {
     if (!isActionAdj(map, Pos(simulator), 'F'))
     {
+      red(false);
       printf("\nBNMO tidak berada di area fry!\n\n");
+      reset();
       return false;
     }
     addToStack();
@@ -149,7 +158,9 @@ boolean startCommand()
   {
     if (!isActionAdj(map, Pos(simulator), 'C'))
     {
+      red(false);
       printf("\nBNMO tidak berada di area chop!\n\n");
+      reset();
       return false;
     }
     addToStack();
@@ -161,7 +172,9 @@ boolean startCommand()
   {
     if (!isActionAdj(map, Pos(simulator), 'M'))
     {
+      red(false);
       printf("\nBNMO tidak berada di area mix!\n\n");
+      reset();
       return false;
     }
     addToStack();
@@ -173,7 +186,9 @@ boolean startCommand()
   {
     if (!isActionAdj(map, Pos(simulator), 'B'))
     {
+      red(false);
       printf("\nBNMO tidak berada di area boil!\n\n");
+      reset();
       return false;
     }
     addToStack();
@@ -219,7 +234,9 @@ boolean startCommand()
   }
   else
   {
+    red(false);
     printf("Command tidak valid. Silakan coba lagi.\n");
+    reset();
     dealocateString(&command);
     return startCommand();
   }

@@ -99,13 +99,13 @@ int readIntWithRange(int min, int max)
         if (!isWordInt(currentWord))
         {
             valid = false;
-            IgnoreWords();
         }
         else
         {
             res = wordToInt(currentWord);
             valid = (res >= min && res <= max);
         }
+        IgnoreWords();
         if (!valid)
         {
             printf("Input tidak valid. Silahkan coba lagi.\n");

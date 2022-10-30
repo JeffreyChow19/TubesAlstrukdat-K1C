@@ -24,8 +24,8 @@ void tick()
     Makanan accept;
     dequeue(&(Proc(simulator)), &accept);
     enqueue(&(Inv(simulator)), accept);
-    char text[27 + LENGTH(NAME(accept))];
-    sprintf(text, "%s sudah diterima oleh BNMO!", SBUFFER(NAME(accept)));
+    char text[46 + LENGTH(NAME(accept))];
+    sprintf(text, "%s selesai dibuat dan sudah masuk ke inventory!", SBUFFER(NAME(accept)));
     String notif;
     CreateEmptyString(&notif, 27 + LENGTH(NAME(accept)));
     setLiteral(&notif, text);

@@ -5,6 +5,7 @@
 #include "../mesinkata/wordmachine.h"
 #include "../../error/error.h"
 #include <stdlib.h>
+#include "../../color/color.h"
 
 /* Constructor */
 void createMatrix(int nRows, int nCols, Matrix *m)
@@ -128,9 +129,25 @@ void displayMatrix(Matrix m, Point simPoint)
         for (j = 0; j < m.colEff; j++)
         {
             if (j == Absis(simPoint) && i == Ordinat(simPoint))
+            {
+                yellow(false);
                 printf("S ");
+                reset();
+            }
             else
-                printf("%c ", ELMTMat(m, i, j));
+            {
+                char c = ELMTMat(m, i, j);
+                if (c == ' ' || c == 'X')
+                {
+                    printf("%c ", c);
+                }
+                else
+                {
+                    yellow(false);
+                    printf("%c ", ELMTMat(m, i, j));
+                    reset();
+                }
+            }
         }
         printf("*\n");
     }

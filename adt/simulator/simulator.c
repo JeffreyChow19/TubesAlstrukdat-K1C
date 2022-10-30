@@ -1,4 +1,5 @@
 #include "simulator.h"
+#include "../../color/color.h"
 #include <stdio.h>
 
 void CreateSim(Sim *S, String Name, Point Pos)
@@ -124,10 +125,14 @@ void removeProc(Sim *S, Makanan *val)
 void openInv(Sim S)
 {
     if (isQueueEmpty(Inv(S)))
-        printf("Inventory kosong\n");
+    {
+        red(false);
+        printf("\nInventory kosong\n\n");
+        reset();
+    }
     else
     {
-        printf("List Makanan di Inventory\nnama (waktu sisa kedaluwarsa)\n");
+        printf("\nList Makanan di Inventory\nnama (waktu sisa kedaluwarsa)\n");
         int i = 0;
         while (i < queueLength(Inv(S)))
         {
@@ -135,16 +140,21 @@ void openInv(Sim S)
             printWithExpired(FoodInv(S, i));
             i++;
         }
+        printf("\n");
     }
 }
 
 void openDelv(Sim S)
 {
     if (isQueueEmpty(Delv(S)))
-        printf("Delivery list kosong\n");
+    {
+        red(false);
+        printf("\nDelivery list kosong\n\n");
+        reset();
+    }
     else
     {
-        printf("List Makanan di Delivery list\nnama (waktu sisa delivery)\n");
+        printf("\nList Makanan di Delivery list\nnama (waktu sisa delivery)\n");
         int len = queueLength(Delv(S));
         int i;
         for (i = 0; i < len; i++)
@@ -152,16 +162,21 @@ void openDelv(Sim S)
             printf("%d. ", i + 1);
             printWithDelivery(FoodDelv(S, i));
         }
+        printf("\n");
     }
 }
 
 void openProc(Sim S)
 {
     if (isQueueEmpty(Proc(S)))
-        printf("Process list kosong\n");
+    {
+        red(false);
+        printf("\nProcess list kosong\n\n");
+        reset();
+    }
     else
     {
-        printf("List Makanan di Process list\nnama (waktu sisa proses)\n");
+        printf("\nList Makanan di Process list\nnama (waktu sisa proses)\n");
         int i = 0;
         while (i < queueLength(Proc(S)))
         {
@@ -169,6 +184,7 @@ void openProc(Sim S)
             printWithDelivery(FoodProc(S, i));
             i++;
         }
+        printf("\n");
     }
 }
 
