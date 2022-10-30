@@ -1,4 +1,4 @@
-9
+12
 11
 Ayam Mentah
 2 3
@@ -52,4 +52,22 @@ Nasi Ayam
 2 3
 0 0 30
 0 0 15
+MIX
+41
+Sayur
+1 1
+0 1 0
+0 0 5
+BUY
+42
+Bakwan
+1 1
+0 1 0
+0 0 10
 FRY
+43
+Nasi Ayam Bakwan
+2 3
+0 0 30
+0 0 3
+MIX

@@ -1,5 +1,6 @@
 #include "multiset.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 void CreateSet(MultiSet *m, int cap)
 {
@@ -41,13 +42,13 @@ int indexOfSet(MultiSet m, int id)
   return IDX_UNDEF_SET;
 }
 
-void addElmtSet(MultiSet *m, int id)
+void addElmtSet(MultiSet *m, int id, int n)
 {
   int idx = indexOfSet(*m, id);
 
   if (idx != IDX_UNDEF_SET)
   {
-    SetELMT(*m, idx).num++;
+    SetELMT(*m, idx).num += n;
   }
   else
   {
@@ -64,20 +65,20 @@ void addElmtSet(MultiSet *m, int id)
     }
 
     SetELMT(*m, i + 1).id = id;
-    SetELMT(*m, i + 1).num = 1;
+    SetELMT(*m, i + 1).num = n;
     SetNEFF(*m)++;
   }
 }
 
-void removeElmtSet(MultiSet *m, int id)
+void removeElmtSet(MultiSet *m, int id, int n)
 {
   int idx = indexOfSet(*m, id);
 
   if (idx != IDX_UNDEF_SET)
   {
-    if (SetELMT(*m, idx).num > 1)
+    if (SetELMT(*m, idx).num > n)
     {
-      SetELMT(*m, idx).num--;
+      SetELMT(*m, idx).num -= n;
     }
     else
     {
@@ -93,6 +94,57 @@ void removeElmtSet(MultiSet *m, int id)
         shrinkSet(m, SetCAPACITY(*m) / 2);
       }
     }
+  }
+}
+
+void combineSet(MultiSet *m1, MultiSet *m2)
+{
+  int i;
+  for (i = 0; i < SetNEFF(*m2); i++)
+  {
+    int j;
+    int id = SetELMT(*m2, i).id;
+    int num = SetELMT(*m2, i).num;
+
+    int idx = indexOfSet(*m1, id);
+    addElmtSet(m1, id, num);
+  }
+  dealocateSet(m2);
+}
+
+void multiplySet(MultiSet *m, int n)
+{
+  int i;
+  for (i = 0; i < SetNEFF(*m); i++)
+  {
+    SetELMT(*m, i).num *= n;
+  }
+}
+
+boolean isSubset(MultiSet m1, MultiSet m2)
+{
+  int i;
+  for (i = 0; i < SetNEFF(m1); i++)
+  {
+    int id = SetELMT(m1, i).id;
+    int num = SetELMT(m1, i).num;
+    if (!hasOccurence(m2, id, num))
+    {
+      return false;
+    }
+  }
+  return true;
+}
+
+void subtractSet(MultiSet *m1, MultiSet m2)
+{
+  int i;
+  for (i = 0; i < SetNEFF(m2); i++)
+  {
+    int id = SetELMT(m2, i).id;
+    int num = SetELMT(m2, i).num;
+    int j;
+    removeElmtSet(m1, id, num);
   }
 }
 
@@ -134,4 +186,19 @@ void shrinkSet(MultiSet *m, int num)
 {
   SetBUFFER(*m) = (SetInfo *)realloc(SetBUFFER(*m), (SetCAPACITY(*m) - num) * sizeof(SetInfo));
   SetCAPACITY(*m) -= num;
+}
+
+void displaySet(MultiSet m)
+{
+  printf("{");
+  int i;
+  for (i = 0; i < SetNEFF(m); i++)
+  {
+    printf("(%d,%d)", SetELMT(m, i).id, SetELMT(m, i).num);
+    if (i < SetNEFF(m) - 1)
+    {
+      printf(", ");
+    }
+  }
+  printf("}\n");
 }
