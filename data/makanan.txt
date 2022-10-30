@@ -31,6 +31,7 @@ Ayam Tepung
 MIX
 37
 Ayam Goreng
+2 2
 0 0 30
 0 0 15
 FRY
@@ -46,7 +47,6 @@ Nasi
 0 0 30
 0 0 30
 BOIL
-2 3
 40
 Nasi Ayam
 2 3

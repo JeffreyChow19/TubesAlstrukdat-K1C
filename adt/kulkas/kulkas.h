@@ -5,6 +5,7 @@
 #include "../makanan/makanan.h"
 #include <stdlib.h>
 
+#define IDX_UNDEF_K -1
 #define NROWKULKAS 10
 #define NCOLKULKAS 20
 #define INITIALCAP 10
@@ -33,11 +34,17 @@ typedef struct kulkas
 
 void CreateKulkas(Kulkas *k);
 
+void dealocateFridge(Kulkas *k);
+
+void copyFridge(Kulkas k, Kulkas *copy);
+
 void addItemKulkas(Kulkas *k, Makanan m, int x, int y);
 
-void removeItemKulkas(Kulkas *k, int idx);
+void removeItemKulkas(Kulkas *k, Makanan *val, int id);
 
 boolean canAddInKulkas(Kulkas k, Makanan m, int x, int y);
+
+int searchIdxKulkas(Kulkas k, int idx);
 
 void displayKulkas(Kulkas k);
 

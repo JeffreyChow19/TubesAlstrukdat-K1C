@@ -17,6 +17,7 @@ void dealocateSim(Sim *S)
     dealocateQueue(&(Inv(*S)));
     dealocateQueue(&(Delv(*S)));
     dealocateQueue(&(Proc(*S)));
+    dealocateFridge(&(Fridge(*S)));
 }
 
 void copySim(Sim S, Sim *CS)
@@ -27,6 +28,7 @@ void copySim(Sim S, Sim *CS)
     copyQueue(Inv(S), &Inv(*CS));
     copyQueue(Delv(S), &Delv(*CS));
     copyQueue(Proc(S), &Proc(*CS));
+    copyFridge(Fridge(S), &Fridge(*CS));
 }
 
 void moveSim(Sim *S, char dir)

@@ -18,6 +18,23 @@ void CreateKulkas(Kulkas *k)
   KBUFFER(*k) = (InfoKulkas *)malloc(INITIALCAP * sizeof(InfoKulkas));
 }
 
+void dealocateFridge(Kulkas *k)
+{
+  free(KBUFFER(*k));
+  KNEFF(*k) = 0;
+  KCAPACITY(*k) = 0;
+}
+
+void copyFridge(Kulkas k, Kulkas *copy)
+{
+  CreateKulkas(copy);
+  int i;
+  for (i = 0; i < KNEFF(k); i++)
+  {
+    addItemKulkas(copy, KFOOD(KELMT(k, i)), Absis(KPOS(KELMT(k, i))), Ordinat(KPOS(KELMT(k, i))));
+  }
+}
+
 void addItemKulkas(Kulkas *k, Makanan m, int x, int y)
 {
   if (KNEFF(*k) == KCAPACITY(*k))
@@ -41,10 +58,18 @@ void addItemKulkas(Kulkas *k, Makanan m, int x, int y)
   }
 }
 
-void removeItemKulkas(Kulkas *k, int idx)
+void removeItemKulkas(Kulkas *k, Makanan *val, int id)
 {
+  int idx = searchIdxKulkas(*k, id);
+  if (idx == IDX_UNDEF_K)
+  {
+    printf("Tidak ada makanan dengan id %d di kulkas\n", id);
+    return;
+  }
+
   int i, j, x, y;
   InfoKulkas e = KELMT(*k, idx);
+  *val = KFOOD(e);
   for (i = idx; i < KNEFF(*k) - 1; i++)
   {
     KELMT(*k, i) = KELMT(*k, i + 1);
@@ -82,6 +107,18 @@ boolean canAddInKulkas(Kulkas k, Makanan m, int x, int y)
     }
   }
   return true;
+}
+
+int searchIdxKulkas(Kulkas k, int idx)
+{
+  for (int i = 0; i < KNEFF(k); i++)
+  {
+    if (ID(KFOOD(KELMT(k, i))) == idx)
+    {
+      return i;
+    }
+  }
+  return IDX_UNDEF_K;
 }
 
 void displayKulkas(Kulkas k)
