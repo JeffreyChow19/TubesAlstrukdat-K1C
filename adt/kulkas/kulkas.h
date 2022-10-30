@@ -40,6 +40,8 @@ void copyFridge(Kulkas k, Kulkas *copy);
 
 void addItemKulkas(Kulkas *k, Makanan m, int x, int y);
 
+void removeItemKulkasByIndex(Kulkas *k, Makanan *val, int idx);
+
 void removeItemKulkas(Kulkas *k, Makanan *val, int id);
 
 boolean canAddInKulkas(Kulkas k, Makanan m, int x, int y);

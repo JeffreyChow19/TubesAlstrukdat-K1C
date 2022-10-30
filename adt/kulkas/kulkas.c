@@ -58,15 +58,8 @@ void addItemKulkas(Kulkas *k, Makanan m, int x, int y)
   }
 }
 
-void removeItemKulkas(Kulkas *k, Makanan *val, int id)
+void removeItemKulkasByIndex(Kulkas *k, Makanan *val, int idx)
 {
-  int idx = searchIdxKulkas(*k, id);
-  if (idx == IDX_UNDEF_K)
-  {
-    printf("Tidak ada makanan dengan id %d di kulkas\n", id);
-    return;
-  }
-
   int i, j, x, y;
   InfoKulkas e = KELMT(*k, idx);
   *val = KFOOD(e);
@@ -93,12 +86,24 @@ void removeItemKulkas(Kulkas *k, Makanan *val, int id)
   }
 }
 
+void removeItemKulkas(Kulkas *k, Makanan *val, int id)
+{
+  int idx = searchIdxKulkas(*k, id);
+  if (idx == IDX_UNDEF_K)
+  {
+    printf("Tidak ada makanan dengan id %d di kulkas\n", id);
+    return;
+  }
+
+  removeItemKulkasByIndex(k, val, idx);
+}
+
 boolean canAddInKulkas(Kulkas k, Makanan m, int x, int y)
 {
   int i, j;
-  for (i = x; i < x + Absis(SIZE(m)); i++)
+  for (i = y; i < y + Ordinat(SIZE(m)); i++)
   {
-    for (j = y; j < y + Ordinat(SIZE(m)); j++)
+    for (j = x; j < x + Absis(SIZE(m)); j++)
     {
       if (ELMTMat(KMAT(k), i, j))
       {

@@ -3,6 +3,8 @@
 
 #include "../adt/kulkas/kulkas.h"
 
+void printAllBahanKulkas();
+
 void showFridgeMenu();
 
 void addFoodToFridge();

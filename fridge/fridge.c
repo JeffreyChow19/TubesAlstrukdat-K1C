@@ -2,25 +2,29 @@
 #include "../data/data.h"
 #include "../adt/mesinkata/wordmachine.h"
 
+void printAllBahanKulkas()
+{
+  printf("(nama - ukuran - posisi)\n");
+  int i;
+  for (i = 0; i < KNEFF(Fridge(simulator)); i++)
+  {
+    InfoKulkas info = KELMT(Fridge(simulator), i);
+    printf("%d. %s - %dx%d ", i + 1, SBUFFER(NAME(KFOOD(info))), Absis(SIZE(KFOOD(info))), Ordinat(SIZE(KFOOD(info))));
+    WritePoint(KPOS(info));
+  }
+}
+
 void showFridgeMenu()
 {
   displayKulkas(Fridge(simulator));
-  printf("\nList bahan dalam kulkas:\n");
+  printf("\nList Makanan dalam kulkas:\n");
   if (KNEFF(Fridge(simulator)) == 0)
   {
     printf("Kulkas kosong\n");
   }
   else
   {
-    printf("(nama - ukuran - posisi)\n");
-    int i;
-    for (i = 0; i < KNEFF(Fridge(simulator)); i++)
-    {
-      InfoKulkas info = KELMT(Fridge(simulator), i);
-      printf("%d. %s - %dx%d ", i + 1, SBUFFER(NAME(KFOOD(info))), Absis(SIZE(KFOOD(info))), Ordinat(SIZE(KFOOD(info))));
-      WritePoint(KPOS(info));
-      printf("\n");
-    }
+    printAllBahanKulkas();
   }
 
   printf("\nMasukkan perintah yang ingin dilakukan:\n");
@@ -46,7 +50,7 @@ void addFoodToFridge()
 {
   if (queueLength(Inv(simulator)) == 0)
   {
-    printf("Tidak ada bahan di inventory\n");
+    printf("\nTidak ada bahan di inventory\n\n");
     return;
   }
 
@@ -67,7 +71,7 @@ void addFoodToFridge()
 
   Makanan m = FoodInv(simulator, chosen - 1);
   displayKulkas(Fridge(simulator));
-  printf("Masukkan posisi bahan dalam kulkas (ukuran bahan %dx%d): \n", Absis(SIZE(m)), Ordinat(SIZE(m)));
+  printf("Masukkan posisi makanan dalam kulkas (ukuran makanan %dx%d): \n", Absis(SIZE(m)), Ordinat(SIZE(m)));
   int x, y;
   boolean valid = false;
   do
@@ -76,20 +80,25 @@ void addFoodToFridge()
     if (!isWordInt(currentWord))
     {
       IgnoreWords();
-      continue;
     }
-    x = wordToInt(currentWord);
-
-    ADVWORD();
-
-    if (!isWordInt(currentWord))
+    else
     {
-      IgnoreWords();
-      continue;
+
+      x = wordToInt(currentWord);
+
+      ADVWORD();
+
+      if (endWord || !isWordInt(currentWord))
+      {
+        IgnoreWords();
+      }
+      else
+      {
+        y = wordToInt(currentWord);
+        ADVWORD();
+        valid = endWord && isIdxEffMat(KMAT(Fridge(simulator)), y, x);
+      }
     }
-    y = wordToInt(currentWord);
-    ADVWORD();
-    valid = endWord && isIdxEffMat(KMAT(Fridge(simulator)), y, x);
 
     IgnoreWords();
     if (!valid)
@@ -100,14 +109,32 @@ void addFoodToFridge()
   {
     removeByIndex(&Inv(simulator), &m, chosen - 1);
     addItemKulkas(&Fridge(simulator), m, x, y);
-    printf("\nBahan berhasil dimasukkan ke kulkas\n\n");
+    printf("\n%s berhasil dimasukkan ke kulkas\n\n", SBUFFER(NAME(m)));
   }
   else
   {
-    printf("\nBahan tidak dapat dimasukkan ke kulkas\n\n");
+    printf("\n%s tidak dapat dimasukkan ke kulkas\n\n", SBUFFER(NAME(m)));
   }
 }
 
 void removeFoodFromFridge()
 {
+  if (KNEFF(Fridge(simulator)) == 0)
+  {
+    printf("\nKulkas kosong. Tidak ada makanan yang dapat dikeluarkan.\n\n");
+    return;
+  }
+
+  printf("Pilih makanan yang ingin dikeluarkan dari kulkas:\n");
+  printAllBahanKulkas();
+  printf("\nKirim 0 untuk exit.\n\n");
+
+  int chosen = readIntWithRange(0, KNEFF(Fridge(simulator)));
+
+  if (chosen == 0)
+    return;
+  Makanan m;
+  removeItemKulkasByIndex(&Fridge(simulator), &m, chosen - 1);
+  enqueue(&Inv(simulator), m);
+  printf("\n%s berhasil dikeluarkan dari kulkas\n\n", SBUFFER(NAME(m)));
 }
