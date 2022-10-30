@@ -10,6 +10,9 @@
 #include "../delivery/delivery.h"
 #include "../schedule/schedule.h"
 #include "../undoredo/undoredo.h"
+#include "../fridge/fridge.h"
+#include "../recommendation/recommendation.h"
+#include "../color/color.h"
 
 void addToStack()
 {
@@ -35,7 +38,6 @@ void move(char dir)
 boolean startCommand()
 {
   printf("\nEnter Command: ");
-
   STARTWORD(stdin, false);
 
   if (isKataEqualLiteral(currentWord, "WAIT"))
@@ -44,7 +46,9 @@ boolean startCommand()
     String str = wordToString(currentWord);
     if (endWord || !isStringInt(str))
     {
+      red(false);
       printf("Command invalid. Jam harus merupakan angka. Silahkan coba lagi\n");
+      reset();
       IgnoreWords();
       dealocateString(&str);
       return startCommand();
@@ -56,7 +60,9 @@ boolean startCommand()
     appendWord(&str, currentWord);
     if (endWord || !isStringInt(str))
     {
+      red(false);
       printf("Command invalid. Menit harus merupakan angka. Silahkan coba lagi\n");
+      reset();
       IgnoreWords();
       dealocateString(&str);
       return startCommand();
@@ -69,8 +75,10 @@ boolean startCommand()
 
     addToStack();
     tickWithTime(h, m);
-    printf("Waktu telah berjalan ");
+    green(false);
+    printf("\nWaktu telah berjalan ");
     WriteDuration(t);
+    reset();
     printf("\n\n");
 
     return false;
@@ -116,15 +124,15 @@ boolean startCommand()
 
     if (!isActionAdj(map, Pos(simulator), 'T'))
     {
+      red(false);
       printf("\nBNMO tidak berada di area telepon!\n\n");
+      reset();
       return false;
     }
 
     addToStack();
     buy(&simulator);
     tick();
-    STARTWORD(stdin, false);
-    IgnoreWords();
   }
   else if (isStringEqualLiteral(command, "DELIVERY"))
   {
@@ -135,7 +143,9 @@ boolean startCommand()
   {
     if (!isActionAdj(map, Pos(simulator), 'F'))
     {
+      red(false);
       printf("\nBNMO tidak berada di area fry!\n\n");
+      reset();
       return false;
     }
     addToStack();
@@ -147,7 +157,9 @@ boolean startCommand()
   {
     if (!isActionAdj(map, Pos(simulator), 'C'))
     {
+      red(false);
       printf("\nBNMO tidak berada di area chop!\n\n");
+      reset();
       return false;
     }
     addToStack();
@@ -159,7 +171,9 @@ boolean startCommand()
   {
     if (!isActionAdj(map, Pos(simulator), 'M'))
     {
+      red(false);
       printf("\nBNMO tidak berada di area mix!\n\n");
+      reset();
       return false;
     }
     addToStack();
@@ -171,7 +185,9 @@ boolean startCommand()
   {
     if (!isActionAdj(map, Pos(simulator), 'B'))
     {
+      red(false);
       printf("\nBNMO tidak berada di area boil!\n\n");
+      reset();
       return false;
     }
     addToStack();
@@ -181,13 +197,15 @@ boolean startCommand()
   }
   else if (isStringEqualLiteral(command, "UNDO"))
   {
-    undo();
-    enterToContinue();
+    boolean success = undo();
+    if (!success)
+      enterToContinue();
   }
   else if (isStringEqualLiteral(command, "REDO"))
   {
-    redo();
-    enterToContinue();
+    boolean success = redo();
+    if (!success)
+      enterToContinue();
   }
   else if (isStringEqualLiteral(command, "INVENTORY"))
   {
@@ -199,13 +217,25 @@ boolean startCommand()
     openProc(simulator);
     enterToContinue();
   }
+  else if (isStringEqualLiteral(command, "FRIDGE"))
+  {
+    showFridgeMenu();
+    enterToContinue();
+  }
+  else if (isStringEqualLiteral(command, "RECOMMENDATION"))
+  {
+    showRecommendation();
+    enterToContinue();
+  }
   else if (isStringEqualLiteral(command, "EXIT"))
   {
     return true;
   }
   else
   {
+    red(false);
     printf("Command tidak valid. Silakan coba lagi.\n");
+    reset();
     dealocateString(&command);
     return startCommand();
   }

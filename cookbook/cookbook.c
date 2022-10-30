@@ -3,6 +3,23 @@
 #include "../adt/listdin/listdin.h"
 #include "../adt/tree/tree.h"
 
+void displayRecipe(Tree node)
+{
+    // print menu
+    printf("%s\n", SBUFFER(NAME(INFO(node))));
+
+    // print action
+    printf("   %s", SBUFFER(ACTION(INFO(node))));
+
+    // print bahan
+    int j;
+    for (j = getFirstIdxDin(CHILDREN(node)); j <= getLastIdxDin(CHILDREN(node)); ++j)
+    {
+        printf(" - %s", SBUFFER(NAME(INFO(ELMT(CHILDREN(node), j)))));
+    }
+    printf("\n");
+}
+
 void displayCookbook()
 {
     printf("List Resep\n");
@@ -17,18 +34,6 @@ void displayCookbook()
         // print number
         printf("%d. ", i + 1);
 
-        // print menu
-        printf("%s\n", SBUFFER(NAME(INFO(node))));
-
-        // print action
-        printf("   %s", SBUFFER(ACTION(INFO(node))));
-
-        // print bahan
-        int j;
-        for (j = getFirstIdxDin(CHILDREN(node)); j <= getLastIdxDin(CHILDREN(node)); ++j)
-        {
-            printf(" - %s", SBUFFER(NAME(INFO(ELMT(CHILDREN(node), j)))));
-        }
-        printf("\n");
+        displayRecipe(node);
     }
 }

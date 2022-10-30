@@ -1,29 +1,38 @@
 #include "undoredo.h"
 #include <stdio.h>
 #include "../data/data.h"
+#include "../color/color.h"
 
-void undo()
+boolean undo()
 {
     if (isStackEmpty(undoStack))
     {
-        printf("Anda belum memulai melakukan command\n");
+        red(false);
+        printf("\nAnda belum memulai melakukan command\n\n");
+        reset();
+        return false;
     }
     else
     {
         push(&redoStack, simulator);
         pop(&undoStack, &simulator);
+        return true;
     }
 }
 
-void redo()
+boolean redo()
 {
     if (!isStackEmpty(redoStack))
     {
         push(&undoStack, simulator);
         pop(&redoStack, &simulator);
+        return true;
     }
     else
     {
-        printf("Anda belum melakukan undo setelah command terakhir\n");
+        red(false);
+        printf("\nAnda belum melakukan undo setelah command terakhir\n\n");
+        reset();
+        return false;
     }
 }

@@ -3,6 +3,7 @@
 #include "data/data.h"
 #include "adt/mesinkata/wordmachine.h"
 #include "command/command.h"
+#include "color/color.h"
 
 void printNotifications()
 {
@@ -14,10 +15,12 @@ void printNotifications()
   }
   printf("\n");
   int i;
+  yellow(false);
   for (i = getFirstIdxLString(notifs); i <= getLastIdxLString(notifs); i++)
   {
     printf("%d. %s\n", i + 1, SBUFFER(ELMTLString(notifs, i)));
   }
+  reset();
   printf("\n");
   clearListString(&notifs);
 }
@@ -35,8 +38,10 @@ void printStatus()
 
 int main()
 {
-
-  printf("Welcome to BNMO :)\nType START to start, EXIT to exit the program\n");
+  green(false);
+  printf("Welcome to BNMO :)\n");
+  reset();
+  printf("Type START to start, EXIT to exit the program\n");
   boolean valid = false;
   do
   {
@@ -55,7 +60,9 @@ int main()
     }
     else
     {
+      red(false);
       printf("Invalid command\n");
+      reset();
     }
     dealocateString(&command);
     IgnoreWords();

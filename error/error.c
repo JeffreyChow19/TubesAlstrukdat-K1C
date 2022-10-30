@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "../color/color.h"
 
 void throwError(char *message)
 {
-  printf("\033[0;31mError: %s\033[0m\n", message);
+  red(true);
+  printf("Error: %s\n", message);
+  reset();
   exit(1);
 }
