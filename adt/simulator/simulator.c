@@ -9,6 +9,7 @@ void CreateSim(Sim *S, String Name, Point Pos)
     CreateQueue(&Inv(*S), 50, 'i');
     CreateQueue(&Delv(*S), 50, 'd');
     CreateQueue(&Proc(*S), 50, 'p');
+    CreateKulkas(&Fridge(*S));
 }
 
 void dealocateSim(Sim *S)
@@ -16,6 +17,7 @@ void dealocateSim(Sim *S)
     dealocateQueue(&(Inv(*S)));
     dealocateQueue(&(Delv(*S)));
     dealocateQueue(&(Proc(*S)));
+    dealocateFridge(&(Fridge(*S)));
 }
 
 void copySim(Sim S, Sim *CS)
@@ -26,6 +28,7 @@ void copySim(Sim S, Sim *CS)
     copyQueue(Inv(S), &Inv(*CS));
     copyQueue(Delv(S), &Delv(*CS));
     copyQueue(Proc(S), &Proc(*CS));
+    copyFridge(Fridge(S), &Fridge(*CS));
 }
 
 void moveSim(Sim *S, char dir)

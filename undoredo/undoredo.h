@@ -1,8 +1,10 @@
 #ifndef UNDOREDO_H
 #define UNDOREDO_H
 
-void undo();
+#include "../adt/boolean.h"
 
-void redo();
+boolean undo();
+
+boolean redo();
 
 #endif

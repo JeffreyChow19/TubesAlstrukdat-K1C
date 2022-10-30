@@ -6,7 +6,7 @@
 void tick()
 {
   reduceAllTime(&(Delv(simulator)));
-  while (isDurZero(DELIVERY(InfoHead(Delv(simulator)))))
+  while (!isQueueEmpty(Delv(simulator)) && isDurZero(DELIVERY(InfoHead(Delv(simulator)))))
   {
     Makanan accept;
     dequeue(&(Delv(simulator)), &accept);
@@ -18,9 +18,8 @@ void tick()
     setLiteral(&notif, text);
     insertLastString(&notifs, notif);
   }
-
   reduceAllTime(&(Proc(simulator)));
-  while (isDurZero(DELIVERY(InfoHead(Proc(simulator)))))
+  while (!isQueueEmpty(Proc(simulator)) && isDurZero(DELIVERY(InfoHead(Proc(simulator)))))
   {
     Makanan accept;
     dequeue(&(Proc(simulator)), &accept);
@@ -32,9 +31,8 @@ void tick()
     setLiteral(&notif, text);
     insertLastString(&notifs, notif);
   }
-
   reduceAllTime(&(Inv(simulator)));
-  while (isDurZero(EXPIRY(InfoHead(Inv(simulator)))))
+  while (!isQueueEmpty(Inv(simulator)) && isDurZero(EXPIRY(InfoHead(Inv(simulator)))))
   {
     Makanan expire;
     dequeue(&(Inv(simulator)), &expire);
@@ -45,7 +43,6 @@ void tick()
     setLiteral(&notif, text);
     insertLastString(&notifs, notif);
   }
-
   incTime(&(Clock(simulator)));
 }
 

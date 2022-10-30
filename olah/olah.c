@@ -66,7 +66,7 @@ void processFood(String process)
         {
             int idToSearch = INFO(ELMT(CHILDREN(recipe), j)).id;
 
-            if (searchIdx(simulator.Inv, idToSearch) == IDX_UNDEF)
+            if (searchIdx(simulator.Inv, idToSearch) == IDX_UNDEF && searchIdxKulkas(Fridge(simulator), idToSearch) == IDX_UNDEF_K)
             {
                 if (!notFound)
                 {
@@ -85,11 +85,19 @@ void processFood(String process)
             for (j = getFirstIdxDin(CHILDREN(recipe)); j <= getLastIdxDin(CHILDREN(recipe)); ++j)
             {
                 int idToRemove = INFO(ELMT(CHILDREN(recipe), j)).id;
+                int indexInQueue = searchIdx(Inv(simulator), idToRemove);
 
                 QElType val;
 
-                // remove item from inventory
-                removeIdx(&(simulator.Inv), &val, idToRemove);
+                // remove item from inventory or fridge
+                if (indexInQueue != IDX_UNDEF)
+                {
+                    removeByIndex(&Inv(simulator), &val, indexInQueue);
+                }
+                else
+                {
+                    removeItemKulkas(&Fridge(simulator), &val, idToRemove);
+                }
             }
 
             // add makanan to queue

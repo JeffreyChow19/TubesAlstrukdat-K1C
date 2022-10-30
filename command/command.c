@@ -10,6 +10,7 @@
 #include "../delivery/delivery.h"
 #include "../schedule/schedule.h"
 #include "../undoredo/undoredo.h"
+#include "../fridge/fridge.h"
 
 void addToStack()
 {
@@ -181,13 +182,15 @@ boolean startCommand()
   }
   else if (isStringEqualLiteral(command, "UNDO"))
   {
-    undo();
-    enterToContinue();
+    boolean success = undo();
+    if (!success)
+      enterToContinue();
   }
   else if (isStringEqualLiteral(command, "REDO"))
   {
-    redo();
-    enterToContinue();
+    boolean success = redo();
+    if (!success)
+      enterToContinue();
   }
   else if (isStringEqualLiteral(command, "INVENTORY"))
   {
@@ -197,6 +200,11 @@ boolean startCommand()
   else if (isStringEqualLiteral(command, "PROCESS"))
   {
     openProc(simulator);
+    enterToContinue();
+  }
+  else if (isStringEqualLiteral(command, "FRIDGE"))
+  {
+    showFridgeMenu();
     enterToContinue();
   }
   else if (isStringEqualLiteral(command, "EXIT"))

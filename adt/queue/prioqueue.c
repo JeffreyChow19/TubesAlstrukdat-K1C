@@ -166,24 +166,29 @@ void removeIdx(PrioQueue *Q, Makanan *val, int id)
     }
     else
     {
-        *val = Elmt(*Q, idx);
-        if (queueLength(*Q) == 1)
+        removeByIndex(Q, val, idx);
+    }
+}
+
+void removeByIndex(PrioQueue *Q, QElType *val, int idx)
+{
+    *val = Elmt(*Q, idx);
+    if (queueLength(*Q) == 1)
+    {
+        Head(*Q) = IDX_UNDEF;
+        Tail(*Q) = IDX_UNDEF;
+    }
+    else
+    {
+        int i = idx;
+        if (i < Tail(*Q))
         {
-            Head(*Q) = IDX_UNDEF;
-            Tail(*Q) = IDX_UNDEF;
-        }
-        else
-        {
-            int i = idx;
-            if (i < Tail(*Q))
+            for (i; i < queueLength(*Q) - 1; i++)
             {
-                for (i; i < queueLength(*Q) - 1; i++)
-                {
-                    Elmt(*Q, i) = Elmt(*Q, i + 1);
-                }
+                Elmt(*Q, i) = Elmt(*Q, i + 1);
             }
-            Tail(*Q) -= 1;
         }
+        Tail(*Q) -= 1;
     }
 }
 

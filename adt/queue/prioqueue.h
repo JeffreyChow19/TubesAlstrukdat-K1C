@@ -85,6 +85,8 @@ int searchIdx(PrioQueue Q, int id);
 void removeIdx(PrioQueue *Q, QElType *val, int id);
 /* Proses: Menghapus elemen pada indeks ditemukannya ID */
 
+void removeByIndex(PrioQueue *Q, QElType *val, int idx);
+
 void copyQueue(PrioQueue Q, PrioQueue *Q2);
 
 boolean isForDelivery(PrioQueue Q);

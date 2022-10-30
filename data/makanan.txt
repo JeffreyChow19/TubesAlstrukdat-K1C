@@ -1,46 +1,55 @@
 9
 11
 Ayam Mentah
+2 3
 1 0 0
 0 0 15
 BUY
 21
 Ayam Potong
+2 3
 0 2 0
 0 0 3
 CHOP
 10
 Tepung
+2 3
 0 1 0
 0 0 30
 BUY
 15
 Minyak Goreng
+2 3
 0 1 30
 0 1 0
 BUY
 31
 Ayam Tepung
+2 3
 0 0 30
 0 0 10
 MIX
 37
 Ayam Goreng
+2 2
 0 0 30
 0 0 15
 FRY
 38
 Beras
+2 3
 0 5 0
 0 0 5
 BUY
 39
 Nasi
+2 3
 0 0 30
 0 0 30
 BOIL
 40
 Nasi Ayam
+2 3
 0 0 30
 0 0 15
 FRY
