@@ -36,6 +36,8 @@ typedef struct
 /* F.S. Terbentuk Simulator dengan nama, posisi terdefinisi dan Inv kosong*/
 void CreateSim(Sim *S, String Name, Point Pos);
 
+void dealocateSim(Sim *S);
+
 /* Menyalin Simulator */
 /* I.S. Simulator terdefinisi */
 /* F.S. Terbentuk salinan simulator */
@@ -68,6 +70,14 @@ void removeTime(Sim *S, int dd, int hh, int mm);
 /* I.S. Inv boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah MAKANAN terakhir Inv yang baru */
 void addFood(Sim *S, Makanan val);
+
+/* *** Menambahkan makanan pada Delv *** */
+/* Proses: Menambahkan val sebagai MAKANAN terakhir Delv */
+/* I.S. Inv boleh kosong, tetapi tidak penuh */
+/* F.S. val adalah MAKANAN terakhir Inv yang baru */
+void addDelv(Sim *S, Makanan val);
+
+void addProc(Sim *S, Makanan val);
 
 /* ********** MENGHAPUS MAKANAN ********** */
 /* *** Menghapus MAKANAN dengan id tertentu *** */

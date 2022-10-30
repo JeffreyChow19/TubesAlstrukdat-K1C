@@ -90,8 +90,8 @@ void readMatrix(Matrix *m, char *filename, Point *simPoint)
             {
                 if (currentWord.TabWord[j] == 'S')
                 {
-                    Absis(*simPoint) = i;
-                    Ordinat(*simPoint) = j;
+                    Absis(*simPoint) = j;
+                    Ordinat(*simPoint) = i;
                 }
                 ELMTMat(*m, i, j) = ' ';
             }
@@ -140,4 +140,22 @@ void displayMatrix(Matrix m, Point simPoint)
         printf("* ");
     }
     printf("\n");
+}
+
+boolean isActionAdj(Matrix m, Point simPoint, char action)
+{
+    int i, j;
+
+    for (i = Ordinat(simPoint) - 1; i <= Ordinat(simPoint) + 1; i++)
+    {
+        for (j = Absis(simPoint) - 1; j <= Absis(simPoint) + 1; j++)
+        {
+            if (!(i == Ordinat(simPoint) && j == Absis(simPoint)) && isIdxEffMat(m, i, j) && ELMTMat(m, i, j) == action)
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
 }

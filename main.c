@@ -13,9 +13,10 @@ void printNotifications()
     return;
   }
   printf("\n");
-  for (int i = getFirstIdxLString(notifs); i <= getLastIdxLString(notifs); i++)
+  int i;
+  for (i = getFirstIdxLString(notifs); i <= getLastIdxLString(notifs); i++)
   {
-    printf("%d. %s\n", i + 1, BUFFER(ELMTLString(notifs, i)));
+    printf("%d. %s\n", i + 1, SBUFFER(ELMTLString(notifs, i)));
   }
   printf("\n");
   clearListString(&notifs);

@@ -9,7 +9,7 @@ BUY
 Ayam Potong
 2 3
 0 2 0
-0 0 0
+0 0 3
 CHOP
 10
 Tepung
@@ -27,13 +27,12 @@ BUY
 Ayam Tepung
 2 3
 0 0 30
-0 0 0
+0 0 10
 MIX
 37
 Ayam Goreng
-2 3
+0 0 30
 0 0 15
-0 0 0
 FRY
 38
 Beras
@@ -45,12 +44,12 @@ BUY
 Nasi
 2 3
 0 0 30
-0 0 0
+0 0 30
 BOIL
 2 3
 40
 Nasi Ayam
 2 3
 0 0 30
-0 0 0
+0 0 15
 FRY

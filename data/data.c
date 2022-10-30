@@ -13,6 +13,7 @@ Sim simulator;
 Stack undoStack;
 Stack redoStack;
 LString notifs;
+ListStatik rawFoods;
 
 void initData(char *mapFile, char *foodsFile, char *recipesFile)
 {
@@ -23,6 +24,7 @@ void initData(char *mapFile, char *foodsFile, char *recipesFile)
   CreateStack(&undoStack, 10);
   CreateStack(&redoStack, 10);
   CreateLString(&notifs, 10);
+  filterRaw();
 }
 
 void readMapConfig(char *filename)
@@ -178,4 +180,18 @@ void initSimulator()
   CreatePoint(&pos, 0, 0);
 
   CreateSim(&simulator, name, pos);
+}
+
+void filterRaw()
+{
+  CreateListStatik(&rawFoods);
+  int i;
+  for (i = 0; i < listLength(foods); i++)
+  {
+    if (isStringEqualLiteral((ACTION(StELMT(foods, i))), "BUY"))
+    {
+      insertLast(&rawFoods, StELMT(foods, i));
+      // printWithDelivery(StELMT(rawFoods, i));
+    }
+  }
 }

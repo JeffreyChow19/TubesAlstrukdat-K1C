@@ -52,4 +52,6 @@ void displayMatrix(Matrix m, Point simPoint);
 /* F.S. Nilai m(i,j) ditulis ke layar per baris per kolom, matriks diberi border berupa '*' dan jika membaca # dari file akan diganti dengan ' '*/
 /* Proses: Menulis nilai setiap elemen m ke layar dengan traversal per baris dan per kolom */
 
+boolean isActionAdj(Matrix m, Point simPoint, char action);
+
 #endif

@@ -12,6 +12,13 @@ void CreateSim(Sim *S, String Name, Point Pos)
     CreateKulkas(&Fridge(*S));
 }
 
+void dealocateSim(Sim *S)
+{
+    dealocateQueue(&(Inv(*S)));
+    dealocateQueue(&(Delv(*S)));
+    dealocateQueue(&(Proc(*S)));
+}
+
 void copySim(Sim S, Sim *CS)
 {
     Name(*CS) = Name(S);
@@ -61,6 +68,16 @@ void addFood(Sim *S, Makanan val)
     enqueue(&Inv(*S), val);
 }
 
+void addDelv(Sim *S, Makanan val)
+{
+    enqueue(&Delv(*S), val);
+}
+
+void addProc(Sim *S, Makanan val)
+{
+    enqueue(&Proc(*S), val);
+}
+
 void removeFoodID(Sim *S, Makanan *val, int id)
 {
     Makanan food;
@@ -108,9 +125,9 @@ void openInv(Sim S)
         printf("Inventory kosong\n");
     else
     {
-        printf("List Makanan di Inventory\n nama (waktu sisa kedaluwarsa)");
-        int i = queueLength(Inv(S)) - 1;
-        while (i >= 0)
+        printf("List Makanan di Inventory\nnama (waktu sisa kedaluwarsa)\n");
+        int i = 0;
+        while (i < queueLength(Inv(S)))
         {
             printf("%d. ", i + 1);
             printWithExpired(FoodInv(S, i));
@@ -125,13 +142,13 @@ void openDelv(Sim S)
         printf("Delivery list kosong\n");
     else
     {
-        printf("List Makanan di Delivery list\n nama (waktu sisa delivery)");
-        int i = queueLength(Delv(S)) - 1;
-        while (i >= 0)
+        printf("List Makanan di Delivery list\nnama (waktu sisa delivery)\n");
+        int len = queueLength(Delv(S));
+        int i;
+        for (i = 0; i < len; i++)
         {
             printf("%d. ", i + 1);
             printWithDelivery(FoodDelv(S, i));
-            i++;
         }
     }
 }
@@ -142,9 +159,9 @@ void openProc(Sim S)
         printf("Process list kosong\n");
     else
     {
-        printf("List Makanan di Process list\n nama (waktu sisa proses)");
-        int i = queueLength(Proc(S)) - 1;
-        while (i >= 0)
+        printf("List Makanan di Process list\nnama (waktu sisa proses)\n");
+        int i = 0;
+        while (i < queueLength(Proc(S)))
         {
             printf("%d. ", i + 1);
             printWithDelivery(FoodProc(S, i));

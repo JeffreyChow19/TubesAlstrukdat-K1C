@@ -93,21 +93,22 @@ int readIntWithRange(int min, int max)
     boolean valid = false;
     do
     {
+        printf("Enter command: ");
         STARTWORD(stdin, false);
-        if (!isWordInt(currentWord) || !endWord)
-        {
 
+        if (!isWordInt(currentWord))
+        {
             valid = false;
             IgnoreWords();
         }
         else
         {
             res = wordToInt(currentWord);
-            valid = res >= min && res <= max;
+            valid = (res >= min && res <= max);
         }
         if (!valid)
         {
-            printf("Input tidak valid. Silahkan coba lagi.\n", min, max);
+            printf("Input tidak valid. Silahkan coba lagi.\n");
         }
     } while (!valid);
     return res;
