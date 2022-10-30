@@ -38,7 +38,6 @@ void move(char dir)
 boolean startCommand()
 {
   printf("\nEnter Command: ");
-
   STARTWORD(stdin, false);
 
   if (isKataEqualLiteral(currentWord, "WAIT"))

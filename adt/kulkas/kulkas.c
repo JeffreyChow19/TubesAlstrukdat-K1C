@@ -131,17 +131,21 @@ void displayKulkas(Kulkas k)
 {
   int i, j;
   printf("* ");
+  blue(false);
   for (i = 0; i < COL_EFF(KMAT(k)); i++)
   {
     printf("%d ", i % 10);
   }
+  reset();
   printf("*");
   printf("\n");
   boolean lastRed = false;
   boolean lastGreen = false;
   for (i = 0; i < ROW_EFF(KMAT(k)); i++)
   {
+    blue(false);
     printf("%d ", i % 10);
+    reset();
     for (j = 0; j < COL_EFF(KMAT(k)); j++)
     {
       if (ELMTMat(KMAT(k), i, j))
@@ -153,7 +157,7 @@ void displayKulkas(Kulkas k)
         }
         if (!lastRed)
         {
-          red(false);
+          red(true);
           lastRed = true;
         }
         printf("X ");
@@ -167,7 +171,7 @@ void displayKulkas(Kulkas k)
         }
         if (!lastGreen)
         {
-          green(false);
+          green(true);
           lastGreen = true;
         }
         printf("- ");

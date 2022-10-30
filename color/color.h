@@ -9,6 +9,8 @@ void green(boolean bold);
 
 void yellow(boolean bold);
 
+void blue(boolean bold);
+
 void reset();
 
 #endif

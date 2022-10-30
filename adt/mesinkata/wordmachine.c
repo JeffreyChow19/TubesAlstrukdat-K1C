@@ -3,6 +3,7 @@
 #include "../boolean.h"
 #include "../mesinkarakter/charmachine.h"
 #include "wordmachine.h"
+#include "../../color/color.h"
 #include <stdio.h>
 
 boolean endWord;
@@ -37,6 +38,7 @@ void STARTWORD(FILE *input, boolean file)
        F.S. : EndWord = true, dan currentChar = MARK;
               atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
               currentChar karakter pertama sesudah karakter terakhir kata */
+    yellow(false);
     START(input, file);
     IgnoreBlanks();
     if (EOP)
@@ -48,6 +50,7 @@ void STARTWORD(FILE *input, boolean file)
         endWord = false;
         CopyWord();
     }
+    reset();
 }
 
 void ADVWORD()

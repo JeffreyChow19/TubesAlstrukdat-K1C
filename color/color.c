@@ -25,6 +25,14 @@ void yellow(boolean bold)
     printf("\033[0;33m");
 }
 
+void blue(boolean bold)
+{
+  if (bold)
+    printf("\033[1;34m");
+  else
+    printf("\033[0;34m");
+}
+
 void reset()
 {
   printf("\033[0m");
