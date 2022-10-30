@@ -4,18 +4,14 @@
 
 void undo()
 {
-    Sim temp;
-    pop(&undoStack, &temp);
-    push(&redoStack, temp);
     if (isStackEmpty(undoStack))
     {
         printf("Anda belum memulai melakukan command\n");
-        push(&undoStack, temp);
-        clearStack(&redoStack);
     }
     else
     {
-        copySim(InfoTop(undoStack), &simulator);
+        push(&redoStack, simulator);
+        pop(&undoStack, &simulator);
     }
 }
 
@@ -23,10 +19,8 @@ void redo()
 {
     if (!isStackEmpty(redoStack))
     {
-        Sim temp;
-        pop(&redoStack, &temp);
-        push(&undoStack, temp);
-        copySim(temp, &simulator);
+        push(&undoStack, simulator);
+        pop(&redoStack, &simulator);
     }
     else
     {

@@ -195,6 +195,8 @@ void copyQueue(PrioQueue Q, PrioQueue *Q2)
     {
         Elmt(*Q2, i) = Elmt(Q, i);
     }
+    Head(*Q2) = Head(Q);
+    Tail(*Q2) = Tail(Q);
 }
 
 boolean isForDelivery(PrioQueue Q)
@@ -204,7 +206,7 @@ boolean isForDelivery(PrioQueue Q)
 
 boolean isForExpiry(PrioQueue Q)
 {
-    return (QueueType(Q) == 'e');
+    return (QueueType(Q) == 'i');
 }
 
 boolean isForProcess(PrioQueue Q)
@@ -221,7 +223,7 @@ void expandQueue(PrioQueue *Q, int num)
 void reduceAllTime(PrioQueue *Q)
 {
     int i;
-    if (QueueType(*Q) == 'e')
+    if (QueueType(*Q) == 'i')
     {
         for (i = 0; i < queueLength(*Q); i++)
         {

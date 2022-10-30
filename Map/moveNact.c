@@ -80,21 +80,24 @@ boolean isOutOfBound(Sim S, char dir, Matrix M)
     }
 }
 
-void setPos(Sim *S, char dir, Matrix M)
+boolean setPos(Sim *S, char dir, Matrix M)
 {
     if (!isOutOfBound(*S, dir, M))
     {
         if (!isBlocked(*S, dir, M))
         {
             moveSim(S, dir);
+            return true;
         }
         else
         {
             printf("Simulator tidak dapat berpindah karena terhalangi!\n");
+            return false;
         }
     }
     else
     {
         printf("Simulator tidak dapat berpindah karena akan keluar map!\n");
+        return false;
     }
 }

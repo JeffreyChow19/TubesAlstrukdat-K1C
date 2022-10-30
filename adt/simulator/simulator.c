@@ -11,6 +11,13 @@ void CreateSim(Sim *S, String Name, Point Pos)
     CreateQueue(&Proc(*S), 50, 'p');
 }
 
+void dealocateSim(Sim *S)
+{
+    dealocateQueue(&(Inv(*S)));
+    dealocateQueue(&(Delv(*S)));
+    dealocateQueue(&(Proc(*S)));
+}
+
 void copySim(Sim S, Sim *CS)
 {
     Name(*CS) = Name(S);

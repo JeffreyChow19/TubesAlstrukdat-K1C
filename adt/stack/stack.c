@@ -60,8 +60,6 @@ void clearStack(Stack *S)
     {
         Sim temp;
         pop(S, &temp);
-        dealocateQueue(&(Inv(temp)));
-        dealocateQueue(&(Delv(temp)));
-        dealocateQueue(&(Proc(temp)));
+        dealocateSim(&temp);
     }
 }

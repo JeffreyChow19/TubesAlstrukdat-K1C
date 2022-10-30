@@ -2,8 +2,12 @@
 #define COMMAND_H
 #include "../adt/simulator/simulator.h"
 
-boolean startCommand(Sim *s);
+void move(char dir);
+
+boolean startCommand();
 
 void enterToContinue();
+
+void addToStack();
 
 #endif
