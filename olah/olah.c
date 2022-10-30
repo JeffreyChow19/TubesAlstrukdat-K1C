@@ -94,6 +94,11 @@ void processFood(String process)
 
             // add makanan to queue
             enqueue(&(simulator.Proc), recipe->info);
+
+            // success message
+            printf("%s sedang diproses. %s akan selesai dalam ", SBUFFER(NAME(INFO(recipe))), SBUFFER(NAME(INFO(recipe))));
+            WriteDuration(DELIVERY(INFO(recipe)));
+            printf("\n");
         }
 
         printf("\n");
