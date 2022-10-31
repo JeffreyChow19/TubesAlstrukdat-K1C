@@ -5,7 +5,7 @@
 void displayCatalog()
 {
     printf("List Makanan\n");
-    printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)\n");
+    printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - action time)\n");
 
     int i;
 
