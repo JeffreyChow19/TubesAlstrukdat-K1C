@@ -6,7 +6,7 @@ merepresentasikan lokasi. */
 #include "point.h"
 #include <stdio.h>
 
-/* Primitif */
+/********** Primitif **********/
 /* Konstruktor Point*/
 void CreatePoint(Point *P, int X, int Y)
 {
@@ -14,13 +14,13 @@ void CreatePoint(Point *P, int X, int Y)
     Ordinat(*P) = Y;
 }
 
-/* Input Output */
+/********** Input Output **********/
 void WritePoint(Point P)
 {
     printf("(%d,%d)\n", Absis(P), Ordinat(P));
 }
 
-/* Validasi Point */
+/********** Validasi Point **********/
 boolean isPointValid(int X, int Y, int colCap, int rowCap)
 {
     return (X >= 0 && X <= colCap && Y >= 0 && Y <= rowCap);
@@ -29,13 +29,12 @@ boolean isPointValid(int X, int Y, int colCap, int rowCap)
 /* Mengirimkan true jika point P merupakan batasan/titik lokasi suatu tempat */
 // boolean isBlock(Point P);
 
-/* Operasi Point */
+/********** Operasi Point **********/
 void nextPoint(Point *P, int nextX, int nextY)
 {
     Absis(*P) += nextX;
     Ordinat(*P) += nextY;
 }
-
 /* Menghasilkan true jika Point P adjacent dengan X*/
 boolean isAdj(Point P, Point X)
 {

@@ -13,26 +13,26 @@ typedef struct
     int Y; /* Ordinat */
 } Point;
 
-/* Selektor Point */
+/********** Selektor Point **********/
 #define Absis(P) (P).X
 #define Ordinat(P) (P).Y
 
 #include "../boolean.h"
 
-/* Primitif */
+/********** Primitif **********/
 /* Konstruktor Point*/
 /* Membuat sebuah Point dengan komponen Absis X dan Ordinat Y */
 /* I.S. Point P sembarang, X dan Y terdefinisi dan merupakan komponen point yang valid */
 /* F.S. Point P terdefinisi dengan komponen Absis X dan ordinat Y */
 void CreatePoint(Point *P, int X, int Y);
 
-/* Input Output */
+/********** Input Output **********/
 /* Menuliskan Point P ke layar dengan format (X,Y) */
 /* I.S. Point P terdefinisi */
 /* F.S. Point P tertampil di layar dengan format (Absis,Ordinat) */
 void WritePoint(Point P);
 
-/* Validasi Time */
+/********** Validasi Time **********/
 /* Menerima input komponen Absis X, ordinat Y, jumlah baris matriks rowCap, dan jumlah kolom matriks colCap */
 /* Menghasilkan true jika X dan Y dapat membentuk point yang valid */
 /* Point valid : 0 <= X < colCap dan 0 <= Y < rowCap */
@@ -44,7 +44,7 @@ boolean isPointValid(int X, int Y, int colCap, int rowCap);
 /* Titik lokasi yaitu tempat telepon (T), tempat mixing (M), tempat menggoreng (F), tempat memotong (C), dan tempat merebus (B). */
 // boolean isBlock(Point P);
 
-/* Operasi Point */
+/********** Operasi Point **********/
 /* Penggeseran nextX point ke kanan dan nextYpoint kebawah */
 /* I.S. Point P, banyak penggeseran absis nextX, dan banyak penggeseran ordinat NextY terdefinisi */
 /* F.S. Point P yang telah dilakukan penggeseran sebanyak NextX secara horizontal dan NextY secara vertikal */

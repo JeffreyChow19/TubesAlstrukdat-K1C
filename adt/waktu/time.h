@@ -15,19 +15,19 @@ typedef struct
     int mm; // Menit [0..59]
 } Time;
 
-/* Selektor Point */
+/********** Selektor Point **********/
 #define Day(T) T.dd
 #define Hour(T) T.hh
 #define Minute(T) T.mm
 
-/* Primitif */
+/********** Primitif **********/
 /* Konstruktor Point*/
 /* Membuat sebuah time dengan komponen dd hari, hh jam, mm menit */
 /* I.S. Time T sembarang, day(dd), hour(hh), minute(mm) terdefinisi */
 /* F.S. Time T terdefinisi dengan komponen dd hh mm */
 void CreateTime(Time *T, int dd, int hh, int mm);
 
-/* Input Output */
+/********** Input Output **********/
 /* Menuliskan ke layar waktu dalam format : dd.hh.mm */
 /* I.S. Time T terdefinisi */
 /* F.S. Waktu aplikasi tertampil pada layar dalam format dd.hh.mm */
@@ -37,7 +37,7 @@ void WriteTime(Time T);
 /* F.S. Time T tertampil di layar dalam format durasi dd Hari hh Jam mm Menit */
 void WriteDuration(Time T);
 
-/* Validasi Time */
+/********** Validasi Time **********/
 /* Menerima input komponen time: dd(day), hh(jam), dan mm (menit) */
 /* dan menghasilkan true jika dd, hh, mm dapat membentuk time yang valid */
 /* Time valid : 0 <= dd ; 0 <= hh <= 23; 0 <= mm <= 59 */
@@ -46,7 +46,7 @@ boolean isTimeValid(int dd, int hh, int mm);
 /* Menghasilkan true jika durasi T menunjukkan 0 Hari 0 Jam 0 Menit */
 boolean isDurZero(Time T);
 
-/* Konversi TipeData */
+/********** Konversi TipeData **********/
 /* Menerima masukkan Time T */
 /* Mengubah tipe data Time(format dd, hh, mm) menjadi integer(format dalam menit) */
 int TimeToMinute(Time T);
@@ -54,7 +54,7 @@ int TimeToMinute(Time T);
 /* Mengubah tipe data integer(representasi menit) menjadi Time(dd, hh, mm) */
 Time MinutetoTime(int N);
 
-/* Operasi Time */
+/********** Operasi Time **********/
 /* I.S. Time T terdefinisi */
 /* F.S. Durasi/Time T berkurang 1 menit */
 void decDuration(Time *T);

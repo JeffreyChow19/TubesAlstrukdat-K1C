@@ -7,8 +7,8 @@
 #include "time.h"
 #include <stdio.h>
 
-/* Primitif */
-/* Konstruktor Point*/
+/********** Primitif **********/
+/********** Konstruktor Point **********/
 void CreateTime(Time *T, int dd, int hh, int mm)
 {
     if (isTimeValid(dd, hh, mm))
@@ -21,7 +21,7 @@ void CreateTime(Time *T, int dd, int hh, int mm)
         printf("Masukkan waktu tidak valid!\n");
 }
 
-/* Input Output */
+/********** Input Output **********/
 void WriteTime(Time T)
 {
     printf("%02d.%02d.%02d\n", Day(T), Hour(T), Minute(T));
@@ -46,7 +46,7 @@ void WriteDuration(Time T)
         printf("0");
 }
 
-/* Validasi Time */
+/********** Validasi Time **********/
 boolean isTimeValid(int dd, int hh, int mm)
 {
     return (dd >= 0 && hh >= 0 && hh <= 23 && mm >= 0 && mm <= 59);
@@ -56,7 +56,7 @@ boolean isDurZero(Time T)
     return (Day(T) == 0 && Hour(T) == 0 && Minute(T) == 0);
 }
 
-/* Konversi TipeData */
+/*********** Konversi TipeData ***********/
 int TimeToMinute(Time T)
 {
     return (Day(T) * 1440 + Hour(T) * 60 + Minute(T));
@@ -74,7 +74,7 @@ Time MinutetoTime(int N)
     return T;
 }
 
-/* Operasi Time */
+/*********** Operasi Time ***********/
 void decDuration(Time *T)
 {
     int mm = TimeToMinute(*T);
