@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include "../color/color.h"
 
+/* Aksi membeli bahan */
 boolean buy()
 {
     int com, i;

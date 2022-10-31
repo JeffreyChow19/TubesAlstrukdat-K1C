@@ -6,45 +6,37 @@ merepresentasikan lokasi. */
 #include "point.h"
 #include <stdio.h>
 
-/* Primitif */
+/********** Primitif **********/
 /* Konstruktor Point*/
 void CreatePoint(Point *P, int X, int Y)
-/* Membuat sebuah Point dengan komponen Absis X dan Ordinat Y */
-/* Prekondisi: X,Y merupakan point yang valid */
 {
     Absis(*P) = X;
     Ordinat(*P) = Y;
 }
 
-/* Input Output */
+/********** Input Output **********/
 void WritePoint(Point P)
-/* Menuliskan Point P ke layar dengan format (X,Y) */
 {
     printf("(%d,%d)\n", Absis(P), Ordinat(P));
 }
 
-/* Validasi Point */
+/********** Validasi Point **********/
 boolean isPointValid(int X, int Y, int colCap, int rowCap)
-/* Menghasilkan true jika X dan Y dapat membentuk point yang valid */
 {
     return (X >= 0 && X <= colCap && Y >= 0 && Y <= rowCap);
 }
 
-// boolean isBlock(Point P);
 /* Mengirimkan true jika point P merupakan batasan/titik lokasi suatu tempat */
-/* Batasan peta ditandai dengan * */
-/* Titik lokasi yaitu tempat telepon (T), tempat mixing (M), tempat menggoreng (F), tempat memotong (C), dan tempat merebus (B). */
+// boolean isBlock(Point P);
 
-/* Operasi Point */
+/********** Operasi Point **********/
 void nextPoint(Point *P, int nextX, int nextY)
-/* Penggeseran nextX point ke kanan dan nextYpoint kebawah */
 {
     Absis(*P) += nextX;
     Ordinat(*P) += nextY;
 }
-
-boolean isAdj(Point P, Point X)
 /* Menghasilkan true jika Point P adjacent dengan X*/
+boolean isAdj(Point P, Point X)
 {
     int distAbsis = Absis(P) - Absis(X);
     int distOrdinat = Ordinat(P) - Ordinat(X);

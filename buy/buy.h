@@ -4,7 +4,8 @@
 #include "../data/data.h"
 #include "../adt/simulator/simulator.h"
 
-boolean buy();
 /* Aksi membeli bahan */
+/* Menghasilkan trus jika berhasil melakukan pembelian makanan, false jika tidak */
+boolean buy();
 
 #endif

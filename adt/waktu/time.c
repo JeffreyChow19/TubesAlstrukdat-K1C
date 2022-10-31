@@ -7,10 +7,9 @@
 #include "time.h"
 #include <stdio.h>
 
-/* Primitif */
-/* Konstruktor Point*/
+/********** Primitif **********/
+/********** Konstruktor Point **********/
 void CreateTime(Time *T, int dd, int hh, int mm)
-/* Membuat sebuah time dengan komponen dd hari, hh jam, mm menit */
 {
     if (isTimeValid(dd, hh, mm))
     {
@@ -22,14 +21,12 @@ void CreateTime(Time *T, int dd, int hh, int mm)
         printf("Masukkan waktu tidak valid!\n");
 }
 
-/* Input Output */
+/********** Input Output **********/
 void WriteTime(Time T)
-/* Menuliskan ke layar waktu dalam format : dd.hh.mm */
 {
     printf("%02d.%02d.%02d\n", Day(T), Hour(T), Minute(T));
 }
 void WriteDuration(Time T)
-/* Menuliskan ke layar waktu durasi dalam format : dd Hari hh Jam mm Menit */
 {
     if (Day(T) != 0)
     {
@@ -49,26 +46,22 @@ void WriteDuration(Time T)
         printf("0");
 }
 
-/* Validasi Time */
+/********** Validasi Time **********/
 boolean isTimeValid(int dd, int hh, int mm)
-/* Menghasilkan true jika dd, hh, mm dapat membentuk time yang valid */
 {
     return (dd >= 0 && hh >= 0 && hh <= 23 && mm >= 0 && mm <= 59);
 }
 boolean isDurZero(Time T)
-/* Menghasilkan true jika durasi menunjukkan 0 Hari 0 Jam 0 Menit*/
 {
     return (Day(T) == 0 && Hour(T) == 0 && Minute(T) == 0);
 }
 
-/* Konversi TipeData */
+/*********** Konversi TipeData ***********/
 int TimeToMinute(Time T)
-/* Mengubah tipe data Time(dd, hh, mm) menjadi menit(integer) */
 {
     return (Day(T) * 1440 + Hour(T) * 60 + Minute(T));
 }
 Time MinutetoTime(int N)
-/* Mengubah tipe data integer(representasi menit) menjadi Time(dd, hh, mm) */
 {
     int mm = N;
     int dd = mm / 1440;
@@ -81,9 +74,8 @@ Time MinutetoTime(int N)
     return T;
 }
 
-/* Operasi Time */
+/*********** Operasi Time ***********/
 void decDuration(Time *T)
-/* Durasi berkurang 1 menit */
 {
     int mm = TimeToMinute(*T);
     if (mm > 0)
@@ -93,7 +85,6 @@ void decDuration(Time *T)
     }
 }
 void decNDuration(Time *T, int N)
-/* Durasi berkurang N menit */
 {
     int mm = TimeToMinute(*T);
     mm -= N;
@@ -102,39 +93,14 @@ void decNDuration(Time *T, int N)
     *T = MinutetoTime(mm);
 }
 void incTime(Time *T)
-/* Time bertambah 1 menit */
 {
     int mm = TimeToMinute(*T);
     mm++;
     *T = MinutetoTime(mm);
 }
 void incNTime(Time *T, int N)
-/* Time T bertambah sebanyak N menit */
 {
     int mm = TimeToMinute(*T);
     mm += N;
     *T = MinutetoTime(mm);
 }
-
-/* void fixedTime(Time *T)
-// Memperbaiki tipe data time menjadi data yang valid
-{
-    int temp;
-    if(Minute((*T)) > 59){
-        temp = Minute((*T))/60;
-        Hour((*T)) += temp;
-        Minute((*T)) -= temp*60;
-    } else if (Minute((*T)) < 0){
-        Minute((*T)) += 60;
-        Hour((*T))--;
-    }
-
-    if(Hour((*T)) > 23){
-        temp = Hour((*T))/24;
-        Day((*T)) += temp;
-        Hour((*T)) -= temp*24;
-    } else if (Hour((*T)) < 0){
-        Hour((*T)) += 24;
-        Day((*T))--;
-    }
-} */
