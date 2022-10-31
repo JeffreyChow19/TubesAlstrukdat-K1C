@@ -21,31 +21,38 @@ typedef struct
 
 /* Primitif */
 /* Konstruktor Point*/
-void CreatePoint(Point *P, int X, int Y);
 /* Membuat sebuah Point dengan komponen Absis X dan Ordinat Y */
-/* Prekondisi: X,Y merupakan point yang valid */
+/* I.S. Point P sembarang, X dan Y terdefinisi dan merupakan komponen point yang valid */
+/* F.S. Point P terdefinisi dengan komponen Absis X dan ordinat Y */
+void CreatePoint(Point *P, int X, int Y);
 
 /* Input Output */
-// void ReadPoint(Point *P); (perlu kah?)
-/* Membaca nilai absis dan ordinat Point P */
-void WritePoint(Point P);
 /* Menuliskan Point P ke layar dengan format (X,Y) */
+/* I.S. Point P terdefinisi */
+/* F.S. Point P tertampil di layar dengan format (Absis,Ordinat) */
+void WritePoint(Point P);
 
 /* Validasi Time */
+/* Menerima input komponen Absis X, ordinat Y, jumlah baris matriks rowCap, dan jumlah kolom matriks colCap */
+/* Menghasilkan true jika X dan Y dapat membentuk point yang valid */
+/* Point valid : 0 <= X < colCap dan 0 <= Y < rowCap */
 boolean isPointValid(int X, int Y, int colCap, int rowCap);
-/* Menghasilkan true jika X dan Y dapat membentuk point yang valid (0 <= X < colCap dan 0 <= Y < rowCap) */
 
-// boolean isBlock(Point P);
-/* Mengirimkan true jika point P merupakan batasan/titik lokasi suatu tempat */
+/* Menerima input point P */
+/* dan Mengirimkan true jika point P merupakan batasan/titik lokasi suatu tempat */
 /* Batasan peta ditandai dengan * */
 /* Titik lokasi yaitu tempat telepon (T), tempat mixing (M), tempat menggoreng (F), tempat memotong (C), dan tempat merebus (B). */
+// boolean isBlock(Point P);
 
 /* Operasi Point */
-void nextPoint(Point *P, int nextX, int nextY);
 /* Penggeseran nextX point ke kanan dan nextYpoint kebawah */
-/* Prekondisi: P dengan X += nextX dan Y += nextY merupakan point yang valid */
+/* I.S. Point P, banyak penggeseran absis nextX, dan banyak penggeseran ordinat NextY terdefinisi */
+/* F.S. Point P yang telah dilakukan penggeseran sebanyak NextX secara horizontal dan NextY secara vertikal */
+/*      dengan (X += nextX) dan (Y += nextY) merupakan point yang valid */
+void nextPoint(Point *P, int nextX, int nextY);
 
+/* Menerima input Point P dan Point X */
+/* kemudian Menghasilkan true jika Point P adjacent dengan X*/
 boolean isAdj(Point P, Point X);
-/* Menghasilkan true jika Point P adjacent dengan X*/
 
 #endif

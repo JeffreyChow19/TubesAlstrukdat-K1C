@@ -22,37 +22,50 @@ typedef struct
 
 /* Primitif */
 /* Konstruktor Point*/
-void CreateTime(Time *T, int dd, int hh, int mm);
 /* Membuat sebuah time dengan komponen dd hari, hh jam, mm menit */
+/* I.S. Time T sembarang, day(dd), hour(hh), minute(mm) terdefinisi */
+/* F.S. Time T terdefinisi dengan komponen dd hh mm */
+void CreateTime(Time *T, int dd, int hh, int mm);
 
 /* Input Output */
-void WriteTime(Time T);
 /* Menuliskan ke layar waktu dalam format : dd.hh.mm */
-void WriteDuration(Time T);
+/* I.S. Time T terdefinisi */
+/* F.S. Waktu aplikasi tertampil pada layar dalam format dd.hh.mm */
+void WriteTime(Time T);
 /* Menuliskan ke layar waktu durasi dalam format : dd Hari hh Jam mm Menit */
+/* I.S. Time T terdefinisi */
+/* F.S. Time T tertampil di layar dalam format durasi dd Hari hh Jam mm Menit */
+void WriteDuration(Time T);
 
 /* Validasi Time */
+/* Menerima input komponen time: dd(day), hh(jam), dan mm (menit) */
+/* dan menghasilkan true jika dd, hh, mm dapat membentuk time yang valid */
+/* Time valid : 0 <= dd ; 0 <= hh <= 23; 0 <= mm <= 59 */
 boolean isTimeValid(int dd, int hh, int mm);
-/* Menghasilkan true jika dd, hh, mm dapat membentuk time yang valid */
+/* Menerima masukkan Time T */
+/* Menghasilkan true jika durasi T menunjukkan 0 Hari 0 Jam 0 Menit */
 boolean isDurZero(Time T);
-/* Menghasilkan true jika durasi menunjukkan 0 Hari 0 Jam 0 Menit*/
 
 /* Konversi TipeData */
+/* Menerima masukkan Time T */
+/* Mengubah tipe data Time(format dd, hh, mm) menjadi integer(format dalam menit) */
 int TimeToMinute(Time T);
-/* Mengubah tipe data Time(dd, hh, mm) menjadi menit(integer) */
-Time MinutetoTime(int N);
+/* Menerima masukkan waktu dalam menit (integer) */
 /* Mengubah tipe data integer(representasi menit) menjadi Time(dd, hh, mm) */
-/* void fixedTime(Time *T); */
-/* Memperbaiki tipe data time menjadi data yang valid*/
+Time MinutetoTime(int N);
 
 /* Operasi Time */
+/* I.S. Time T terdefinisi */
+/* F.S. Durasi/Time T berkurang 1 menit */
 void decDuration(Time *T);
-/* Durasi berkurang 1 menit */
+/* I.S. Time T terdefinisi */
+/* F.S. Durasi/Time T berkurang N menit */
 void decNDuration(Time *T, int N);
-/* Durasi berkurang N menit */
+/* I.S. Time T terdefinisi */
+/* F.S. Time T bertambah 1 menit */
 void incTime(Time *T);
-/* Time bertambah 1 menit */
+/* I.S. Time T terdefinisi */
+/* F.S. Time T bertambah sebanyak N menit */
 void incNTime(Time *T, int N);
-/* Time T bertambah sebanyak N menit */
 
 #endif
