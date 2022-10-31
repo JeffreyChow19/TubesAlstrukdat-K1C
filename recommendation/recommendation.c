@@ -19,6 +19,7 @@ void showRecommendation()
     {
       insertLastDin(&recs, ELMT(recipes, i));
     }
+    dealocateSet(&inv);
   }
 
   if (recs.nEff == 0)

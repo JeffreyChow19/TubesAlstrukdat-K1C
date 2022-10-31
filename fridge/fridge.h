@@ -5,10 +5,10 @@
 
 void printAllBahanKulkas();
 
-void showFridgeMenu();
+boolean showFridgeMenu();
 
-void addFoodToFridge();
+boolean addFoodToFridge();
 
-void removeFoodFromFridge();
+boolean removeFoodFromFridge();
 
 #endif

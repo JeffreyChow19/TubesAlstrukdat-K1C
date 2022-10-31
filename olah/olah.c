@@ -6,7 +6,7 @@
 #include "../color/color.h"
 #include <stdio.h>
 
-void processFood(String process)
+boolean processFood(String process)
 {
     // print header
     yellow(false);
@@ -118,5 +118,8 @@ void processFood(String process)
         }
 
         printf("\n");
+        return !notFound;
     }
+
+    return false;
 }

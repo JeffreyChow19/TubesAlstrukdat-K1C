@@ -4,7 +4,7 @@
 #include "../data/data.h"
 #include "../adt/simulator/simulator.h"
 
-void buy(Sim *S);
+boolean buy();
 /* Aksi membeli bahan */
 
 #endif
