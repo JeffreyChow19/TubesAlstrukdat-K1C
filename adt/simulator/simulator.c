@@ -11,6 +11,8 @@ void CreateSim(Sim *S, String Name, Point Pos)
     CreateQueue(&Delv(*S), 50, 'd');
     CreateQueue(&Proc(*S), 50, 'p');
     CreateKulkas(&Fridge(*S));
+    CreateLString(&Notifs(*S), 3);
+    CreateLString(&UndoNotifs(*S), 3);
 }
 
 void dealocateSim(Sim *S)
@@ -19,6 +21,8 @@ void dealocateSim(Sim *S)
     dealocateQueue(&(Delv(*S)));
     dealocateQueue(&(Proc(*S)));
     dealocateFridge(&(Fridge(*S)));
+    dealocateLString(&Notifs(*S));
+    dealocateLString(&UndoNotifs(*S));
 }
 
 void copySim(Sim S, Sim *CS)
@@ -30,6 +34,8 @@ void copySim(Sim S, Sim *CS)
     copyQueue(Delv(S), &Delv(*CS));
     copyQueue(Proc(S), &Proc(*CS));
     copyFridge(Fridge(S), &Fridge(*CS));
+    copyListString(Notifs(S), &Notifs(*CS));
+    copyListString(UndoNotifs(S), &UndoNotifs(*CS));
 }
 
 void moveSim(Sim *S, char dir)
@@ -196,4 +202,14 @@ void currPos(Sim S)
 void currTime(Sim S)
 {
     WriteTime(Clock(S));
+}
+
+void addNotif(Sim *S, String notif, boolean isUndo)
+{
+    insertLastString(isUndo ? &UndoNotifs(*S) : &Notifs(*S), notif);
+}
+
+void clearNotifs(Sim *S, boolean isUndo)
+{
+    clearListString(isUndo ? &UndoNotifs(*S) : &Notifs(*S), false);
 }

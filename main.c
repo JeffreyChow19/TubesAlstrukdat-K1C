@@ -4,10 +4,12 @@
 #include "adt/mesinkata/wordmachine.h"
 #include "command/command.h"
 #include "color/color.h"
+#include "undoredo/undoredo.h"
 
 void printNotifications()
 {
   printf("Notifikasi: ");
+  LString notifs = (isUndo && IDX_TOP(redoStack) != -1) ? UndoNotifs(InfoTop(redoStack)) : Notifs(simulator);
   if (isEmptyLString(notifs))
   {
     printf("-\n\n");
@@ -22,7 +24,6 @@ void printNotifications()
   }
   reset();
   printf("\n");
-  clearListString(&notifs);
 }
 
 void printStatus()

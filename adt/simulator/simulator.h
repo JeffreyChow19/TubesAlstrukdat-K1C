@@ -6,6 +6,7 @@
 #include "../point/point.h"
 #include "../queue/prioqueue.h"
 #include "../kulkas/kulkas.h"
+#include "../liststring/liststring.h"
 
 typedef struct
 {
@@ -16,6 +17,8 @@ typedef struct
     PrioQueue Delv;
     PrioQueue Proc;
     Kulkas Fridge;
+    LString Notifs;
+    LString UndoNotifs;
 } Sim;
 
 /* ********** SELEKTOR ********** */
@@ -29,6 +32,8 @@ typedef struct
 #define Proc(S) (S).Proc
 #define FoodProc(S, i) (S).Proc.buffer[(i)]
 #define Fridge(S) (S).Fridge
+#define Notifs(S) (S).Notifs
+#define UndoNotifs(S) (S).UndoNotifs
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : membuat simulator*/
@@ -142,5 +147,9 @@ void currPos(Sim S);
 /* I.S. Waktu terdefinisi */
 /* F.S. Waktu simulator ditampilkan di layar */
 void currTime(Sim S);
+
+void addNotif(Sim *S, String notif, boolean isUndo);
+
+void clearNotifs(Sim *S, boolean isUndo);
 
 #endif

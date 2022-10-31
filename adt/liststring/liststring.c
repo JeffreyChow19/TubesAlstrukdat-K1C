@@ -12,8 +12,8 @@ void CreateLString(LString *l, int capacity)
 
 void dealocateLString(LString *l)
 {
+    clearListString(l, true);
     LSCAPACITY(*l) = 0;
-    LSNEFF(*l) = 0;
     free(LSBUFFER(*l));
 }
 
@@ -66,12 +66,26 @@ void insertLastString(LString *l, SElType val)
     SBUFFER(ELMTLString(*l, getLastIdxLString(*l))) = val.buffer;
 }
 
-void clearListString(LString *l)
+void clearListString(LString *l, boolean dealocateEl)
 {
-    int i;
-    for (i = getFirstIdxLString(*l); i <= getLastIdxLString(*l); i++)
+    if (dealocateEl)
     {
-        dealocateString(&(ELMTLString(*l, i)));
+        int i;
+        for (i = getFirstIdxLString(*l); i <= getLastIdxLString(*l); i++)
+        {
+            dealocateString(&(ELMTLString(*l, i)));
+        }
     }
     LSNEFF(*l) = 0;
+}
+
+void copyListString(LString l, LString *l1)
+{
+    CreateLString(l1, LSNEFF(l));
+    LSNEFF(*l1) = LSNEFF(l);
+    int i;
+    for (i = 0; i < LSNEFF(l); i++)
+    {
+        ELMTLString(*l1, i) = ELMTLString(l, i);
+    }
 }

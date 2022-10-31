@@ -3,6 +3,8 @@
 #include "../data/data.h"
 #include "../color/color.h"
 
+boolean isUndo = false;
+
 boolean undo()
 {
     if (isStackEmpty(undoStack))
@@ -14,6 +16,7 @@ boolean undo()
     }
     else
     {
+        isUndo = true;
         push(&redoStack, simulator);
         pop(&undoStack, &simulator);
         return true;
@@ -24,6 +27,7 @@ boolean redo()
 {
     if (!isStackEmpty(redoStack))
     {
+        isUndo = false;
         push(&undoStack, simulator);
         pop(&redoStack, &simulator);
         return true;

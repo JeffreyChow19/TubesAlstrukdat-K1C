@@ -114,6 +114,15 @@ boolean processFood(String process)
             // success message
             green(false);
             printf("%s sedang diproses. %s akan selesai dalam ", SBUFFER(NAME(INFO(recipe))), SBUFFER(NAME(INFO(recipe))));
+
+            int length = LENGTH(NAME(INFO(recipe))) + LENGTH(ACTION(INFO(recipe)));
+            char text[22 + length];
+            sprintf(text, "%s makanan %s dibatalkan.", SBUFFER(ACTION(INFO(recipe))), SBUFFER(NAME(INFO(recipe))));
+            String notif;
+            CreateEmptyString(&notif, 22 + length);
+            setLiteral(&notif, text);
+            addNotif(&simulator, notif, true);
+
             WriteDuration(DELIVERY(INFO(recipe)));
             reset();
             printf("\n");

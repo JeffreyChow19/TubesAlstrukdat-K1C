@@ -24,9 +24,12 @@ void addToStack(boolean clearRedo)
 {
   Sim s;
   copySim(simulator, &s);
+  clearListString(&UndoNotifs(simulator), false);
+  clearListString(&Notifs(simulator), false);
   push(&undoStack, s);
   if (clearRedo)
   {
+    isUndo = false;
     clearStack(&redoStack);
   }
 }
@@ -37,6 +40,7 @@ void move(char dir)
   boolean moved = setPos(&simulator, dir, map);
   if (moved)
   {
+    isUndo = false;
     tick();
     clearStack(&redoStack);
   }
@@ -60,6 +64,7 @@ void processFoodCommand(String command, char action, char *name)
   boolean success = processFood(command);
   if (success)
   {
+    isUndo = false;
     tick();
     clearStack(&redoStack);
   }
@@ -168,6 +173,7 @@ boolean startCommand()
     boolean bought = buy(&simulator);
     if (bought)
     {
+      isUndo = false;
       tick();
       clearStack(&redoStack);
     }
@@ -226,7 +232,10 @@ boolean startCommand()
     if (!changed)
       cancelAddToStack();
     else
+    {
+      isUndo = false;
       clearStack(&redoStack);
+    }
     enterToContinue();
   }
   else if (isStringEqualLiteral(command, "RECOMMENDATION"))

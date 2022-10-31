@@ -3,6 +3,8 @@
 
 #include "../adt/boolean.h"
 
+extern boolean isUndo;
+
 boolean undo();
 
 boolean redo();

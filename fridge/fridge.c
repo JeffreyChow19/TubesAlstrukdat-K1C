@@ -117,6 +117,15 @@ boolean addFoodToFridge()
     green(false);
     printf("\n%s berhasil dimasukkan ke kulkas\n\n", SBUFFER(NAME(m)));
     reset();
+
+    int length = LENGTH(NAME(m));
+    char text[26 + length];
+    sprintf(text, "%s dikeluarkan dari kulkas.", SBUFFER(NAME(m)));
+    String notif;
+    CreateEmptyString(&notif, 26 + length);
+    setLiteral(&notif, text);
+    addNotif(&simulator, notif, true);
+
     return true;
   }
   else
@@ -152,5 +161,14 @@ boolean removeFoodFromFridge()
   green(false);
   printf("\n%s berhasil dikeluarkan dari kulkas\n\n", SBUFFER(NAME(m)));
   reset();
+
+  int length = LENGTH(NAME(m));
+  char text[31 + length];
+  sprintf(text, "%s kembali dimasukkan ke kulkas.", SBUFFER(NAME(m)));
+  String notif;
+  CreateEmptyString(&notif, 31 + length);
+  setLiteral(&notif, text);
+  addNotif(&simulator, notif, true);
+
   return true;
 }

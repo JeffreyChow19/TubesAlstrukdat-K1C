@@ -38,13 +38,23 @@ boolean buy()
 
         if (com == 0)
             return false;
+        Makanan m = StELMT(rawFoods, com - 1);
 
-        addDelv(&simulator, StELMT(rawFoods, com - 1));
+        addDelv(&simulator, m);
         green(false);
-        printf("\nBerhasil memesan %s. %s akan diantar dalam ", SBUFFER(NAME(StELMT(rawFoods, com - 1))), SBUFFER(NAME(StELMT(rawFoods, com - 1))));
+        printf("\nBerhasil memesan %s. %s akan diantar dalam ", SBUFFER(NAME(m)), SBUFFER(NAME(m)));
+
         WriteDuration(DELIVERY(StELMT(rawFoods, com - 1)));
         printf(".\n\n");
         reset();
+
+        int length = LENGTH(NAME(m));
+        char text[100 + length];
+        sprintf(text, "Pembelian makanan %s dibatalkan.", SBUFFER(NAME(m)));
+        String notif;
+        CreateEmptyString(&notif, 100 + length);
+        setLiteral(&notif, text);
+        addNotif(&simulator, notif, true);
         return true;
     }
 }
