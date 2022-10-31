@@ -148,8 +148,14 @@ void currPos(Sim S);
 /* F.S. Waktu simulator ditampilkan di layar */
 void currTime(Sim S);
 
+/* *** Penambahan notifikasi simulator *** */
+/* Menambahkan notifikasi pada list string undo atau notif simulator */
+/* Memasukkan string berdasarkan isUndo (menuju list string undo jika true dan notif jika false)*/
 void addNotif(Sim *S, String notif, boolean isUndo);
 
+/* *** Penghapusan notifikasi simulator *** */
+/* Menghapus semua elemen list string notifikasi pada simulator */
+/* Menghapus string berdasarkan isUndo (dari list string undo jika true dan notif jika false)*/
 void clearNotifs(Sim *S, boolean isUndo);
 
 #endif
