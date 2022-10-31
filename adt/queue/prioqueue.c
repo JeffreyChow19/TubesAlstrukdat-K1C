@@ -67,7 +67,7 @@ void enqueue(PrioQueue *Q, QElType X)
         {
             int timeInput;
             int timeIdx;
-            if (isForExpiry(*Q))
+            if (isForInventory(*Q))
             {
                 timeInput = TimeToMinute(EXPIRY(X));
                 timeIdx = TimeToMinute(EXPIRY(Elmt(*Q, i)));
@@ -209,7 +209,7 @@ boolean isForDelivery(PrioQueue Q)
     return (QueueType(Q) == 'd');
 }
 
-boolean isForExpiry(PrioQueue Q)
+boolean isForInventory(PrioQueue Q)
 {
     return (QueueType(Q) == 'i');
 }

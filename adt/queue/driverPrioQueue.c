@@ -1,13 +1,14 @@
 #include "prioqueue.h"
 #include <stdio.h>
 
-// gcc driverPrioQueue.c prioqueue.c ../makanan/makanan.c ../waktu/time.c ../string/string.c
+// gcc driverPrioQueue.c prioqueue.c ../makanan/makanan.c ../waktu/time.c ../string/string.c ../point/point.c
 
 int main()
 {
     PrioQueue Q;
-    CreateQueue(&Q, 5, 'e'); // diurut sesuai expiry
+    CreateQueue(&Q, 5, 'i'); // diurut sesuai expiry
     Time exp, del;
+    Point size;
 
     // Make A
     Makanan A;
@@ -18,7 +19,8 @@ int main()
     setLiteral(&act1, "CHOP");
     CreateTime(&exp, 0, 2, 0);
     CreateTime(&del, 0, 0, 4);
-    CreateMakanan(&A, 2, name1, exp, act1, del);
+    CreatePoint(&size, 5, 4);
+    CreateMakanan(&A, 2, name1, exp, act1, del, size);
 
     // Make B
     Makanan B;
@@ -29,7 +31,8 @@ int main()
     setLiteral(&act2, "MIX");
     CreateTime(&exp, 0, 5, 0);
     CreateTime(&del, 0, 0, 1);
-    CreateMakanan(&B, 4, name2, exp, act2, del);
+    CreatePoint(&size, 2, 3);
+    CreateMakanan(&B, 4, name2, exp, act2, del, size);
 
     // Make C
     Makanan C;
@@ -40,12 +43,15 @@ int main()
     setLiteral(&act3, "MIX");
     CreateTime(&exp, 0, 3, 0);
     CreateTime(&del, 0, 0, 3);
-    CreateMakanan(&C, 5, name3, exp, act3, del);
+    CreatePoint(&size, 1, 2);
+    CreateMakanan(&C, 5, name3, exp, act3, del, size);
 
+    // Memasukkan ke PrioQueue Q
     enqueue(&Q, A);
     enqueue(&Q, B);
     enqueue(&Q, C);
 
+    // Print isi Q
     while (!isQueueEmpty(Q))
     {
         Makanan temp;
