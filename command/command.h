@@ -8,6 +8,10 @@ boolean startCommand();
 
 void enterToContinue();
 
-void addToStack();
+void addToStack(boolean clearRedo);
+
+void cancelAddToStack();
+
+void processFoodCommand(String command, char action, char *name);
 
 #endif

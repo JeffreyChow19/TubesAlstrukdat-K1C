@@ -14,24 +14,58 @@
 #include "../recommendation/recommendation.h"
 #include "../color/color.h"
 
-void addToStack()
+void cancelAddToStack()
+{
+  dealocateSim(&simulator);
+  pop(&undoStack, &simulator);
+}
+
+void addToStack(boolean clearRedo)
 {
   Sim s;
   copySim(simulator, &s);
   push(&undoStack, s);
-  clearStack(&redoStack);
+  if (clearRedo)
+  {
+    clearStack(&redoStack);
+  }
 }
 
 void move(char dir)
 {
-  addToStack();
+  addToStack(false);
   boolean moved = setPos(&simulator, dir, map);
   if (moved)
+  {
     tick();
+    clearStack(&redoStack);
+  }
   else
   {
-    dealocateSim(&simulator);
-    pop(&undoStack, &simulator);
+    cancelAddToStack();
+  }
+}
+
+void processFoodCommand(String command, char action, char *name)
+{
+  if (!isActionAdj(map, Pos(simulator), action))
+  {
+    red(false);
+    printf("\nBNMO tidak berada di area %s!\n\n", name);
+    reset();
+    return;
+  }
+
+  addToStack(false);
+  boolean success = processFood(command);
+  if (success)
+  {
+    tick();
+    clearStack(&redoStack);
+  }
+  else
+  {
+    cancelAddToStack();
   }
 }
 
@@ -73,7 +107,7 @@ boolean startCommand()
     Time t;
     CreateTime(&t, 0, h, m);
 
-    addToStack();
+    addToStack(true);
     tickWithTime(h, m);
     green(false);
     printf("\nWaktu telah berjalan ");
@@ -130,9 +164,17 @@ boolean startCommand()
       return false;
     }
 
-    addToStack();
-    buy(&simulator);
-    tick();
+    addToStack(false);
+    boolean bought = buy(&simulator);
+    if (bought)
+    {
+      tick();
+      clearStack(&redoStack);
+    }
+    else
+    {
+      cancelAddToStack();
+    }
   }
   else if (isStringEqualLiteral(command, "DELIVERY"))
   {
@@ -141,59 +183,19 @@ boolean startCommand()
   }
   else if (isStringEqualLiteral(command, "FRY"))
   {
-    if (!isActionAdj(map, Pos(simulator), 'F'))
-    {
-      red(false);
-      printf("\nBNMO tidak berada di area fry!\n\n");
-      reset();
-      return false;
-    }
-    addToStack();
-    processFood(command);
-    tick();
-    enterToContinue();
+    processFoodCommand(command, 'F', "fry");
   }
   else if (isStringEqualLiteral(command, "CHOP"))
   {
-    if (!isActionAdj(map, Pos(simulator), 'C'))
-    {
-      red(false);
-      printf("\nBNMO tidak berada di area chop!\n\n");
-      reset();
-      return false;
-    }
-    addToStack();
-    processFood(command);
-    tick();
-    enterToContinue();
+    processFoodCommand(command, 'C', "chop");
   }
   else if (isStringEqualLiteral(command, "MIX"))
   {
-    if (!isActionAdj(map, Pos(simulator), 'M'))
-    {
-      red(false);
-      printf("\nBNMO tidak berada di area mix!\n\n");
-      reset();
-      return false;
-    }
-    addToStack();
-    processFood(command);
-    tick();
-    enterToContinue();
+    processFoodCommand(command, 'M', "mix");
   }
   else if (isStringEqualLiteral(command, "BOIL"))
   {
-    if (!isActionAdj(map, Pos(simulator), 'B'))
-    {
-      red(false);
-      printf("\nBNMO tidak berada di area boil!\n\n");
-      reset();
-      return false;
-    }
-    addToStack();
-    processFood(command);
-    tick();
-    enterToContinue();
+    processFoodCommand(command, 'B', "boil");
   }
   else if (isStringEqualLiteral(command, "UNDO"))
   {
@@ -219,7 +221,12 @@ boolean startCommand()
   }
   else if (isStringEqualLiteral(command, "FRIDGE"))
   {
-    showFridgeMenu();
+    addToStack(false);
+    boolean changed = showFridgeMenu();
+    if (!changed)
+      cancelAddToStack();
+    else
+      clearStack(&redoStack);
     enterToContinue();
   }
   else if (isStringEqualLiteral(command, "RECOMMENDATION"))

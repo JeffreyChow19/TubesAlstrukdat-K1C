@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include "../color/color.h"
 
-void buy(Sim *S)
+boolean buy()
 {
     int com, i;
 
@@ -18,6 +18,7 @@ void buy(Sim *S)
         red(false);
         printf("Tidak ada bahan yang dapat dibeli.\n");
         reset();
+        return false;
     }
     else
     {
@@ -35,11 +36,15 @@ void buy(Sim *S)
         printf("\n");
         com = readIntWithRange(0, listLength(rawFoods));
 
-        addDelv(S, StELMT(rawFoods, com - 1));
+        if (com == 0)
+            return false;
+
+        addDelv(&simulator, StELMT(rawFoods, com - 1));
         green(false);
         printf("\nBerhasil memesan %s. %s akan diantar dalam ", SBUFFER(NAME(StELMT(rawFoods, com - 1))), SBUFFER(NAME(StELMT(rawFoods, com - 1))));
         WriteDuration(DELIVERY(StELMT(rawFoods, com - 1)));
         printf(".\n\n");
         reset();
+        return true;
     }
 }

@@ -15,7 +15,7 @@ void printAllBahanKulkas()
   }
 }
 
-void showFridgeMenu()
+boolean showFridgeMenu()
 {
   printf("\n");
   displayKulkas(Fridge(simulator));
@@ -40,24 +40,22 @@ void showFridgeMenu()
   switch (command)
   {
   case 1:
-    addFoodToFridge();
-    break;
+    return addFoodToFridge();
   case 2:
-    removeFoodFromFridge();
-    break;
+    return removeFoodFromFridge();
   default:
-    break;
+    return false;
   }
 }
 
-void addFoodToFridge()
+boolean addFoodToFridge()
 {
   if (queueLength(Inv(simulator)) == 0)
   {
     red(false);
     printf("\nTidak ada bahan di inventory\n\n");
     reset();
-    return;
+    return false;
   }
 
   printf("Pilih bahan yang ingin dimasukkan ke kulkas:\n");
@@ -73,7 +71,7 @@ void addFoodToFridge()
   int chosen = readIntWithRange(0, queueLength(Inv(simulator)));
 
   if (chosen == 0)
-    return;
+    return false;
 
   Makanan m = FoodInv(simulator, chosen - 1);
   printf("\n");
@@ -119,23 +117,25 @@ void addFoodToFridge()
     green(false);
     printf("\n%s berhasil dimasukkan ke kulkas\n\n", SBUFFER(NAME(m)));
     reset();
+    return true;
   }
   else
   {
     red(false);
     printf("\n%s tidak dapat dimasukkan ke kulkas\n\n", SBUFFER(NAME(m)));
     reset();
+    return false;
   }
 }
 
-void removeFoodFromFridge()
+boolean removeFoodFromFridge()
 {
   if (KNEFF(Fridge(simulator)) == 0)
   {
     red(false);
     printf("\nKulkas kosong. Tidak ada makanan yang dapat dikeluarkan.\n\n");
     reset();
-    return;
+    return false;
   }
 
   printf("Pilih makanan yang ingin dikeluarkan dari kulkas:\n");
@@ -145,11 +145,12 @@ void removeFoodFromFridge()
   int chosen = readIntWithRange(0, KNEFF(Fridge(simulator)));
 
   if (chosen == 0)
-    return;
+    return false;
   Makanan m;
   removeItemKulkasByIndex(&Fridge(simulator), &m, chosen - 1);
   enqueue(&Inv(simulator), m);
   green(false);
   printf("\n%s berhasil dikeluarkan dari kulkas\n\n", SBUFFER(NAME(m)));
   reset();
+  return true;
 }
