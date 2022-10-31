@@ -50,6 +50,8 @@ boolean processFood(String process)
         }
     }
 
+    printf("\nKirim 0 untuk exit.\n");
+
     // input command
     printf("\n");
     int command = readIntWithRange(0, menus.nEff);
