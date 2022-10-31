@@ -4,9 +4,10 @@
 
 void CreateSet(MultiSet *m, int cap)
 {
-  SetBUFFER(*m) = (SetInfo *)malloc(cap * sizeof(SetInfo));
+  SetCAPACITY(*m) = cap > 0 ? cap : 1;
 
-  SetCAPACITY(*m) = cap;
+  SetBUFFER(*m) = (SetInfo *)malloc(SetCAPACITY(*m) * sizeof(SetInfo));
+
   SetNEFF(*m) = 0;
 }
 

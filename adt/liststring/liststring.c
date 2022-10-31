@@ -5,8 +5,8 @@
 
 void CreateLString(LString *l, int capacity)
 {
-    LSCAPACITY(*l) = capacity;
-    LSBUFFER(*l) = (String *)malloc(sizeof(SElType) * capacity);
+    LSCAPACITY(*l) = capacity > 0 ? capacity : 1;
+    LSBUFFER(*l) = (String *)malloc(sizeof(SElType) * LSCAPACITY(*l));
     LSNEFF(*l) = 0;
 }
 
@@ -62,8 +62,8 @@ void insertLastString(LString *l, SElType val)
     {
         LSNEFF(*l) += 1;
     }
-
-    SBUFFER(ELMTLString(*l, getLastIdxLString(*l))) = val.buffer;
+    int idx = LSCAPACITY(*l);
+    ELMTLString(*l, getLastIdxLString(*l)) = val;
 }
 
 void clearListString(LString *l, boolean dealocateEl)

@@ -33,6 +33,11 @@ void blue(boolean bold)
     printf("\033[0;34m");
 }
 
+void rgb(int r, int g, int b)
+{
+  printf("\033[38;2;%d;%d;%dm", r, g, b);
+}
+
 void reset()
 {
   printf("\033[0m");
