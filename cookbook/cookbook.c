@@ -2,6 +2,17 @@
 #include "../data/data.h"
 #include "../adt/listdin/listdin.h"
 #include "../adt/tree/tree.h"
+#include "../color/color.h"
+
+boolean hasBahan(int id)
+{
+    int idx = searchIdx(Inv(simulator), id);
+    if (idx != IDX_UNDEF)
+        return true;
+
+    idx = searchIdxKulkas(Fridge(simulator), id);
+    return idx != IDX_UNDEF_K;
+}
 
 void displayRecipe(Tree node)
 {
@@ -15,7 +26,13 @@ void displayRecipe(Tree node)
     int j;
     for (j = getFirstIdxDin(CHILDREN(node)); j <= getLastIdxDin(CHILDREN(node)); ++j)
     {
-        printf(" - %s", SBUFFER(NAME(INFO(ELMT(CHILDREN(node), j)))));
+        boolean has = hasBahan(ID(INFO(ELMT(CHILDREN(node), j))));
+        printf(" - ");
+        if (has)
+            green(false);
+        printf("%s", SBUFFER(NAME(INFO(ELMT(CHILDREN(node), j)))));
+        if (has)
+            reset();
     }
     printf("\n");
 }

@@ -3,6 +3,8 @@
 
 #include "../adt/tree/tree.h"
 
+boolean hasBahan(int id);
+
 void displayCookbook();
 /* Menampilkan resep-resep yang tersedia pada system */
 
