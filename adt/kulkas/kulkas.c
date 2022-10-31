@@ -117,7 +117,8 @@ boolean canAddInKulkas(Kulkas k, Makanan m, int x, int y)
 
 int searchIdxKulkas(Kulkas k, int idx)
 {
-  for (int i = 0; i < KNEFF(k); i++)
+  int i;
+  for (i = 0; i < KNEFF(k); i++)
   {
     if (ID(KFOOD(KELMT(k, i))) == idx)
     {

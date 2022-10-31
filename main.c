@@ -36,10 +36,28 @@ void printStatus()
   displayMatrix(map, Pos(simulator));
 }
 
+void printAsciiArt()
+{
+  String filename;
+  CreateEmptyString(&filename, 15);
+  SBUFFER(filename) = "asciiArt.txt";
+
+  START(fopen(SBUFFER(filename), "r"), true);
+
+  while (!EOP)
+  {
+    printf("%c", currentChar);
+    ADV();
+  }
+
+  printf("\n");
+}
+
 int main()
 {
   green(false);
   printf("Welcome to BNMO :)\n");
+  printAsciiArt();
   reset();
   printf("Type START to start, EXIT to exit the program\n");
   boolean valid = false;
