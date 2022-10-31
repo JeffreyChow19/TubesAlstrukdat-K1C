@@ -28,7 +28,7 @@ void printNotifications()
 
 void printStatus()
 {
-  printf("%s di posisi: ", SBUFFER(Name(simulator)));
+  printf("\n%s di posisi: ", SBUFFER(Name(simulator)));
   WritePoint(Pos(simulator));
   printf("Waktu: ");
   WriteTime(Clock(simulator));
@@ -44,23 +44,58 @@ void printAsciiArt()
   SBUFFER(filename) = "asciiArt.txt";
 
   START(fopen(SBUFFER(filename), "r"), true);
-
+  int i = 120;
+  boolean inc = true;
+  rgb(255, 150, i);
   while (!EOP)
   {
     printf("%c", currentChar);
+    if (currentChar == '\n')
+    {
+      reset();
+      if (inc)
+      {
+        i += 8;
+        if (i >= 255)
+        {
+          i = 255;
+          inc = false;
+        }
+      }
+      else
+      {
+        i -= 8;
+        if (i <= 120)
+        {
+          i = 120;
+          inc = true;
+        }
+      }
+      rgb(255, 150, i);
+    }
     ADV();
   }
+  reset();
 
   printf("\n");
 }
 
 int main()
 {
+  printAsciiArt();
   green(false);
   printf("Welcome to BNMO :)\n");
-  printAsciiArt();
   reset();
-  printf("Type START to start, EXIT to exit the program\n");
+  printf("Type ");
+  green(true);
+  printf("START");
+  reset();
+  printf(" to start, ");
+  red(true);
+  printf("EXIT");
+  reset();
+  printf(" to exit the program\n");
+
   boolean valid = false;
   do
   {

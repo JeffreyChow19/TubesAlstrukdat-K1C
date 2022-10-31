@@ -11,6 +11,8 @@ void yellow(boolean bold);
 
 void blue(boolean bold);
 
+void rgb(int r, int g, int b);
+
 void reset();
 
 #endif
