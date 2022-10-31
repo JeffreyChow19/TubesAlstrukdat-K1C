@@ -2,8 +2,9 @@
 #define OLAH_H
 #include "../adt/simulator/simulator.h"
 #include "../adt/string/string.h"
+#include "../adt/boolean.h"
 
-void processFood(String process);
+boolean processFood(String process);
 /* I.S. process valid dan terdefinisi
    F.S. dilakukan proses fry/mix/boil/chop
         jika berhasil, bahan dikeluarkan dari inventory dan makanan yang dibuat dimasukkan ke inventory

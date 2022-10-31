@@ -3,11 +3,13 @@
 #include "../adt/liststring/liststring.h"
 #include "../adt/boolean.h"
 #include "../adt/mesinkata/wordmachine.h"
+#include "../color/color.h"
 #include <stdio.h>
 
-void processFood(String process)
+boolean processFood(String process)
 {
     // print header
+    yellow(false);
     int i;
     for (i = 0; i < process.nEff + 12; i++)
     {
@@ -20,6 +22,7 @@ void processFood(String process)
         printf("=");
     }
     printf("\n");
+    reset();
 
     // print list bahan makanan
     printf("List bahan makanan yang bisa di %s:\n", process.buffer);
@@ -47,7 +50,10 @@ void processFood(String process)
         }
     }
 
+    printf("\nKirim 0 untuk exit.\n");
+
     // input command
+    printf("\n");
     int command = readIntWithRange(0, menus.nEff);
 
     if (command != 0)
@@ -66,11 +72,13 @@ void processFood(String process)
         {
             int idToSearch = INFO(ELMT(CHILDREN(recipe), j)).id;
 
-            if (searchIdx(simulator.Inv, idToSearch) == IDX_UNDEF)
+            if (searchIdx(simulator.Inv, idToSearch) == IDX_UNDEF && searchIdxKulkas(Fridge(simulator), idToSearch) == IDX_UNDEF_K)
             {
                 if (!notFound)
                 {
-                    printf("Gagal membuat %s karena kamu tidak memiliki bahan berikut:\n", recipe->info.name.buffer);
+                    red(false);
+                    printf("\nGagal membuat %s karena kamu tidak memiliki bahan berikut:\n", recipe->info.name.buffer);
+                    reset();
                     notFound = true;
                 }
                 printf("%d. %s\n", idxNotFound, INFO(ELMT(CHILDREN(recipe), j)).name.buffer);
@@ -85,20 +93,44 @@ void processFood(String process)
             for (j = getFirstIdxDin(CHILDREN(recipe)); j <= getLastIdxDin(CHILDREN(recipe)); ++j)
             {
                 int idToRemove = INFO(ELMT(CHILDREN(recipe), j)).id;
+                int indexInQueue = searchIdx(Inv(simulator), idToRemove);
 
                 QElType val;
 
-                // remove item from inventory
-                removeIdx(&(simulator.Inv), &val, idToRemove);
+                // remove item from inventory or fridge
+                if (indexInQueue != IDX_UNDEF)
+                {
+                    removeByIndex(&Inv(simulator), &val, indexInQueue);
+                }
+                else
+                {
+                    removeItemKulkas(&Fridge(simulator), &val, idToRemove);
+                }
             }
 
             // add makanan to queue
             enqueue(&(simulator.Proc), recipe->info);
 
-            // add 1 minutes because of process
-            // incTime(&(simulator.Clock));
+            // success message
+            green(false);
+            printf("%s sedang diproses. %s akan selesai dalam ", SBUFFER(NAME(INFO(recipe))), SBUFFER(NAME(INFO(recipe))));
+
+            int length = LENGTH(NAME(INFO(recipe))) + LENGTH(ACTION(INFO(recipe)));
+            char text[22 + length];
+            sprintf(text, "%s makanan %s dibatalkan.", SBUFFER(ACTION(INFO(recipe))), SBUFFER(NAME(INFO(recipe))));
+            String notif;
+            CreateEmptyString(&notif, 22 + length);
+            setLiteral(&notif, text);
+            addNotif(&simulator, notif, true);
+
+            WriteDuration(DELIVERY(INFO(recipe)));
+            reset();
+            printf("\n");
         }
 
         printf("\n");
+        return !notFound;
     }
+
+    return false;
 }

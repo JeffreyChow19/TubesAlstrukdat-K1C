@@ -5,6 +5,7 @@
 #include "../mesinkata/wordmachine.h"
 #include "../../error/error.h"
 #include <stdlib.h>
+#include "../../color/color.h"
 
 /* Constructor */
 void createMatrix(int nRows, int nCols, Matrix *m)
@@ -53,7 +54,7 @@ void copyMatrix(Matrix mIn, Matrix *mOut)
     }
 }
 
-void readMatrix(Matrix *m, char *filename, Sim *s)
+void readMatrix(Matrix *m, char *filename, Point *simPoint)
 {
     /* I.S. filename valid, m sembarang */
     /* F.S. m terdefinisi nilai elemen efektifnya, berukuran nRow x nCol, nRow dan nCol dicari dari file */
@@ -90,8 +91,8 @@ void readMatrix(Matrix *m, char *filename, Sim *s)
             {
                 if (currentWord.TabWord[j] == 'S')
                 {
-                    Absis(Pos(*s)) = i;
-                    Ordinat(Pos(*s)) = j;
+                    Absis(*simPoint) = j;
+                    Ordinat(*simPoint) = i;
                 }
                 ELMTMat(*m, i, j) = ' ';
             }
@@ -115,7 +116,7 @@ void displayMatrix(Matrix m, Point simPoint)
     /* F.S. Nilai m(i,j) ditulis ke layar per baris per kolom, matriks diberi border berupa '*'*/
     /* Proses: Menulis nilai setiap elemen m ke layar dengan traversal per baris dan per kolom */
     int i, j;
-
+    red(false);
     for (i = 0; i < m.colEff + 2; i++)
     {
         printf("* ");
@@ -124,20 +125,64 @@ void displayMatrix(Matrix m, Point simPoint)
 
     for (i = 0; i < m.rowEff; i++)
     {
+        red(false);
         printf("* ");
+        reset();
         for (j = 0; j < m.colEff; j++)
         {
             if (j == Absis(simPoint) && i == Ordinat(simPoint))
+            {
+                yellow(true);
                 printf("S ");
+                reset();
+            }
             else
-                printf("%c ", ELMTMat(m, i, j));
+            {
+                char c = ELMTMat(m, i, j);
+                if (c == ' ')
+                {
+                    printf("%c ", c);
+                }
+                else if (c == 'X')
+                {
+                    red(true);
+                    printf("%c ", c);
+                    reset();
+                }
+                else
+                {
+                    blue(true);
+                    printf("%c ", ELMTMat(m, i, j));
+                    reset();
+                }
+            }
         }
+        red(false);
         printf("*\n");
     }
-
+    red(false);
     for (i = 0; i < m.colEff + 2; i++)
     {
         printf("* ");
     }
+    reset();
     printf("\n");
+}
+
+boolean isActionAdj(Matrix m, Point simPoint, char action)
+{
+    int i, j;
+
+    for (i = Ordinat(simPoint) - 1; i <= Ordinat(simPoint) + 1; i++)
+    {
+        for (j = Absis(simPoint) - 1; j <= Absis(simPoint) + 1; j++)
+        {
+            if (!(i == Ordinat(simPoint) && j == Absis(simPoint)) && isIdxEffMat(m, i, j) && ELMTMat(m, i, j) == action)
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
 }

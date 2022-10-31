@@ -29,7 +29,7 @@ void initData(char *mapFile, char *foodsFile, char *recipesFile)
 
 void readMapConfig(char *filename)
 {
-  readMatrix(&map, filename, &simulator);
+  readMatrix(&map, filename, &(Pos(simulator)));
 }
 
 void readFoodsConfig(char *filename)
@@ -65,7 +65,15 @@ void readFoodsConfig(char *filename)
     }
 
     int d,
-        h, m;
+        h, m, x, y;
+
+    x = wordToInt(currentWord);
+    ADVWORD();
+    y = wordToInt(currentWord);
+    Point size;
+    CreatePoint(&size, x, y);
+
+    ADVWORD();
     d = wordToInt(currentWord);
     ADVWORD();
     h = wordToInt(currentWord);
@@ -86,7 +94,7 @@ void readFoodsConfig(char *filename)
     ADVWORD();
     appendWord(&action, currentWord);
 
-    CreateMakanan(&newFood, id, name, expiry, action, deliv);
+    CreateMakanan(&newFood, id, name, expiry, action, deliv, size);
     insertLast(&foods, newFood);
     ADVWORD();
   }
@@ -177,7 +185,8 @@ void initSimulator()
 void filterRaw()
 {
   CreateListStatik(&rawFoods);
-  for (int i = 0; i < listLength(foods); i++)
+  int i;
+  for (i = 0; i < listLength(foods); i++)
   {
     if (isStringEqualLiteral((ACTION(StELMT(foods, i))), "BUY"))
     {

@@ -5,8 +5,8 @@
 
 void CreateListDin(ListDin *l, int capacity)
 {
-  BUFFER(*l) = (ElTypeDin *)malloc(capacity * sizeof(ElTypeDin));
-  CAPACITY(*l) = capacity;
+  CAPACITY(*l) = capacity > 0 ? capacity : 1;
+  BUFFER(*l) = (ElTypeDin *)malloc(CAPACITY(*l) * sizeof(ElTypeDin));
   NEFF(*l) = 0;
 }
 

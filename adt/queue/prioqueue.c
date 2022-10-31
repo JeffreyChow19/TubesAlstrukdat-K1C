@@ -166,24 +166,29 @@ void removeIdx(PrioQueue *Q, Makanan *val, int id)
     }
     else
     {
-        *val = Elmt(*Q, idx);
-        if (queueLength(*Q) == 1)
+        removeByIndex(Q, val, idx);
+    }
+}
+
+void removeByIndex(PrioQueue *Q, QElType *val, int idx)
+{
+    *val = Elmt(*Q, idx);
+    if (queueLength(*Q) == 1)
+    {
+        Head(*Q) = IDX_UNDEF;
+        Tail(*Q) = IDX_UNDEF;
+    }
+    else
+    {
+        int i = idx;
+        if (i < Tail(*Q))
         {
-            Head(*Q) = IDX_UNDEF;
-            Tail(*Q) = IDX_UNDEF;
-        }
-        else
-        {
-            int i = idx;
-            if (i < Tail(*Q))
+            for (i; i < queueLength(*Q) - 1; i++)
             {
-                for (i; i < queueLength(*Q) - 1; i++)
-                {
-                    Elmt(*Q, i) = Elmt(*Q, i + 1);
-                }
+                Elmt(*Q, i) = Elmt(*Q, i + 1);
             }
-            Tail(*Q) -= 1;
         }
+        Tail(*Q) -= 1;
     }
 }
 
@@ -195,6 +200,8 @@ void copyQueue(PrioQueue Q, PrioQueue *Q2)
     {
         Elmt(*Q2, i) = Elmt(Q, i);
     }
+    Head(*Q2) = Head(Q);
+    Tail(*Q2) = Tail(Q);
 }
 
 boolean isForDelivery(PrioQueue Q)
@@ -204,7 +211,7 @@ boolean isForDelivery(PrioQueue Q)
 
 boolean isForExpiry(PrioQueue Q)
 {
-    return (QueueType(Q) == 'e');
+    return (QueueType(Q) == 'i');
 }
 
 boolean isForProcess(PrioQueue Q)
@@ -221,7 +228,7 @@ void expandQueue(PrioQueue *Q, int num)
 void reduceAllTime(PrioQueue *Q)
 {
     int i;
-    if (QueueType(*Q) == 'e')
+    if (QueueType(*Q) == 'i')
     {
         for (i = 0; i < queueLength(*Q); i++)
         {

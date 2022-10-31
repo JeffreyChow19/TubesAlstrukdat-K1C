@@ -1,4 +1,5 @@
 #include "simulator.h"
+#include "../../color/color.h"
 #include <stdio.h>
 
 void CreateSim(Sim *S, String Name, Point Pos)
@@ -9,6 +10,19 @@ void CreateSim(Sim *S, String Name, Point Pos)
     CreateQueue(&Inv(*S), 50, 'i');
     CreateQueue(&Delv(*S), 50, 'd');
     CreateQueue(&Proc(*S), 50, 'p');
+    CreateKulkas(&Fridge(*S));
+    CreateLString(&Notifs(*S), 3);
+    CreateLString(&UndoNotifs(*S), 3);
+}
+
+void dealocateSim(Sim *S)
+{
+    dealocateQueue(&(Inv(*S)));
+    dealocateQueue(&(Delv(*S)));
+    dealocateQueue(&(Proc(*S)));
+    dealocateFridge(&(Fridge(*S)));
+    dealocateLString(&Notifs(*S));
+    dealocateLString(&UndoNotifs(*S));
 }
 
 void copySim(Sim S, Sim *CS)
@@ -19,6 +33,9 @@ void copySim(Sim S, Sim *CS)
     copyQueue(Inv(S), &Inv(*CS));
     copyQueue(Delv(S), &Delv(*CS));
     copyQueue(Proc(S), &Proc(*CS));
+    copyFridge(Fridge(S), &Fridge(*CS));
+    copyListString(Notifs(S), &Notifs(*CS));
+    copyListString(UndoNotifs(S), &UndoNotifs(*CS));
 }
 
 void moveSim(Sim *S, char dir)
@@ -114,50 +131,66 @@ void removeProc(Sim *S, Makanan *val)
 void openInv(Sim S)
 {
     if (isQueueEmpty(Inv(S)))
-        printf("Inventory kosong\n");
+    {
+        red(false);
+        printf("\nInventory kosong\n\n");
+        reset();
+    }
     else
     {
-        printf("List Makanan di Inventory\n nama (waktu sisa kedaluwarsa)");
-        int i = queueLength(Inv(S)) - 1;
-        while (i >= 0)
+        printf("\nList Makanan di Inventory\nnama (waktu sisa kedaluwarsa)\n");
+        int i = 0;
+        while (i < queueLength(Inv(S)))
         {
             printf("%d. ", i + 1);
             printWithExpired(FoodInv(S, i));
             i++;
         }
+        printf("\n");
     }
 }
 
 void openDelv(Sim S)
 {
     if (isQueueEmpty(Delv(S)))
-        printf("Delivery list kosong\n");
+    {
+        red(false);
+        printf("\nDelivery list kosong\n\n");
+        reset();
+    }
     else
     {
-        printf("List Makanan di Delivery list\nnama (waktu sisa delivery)\n");
+        printf("\nList Makanan di Delivery list\nnama (waktu sisa delivery)\n");
         int len = queueLength(Delv(S));
-        for (int i = 0; i < len; i++)
+        int i;
+        for (i = 0; i < len; i++)
         {
             printf("%d. ", i + 1);
             printWithDelivery(FoodDelv(S, i));
         }
+        printf("\n");
     }
 }
 
 void openProc(Sim S)
 {
     if (isQueueEmpty(Proc(S)))
-        printf("Process list kosong\n");
+    {
+        red(false);
+        printf("\nProcess list kosong\n\n");
+        reset();
+    }
     else
     {
-        printf("List Makanan di Process list\n nama (waktu sisa proses)");
-        int i = queueLength(Proc(S)) - 1;
-        while (i >= 0)
+        printf("\nList Makanan di Process list\nnama (waktu sisa proses)\n");
+        int i = 0;
+        while (i < queueLength(Proc(S)))
         {
             printf("%d. ", i + 1);
             printWithDelivery(FoodProc(S, i));
             i++;
         }
+        printf("\n");
     }
 }
 
@@ -169,4 +202,14 @@ void currPos(Sim S)
 void currTime(Sim S)
 {
     WriteTime(Clock(S));
+}
+
+void addNotif(Sim *S, String notif, boolean isUndo)
+{
+    insertLastString(isUndo ? &UndoNotifs(*S) : &Notifs(*S), notif);
+}
+
+void clearNotifs(Sim *S, boolean isUndo)
+{
+    clearListString(isUndo ? &UndoNotifs(*S) : &Notifs(*S), false);
 }

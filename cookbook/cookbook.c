@@ -2,6 +2,40 @@
 #include "../data/data.h"
 #include "../adt/listdin/listdin.h"
 #include "../adt/tree/tree.h"
+#include "../color/color.h"
+
+boolean hasBahan(int id)
+{
+    int idx = searchIdx(Inv(simulator), id);
+    if (idx != IDX_UNDEF)
+        return true;
+
+    idx = searchIdxKulkas(Fridge(simulator), id);
+    return idx != IDX_UNDEF_K;
+}
+
+void displayRecipe(Tree node)
+{
+    // print menu
+    printf("%s\n", SBUFFER(NAME(INFO(node))));
+
+    // print action
+    printf("   %s", SBUFFER(ACTION(INFO(node))));
+
+    // print bahan
+    int j;
+    for (j = getFirstIdxDin(CHILDREN(node)); j <= getLastIdxDin(CHILDREN(node)); ++j)
+    {
+        boolean has = hasBahan(ID(INFO(ELMT(CHILDREN(node), j))));
+        printf(" - ");
+        if (has)
+            green(false);
+        printf("%s", SBUFFER(NAME(INFO(ELMT(CHILDREN(node), j)))));
+        if (has)
+            reset();
+    }
+    printf("\n");
+}
 
 void displayCookbook()
 {
@@ -17,18 +51,6 @@ void displayCookbook()
         // print number
         printf("%d. ", i + 1);
 
-        // print menu
-        printf("%s\n", SBUFFER(NAME(INFO(node))));
-
-        // print action
-        printf("   %s", SBUFFER(ACTION(INFO(node))));
-
-        // print bahan
-        int j;
-        for (j = getFirstIdxDin(CHILDREN(node)); j <= getLastIdxDin(CHILDREN(node)); ++j)
-        {
-            printf(" - %s", SBUFFER(NAME(INFO(ELMT(CHILDREN(node), j)))));
-        }
-        printf("\n");
+        displayRecipe(node);
     }
 }

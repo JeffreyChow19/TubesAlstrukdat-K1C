@@ -3,10 +3,13 @@
 #include "data/data.h"
 #include "adt/mesinkata/wordmachine.h"
 #include "command/command.h"
+#include "color/color.h"
+#include "undoredo/undoredo.h"
 
 void printNotifications()
 {
   printf("Notifikasi: ");
+  LString notifs = (isUndo && IDX_TOP(redoStack) != -1) ? UndoNotifs(InfoTop(redoStack)) : Notifs(simulator);
   if (isEmptyLString(notifs))
   {
     printf("-\n\n");
@@ -14,17 +17,18 @@ void printNotifications()
   }
   printf("\n");
   int i;
+  yellow(false);
   for (i = getFirstIdxLString(notifs); i <= getLastIdxLString(notifs); i++)
   {
-    printf("%d. %s\n", i + 1, BUFFER(ELMTLString(notifs, i)));
+    printf("%d. %s\n", i + 1, SBUFFER(ELMTLString(notifs, i)));
   }
+  reset();
   printf("\n");
-  clearListString(&notifs);
 }
 
 void printStatus()
 {
-  printf("%s di posisi: ", SBUFFER(Name(simulator)));
+  printf("\n%s di posisi: ", SBUFFER(Name(simulator)));
   WritePoint(Pos(simulator));
   printf("Waktu: ");
   WriteTime(Clock(simulator));
@@ -33,10 +37,65 @@ void printStatus()
   displayMatrix(map, Pos(simulator));
 }
 
+void printAsciiArt()
+{
+  String filename;
+  CreateEmptyString(&filename, 15);
+  SBUFFER(filename) = "asciiArt.txt";
+
+  START(fopen(SBUFFER(filename), "r"), true);
+  int i = 120;
+  boolean inc = true;
+  rgb(255, 150, i);
+  while (!EOP)
+  {
+    printf("%c", currentChar);
+    if (currentChar == '\n')
+    {
+      reset();
+      if (inc)
+      {
+        i += 8;
+        if (i >= 255)
+        {
+          i = 255;
+          inc = false;
+        }
+      }
+      else
+      {
+        i -= 8;
+        if (i <= 120)
+        {
+          i = 120;
+          inc = true;
+        }
+      }
+      rgb(255, 150, i);
+    }
+    ADV();
+  }
+  reset();
+
+  printf("\n");
+}
+
 int main()
 {
+  printAsciiArt();
+  green(false);
+  printf("Welcome to BNMO :)\n");
+  reset();
+  printf("Type ");
+  green(true);
+  printf("START");
+  reset();
+  printf(" to start, ");
+  red(true);
+  printf("EXIT");
+  reset();
+  printf(" to exit the program\n");
 
-  printf("Welcome to BNMO :)\nType START to start, EXIT to exit the program\n");
   boolean valid = false;
   do
   {
@@ -55,7 +114,9 @@ int main()
     }
     else
     {
+      red(false);
       printf("Invalid command\n");
+      reset();
     }
     dealocateString(&command);
     IgnoreWords();

@@ -48,5 +48,5 @@ boolean isAdj(Point P, Point X)
 {
     int distAbsis = Absis(P) - Absis(X);
     int distOrdinat = Ordinat(P) - Ordinat(X);
-    return (distAbsis == 1 || distAbsis == 0 || distAbsis == -1) && (distOrdinat == 1 || distOrdinat == 0 || distOrdinat == -1);
+    return ((distAbsis == 1 || distAbsis == -1) && distOrdinat == 0) || ((distOrdinat == 1 || distOrdinat == -1) && distAbsis == 0);
 }

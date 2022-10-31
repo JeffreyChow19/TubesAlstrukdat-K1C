@@ -2,8 +2,16 @@
 #define COMMAND_H
 #include "../adt/simulator/simulator.h"
 
-boolean startCommand(Sim *s);
+void move(char dir);
+
+boolean startCommand();
 
 void enterToContinue();
+
+void addToStack(boolean clearRedo);
+
+void cancelAddToStack();
+
+void processFoodCommand(String command, char action, char *name);
 
 #endif

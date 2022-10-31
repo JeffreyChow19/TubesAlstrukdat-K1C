@@ -1,6 +1,6 @@
 # TUGAS BESAR IF2110 ALGORITMA DAN STRUKTUR DATA
-
-## LINK PENTING
+## USUS SAPI DIRENDAM JUS PISANG KIWI NANAS MARI KITA COBA
+### LINK PENTING
 LAPORAN         : https://itbdsti-my.sharepoint.com/:w:/g/personal/13521046_mahasiswa_itb_ac_id/ETq5rfW6SeZAjWDGLqz-9nwBFx_mo67uAt1yVQoqwXk5CA?e=XCMRdG
 <br>
 FORM ASISTENSI  : https://itbdsti-my.sharepoint.com/:w:/g/personal/13521077_mahasiswa_itb_ac_id/EUEVkSXfT2NEky65oYn2VSQB7rw_eAOvzzupXy-fij9eYA?e=XTGvcM

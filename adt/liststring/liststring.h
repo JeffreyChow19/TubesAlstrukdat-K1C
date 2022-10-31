@@ -63,9 +63,11 @@ void insertLastString(LString *l, SElType val);
 /* F.S. val adalah elemen terakhir l yang baru, jika list penuh maka akan dialokasikan 2 kali kapasitas sebelumnya */
 
 /* *** Menghapus semua elemen *** */
-void clearListString(LString *l);
+void clearListString(LString *l, boolean dealocateEl);
 /* Proses: Menghapus semua elemen pada string */
 /* I.S. List l terdefinisi */
 /* F.S. neff l = 0, semua elemen string didealokasi */
+
+void copyListString(LString l, LString *l1);
 
 #endif
