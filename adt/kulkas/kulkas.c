@@ -106,7 +106,7 @@ boolean canAddInKulkas(Kulkas k, Makanan m, int x, int y)
   {
     for (j = x; j < x + Absis(SIZE(m)); j++)
     {
-      if (ELMTMat(KMAT(k), i, j))
+      if (!isIdxEffMat(KMAT(k), i, j) || ELMTMat(KMAT(k), i, j))
       {
         return false;
       }
