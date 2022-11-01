@@ -6,21 +6,27 @@
 #include "color/color.h"
 #include "undoredo/undoredo.h"
 
+LString *lastNotifs;
+
 void printNotifications()
 {
   printf("Notifikasi: ");
-  LString notifs = (isUndo && IDX_TOP(redoStack) != -1) ? UndoNotifs(InfoTop(redoStack)) : Notifs(simulator);
-  if (isEmptyLString(notifs))
+  LString *notifs = (isUndo && IDX_TOP(redoStack) != -1) ? &UndoNotifs(InfoTop(redoStack)) : &Notifs(simulator);
+
+  if (lastNotifs == notifs || isEmptyLString(*notifs))
   {
+    lastNotifs = notifs;
     printf("-\n\n");
     return;
   }
+
+  lastNotifs = notifs;
   printf("\n");
   int i;
   yellow(false);
-  for (i = getFirstIdxLString(notifs); i <= getLastIdxLString(notifs); i++)
+  for (i = getFirstIdxLString(*notifs); i <= getLastIdxLString(*notifs); i++)
   {
-    printf("%d. %s\n", i + 1, SBUFFER(ELMTLString(notifs, i)));
+    printf("%d. %s\n", i + 1, SBUFFER(ELMTLString(*notifs, i)));
   }
   reset();
   printf("\n");
