@@ -93,18 +93,12 @@ boolean canBeMade(MultiSet inv, int id)
   int j;
 
   // reduce all bahan that is in inv
-  for (j = 0; j < SetNEFF(bahan); j++)
-  {
-    int idBahan = SetELMT(bahan, j).id;
-    int numBahan = SetELMT(bahan, j).num;
-    int idxInv = indexOfSet(inv, idBahan);
-    if (idxInv == IDX_UNDEF)
-      continue;
-    int numInv = SetELMT(inv, idxInv).num;
-    int min = numInv < numBahan ? numInv : numBahan;
-    removeElmtSet(&inv, idBahan, min);
-    removeElmtSet(&bahan, idBahan, min);
-  }
+  // inv = inv - (inv intersect bahan)
+  // bahan = bahan - (inv intersect bahan)
+  MultiSet inter = intersection(inv, bahan);
+  subtractSet(&inv, inter);
+  subtractSet(&bahan, inter);
+  dealocateSet(&inter);
 
   // check if remaining bahan can be made
   for (j = 0; j < SetNEFF(bahan); j++)

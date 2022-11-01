@@ -34,6 +34,8 @@ void removeElmtSet(MultiSet *m, int id, int n);
 
 void combineSet(MultiSet *m1, MultiSet *m2);
 
+MultiSet intersection(MultiSet m1, MultiSet m2);
+
 void multiplySet(MultiSet *m, int n);
 
 boolean isSubset(MultiSet m1, MultiSet m2);

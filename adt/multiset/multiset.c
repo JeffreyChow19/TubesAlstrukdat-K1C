@@ -113,6 +113,35 @@ void combineSet(MultiSet *m1, MultiSet *m2)
   dealocateSet(m2);
 }
 
+int min(int a, int b)
+{
+  return a < b ? a : b;
+}
+
+MultiSet intersection(MultiSet m1, MultiSet m2)
+{
+  int i;
+  MultiSet res;
+  if (SetNEFF(m2) < SetNEFF(m1))
+  {
+    MultiSet temp = m2;
+    m2 = m1;
+    m1 = temp;
+  }
+  CreateSet(&res, SetNEFF(m1));
+  for (i = 0; i < SetNEFF(m1); i++)
+  {
+    int id = SetELMT(m1, i).id;
+    int idx = indexOfSet(m2, id);
+    if (idx != IDX_UNDEF_SET)
+    {
+      addElmtSet(&res, id, min(SetELMT(m1, i).num, SetELMT(m2, idx).num));
+    }
+  }
+
+  return res;
+}
+
 void multiplySet(MultiSet *m, int n)
 {
   int i;
