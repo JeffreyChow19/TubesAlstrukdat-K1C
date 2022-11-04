@@ -16,10 +16,11 @@ static int retval;
 void START(FILE *input, boolean file)
 {
     /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
-       Karakter pertama yang ada pada pita posisinya adalah pada jendela.
-       I.S. : sembarang
-       F.S. : currentChar adalah karakter pertama pada pita. Jika currentChar != MARK maka EOP akan padam (false).
-              Jika currentChar = MARK maka EOP akan menyala (true) */
+   Karakter pertama yang ada pada pita posisinya adalah pada jendela. Pita dapat berupa input console (stdin) atau input file. Jika input file, maka boolean file bernilai true, vice versa.
+   I.S. : sembarang
+   F.S. : currentChar adalah karakter pertama pada pita
+          Jika currentChar != MARK maka EOP akan padam (false)
+          Jika currentChar = MARK maka EOP akan menyala (true) */
 
     /* Algoritma */
     pita = input;
