@@ -16,10 +16,10 @@ extern boolean endWord;
 extern Word currentWord;
 extern boolean isNewLine;
 
-void IgnoreBlanks();
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : currentChar sembarang
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
+void IgnoreBlanks();
 
 void IgnoreWords();
 
