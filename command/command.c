@@ -23,7 +23,13 @@ void cancelAddToStack()
 void addToStack(boolean clearRedo)
 {
   Sim s;
+  String *temp;
   copySim(simulator, &s);
+
+  temp = BUFFER(Notifs(simulator));
+  BUFFER(Notifs(simulator)) = BUFFER(Notifs(s));
+  BUFFER(Notifs(s)) = temp;
+
   clearListString(&UndoNotifs(simulator), false);
   clearListString(&Notifs(simulator), false);
   push(&undoStack, s);

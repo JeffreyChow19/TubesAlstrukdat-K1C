@@ -46,16 +46,24 @@ boolean buy()
         printf("\nBerhasil memesan %s. %s akan diantar dalam ", SBUFFER(NAME(m)), SBUFFER(NAME(m)));
 
         WriteDuration(DELIVERY(StELMT(rawFoods, com - 1)));
-        printf(".\n\n");
+        printf(".\n");
         reset();
 
         int length = LENGTH(NAME(m));
-        char text[100 + length];
-        sprintf(text, "Pembelian makanan %s dibatalkan.", SBUFFER(NAME(m)));
+
+        char text[31 + length];
+        sprintf(text, "%s masuk ke dalam delivery list.", SBUFFER(NAME(m)));
         String notif;
-        CreateEmptyString(&notif, 100 + length);
+        CreateEmptyString(&notif, 31 + length);
         setLiteral(&notif, text);
-        addNotif(&simulator, notif, true);
+        addNotif(&simulator, notif, false);
+
+        char textUndo[31 + length];
+        sprintf(textUndo, "Pembelian makanan %s dibatalkan.", SBUFFER(NAME(m)));
+        String notifUndo;
+        CreateEmptyString(&notifUndo, 31 + length);
+        setLiteral(&notifUndo, textUndo);
+        addNotif(&simulator, notifUndo, true);
         return true;
     }
 }

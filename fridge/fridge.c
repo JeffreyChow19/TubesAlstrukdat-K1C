@@ -119,12 +119,19 @@ boolean addFoodToFridge()
     reset();
 
     int length = LENGTH(NAME(m));
-    char text[26 + length];
-    sprintf(text, "%s dikeluarkan dari kulkas.", SBUFFER(NAME(m)));
+    char text[24 + length];
+    sprintf(text, "%s dimasukkan ke kulkas.", SBUFFER(NAME(m)));
     String notif;
-    CreateEmptyString(&notif, 26 + length);
+    CreateEmptyString(&notif, 24 + length);
     setLiteral(&notif, text);
-    addNotif(&simulator, notif, true);
+    addNotif(&simulator, notif, false);
+
+    char undoText[26 + length];
+    sprintf(undoText, "%s dikeluarkan dari kulkas.", SBUFFER(NAME(m)));
+    String undoNotif;
+    CreateEmptyString(&undoNotif, 26 + length);
+    setLiteral(&undoNotif, undoText);
+    addNotif(&simulator, undoNotif, true);
 
     return true;
   }
@@ -163,12 +170,20 @@ boolean removeFoodFromFridge()
   reset();
 
   int length = LENGTH(NAME(m));
-  char text[31 + length];
-  sprintf(text, "%s kembali dimasukkan ke kulkas.", SBUFFER(NAME(m)));
+
+  char text[22 + length];
+  sprintf(text, "%s dihapus dari kulkas.", SBUFFER(NAME(m)));
   String notif;
-  CreateEmptyString(&notif, 31 + length);
+  CreateEmptyString(&notif, 22 + length);
   setLiteral(&notif, text);
-  addNotif(&simulator, notif, true);
+  addNotif(&simulator, notif, false);
+
+  char undoText[31 + length];
+  sprintf(undoText, "%s kembali dimasukkan ke kulkas.", SBUFFER(NAME(m)));
+  String undoNotif;
+  CreateEmptyString(&undoNotif, 31 + length);
+  setLiteral(&undoNotif, undoText);
+  addNotif(&simulator, undoNotif, true);
 
   return true;
 }
