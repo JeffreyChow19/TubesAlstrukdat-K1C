@@ -3,11 +3,13 @@
 
 #include "../adt/tree/tree.h"
 
+/* Menghasilkan true jika bahan dengan id ada */
 boolean hasBahan(int id);
 
-void displayCookbook();
 /* Menampilkan resep-resep yang tersedia pada system */
+void displayCookbook();
 
+/* Menampilkan resep makanan dengan meninjau treenya */
 void displayRecipe(Tree node);
 
 #endif
