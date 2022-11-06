@@ -85,6 +85,8 @@ boolean startCommand()
   printf("\nEnter Command: ");
   STARTWORD(stdin, false);
 
+  wordToUpper(&currentWord);
+
   if (isKataEqualLiteral(currentWord, "WAIT"))
   {
     ADVWORD();

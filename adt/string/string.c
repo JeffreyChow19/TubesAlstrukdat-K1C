@@ -195,6 +195,14 @@ void toUpper(String *s)
       CHAR(*s, i) -= 'a' - 'A';
 }
 
+void wordToUpper(Word *w)
+{
+  int i;
+  for (i = 0; i < w->Length; i++)
+    if (w->TabWord[i] >= 'a' && w->TabWord[i] <= 'z')
+      w->TabWord[i] -= 'a' - 'A';
+}
+
 boolean startsWithLiteral(String s, char *literal)
 {
   int i = 0;

@@ -95,6 +95,8 @@ int wordToInt(Word w);
 
 void toUpper(String *s);
 
+void wordToUpper(Word *w);
+
 boolean startsWithLiteral(String s, char *literal);
 
 boolean startsWith(String s1, String s2);
