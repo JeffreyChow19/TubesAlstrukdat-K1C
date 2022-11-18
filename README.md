@@ -27,13 +27,13 @@ BNMO adalah sebuah program yang mensimulasikan proses memasak mulai dari belanja
 ##### Jika terjadi glitch yang dikarenakan pewarnaan pada CLI, jalankan program pada Windows Powershell
 
 ## Pembagian Tugas
-| PIC                               	| JOBDESC                                                                                                                                                                                                                            	|
-|-----------------------------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
-| 13521046 Jeffrey Chow             	| ADT Matriks<br>ADT Mesin Karakter dan Kata<br>ADT List String<br>FITUR Catalog<br>FITUR Cookbook<br>FITUR Pengolahan Makanan<br>FITUR Waktu Pengolahan Makanan<br>LAPORAN Bab 2, 6                                                 	|
-| 13521057 Hosea Nathanael Abetnego 	| ADT Simulator<br>ADT List Statik<br>FITUR Simulator<br>FITUR PETA (move, aksi)<br>LAPORAN Bab 7, 8, 9                                                                                                                              	|
-| 13521075 Muhammad Rifko Favian    	| ADT Queue<br>ADT Stack<br>FITUR Waktu<br>FITUR Undo/Redo<br>LAPORAN Bab 3, 4                                                                                                                                                       	|
-| 13521077 Husnia Munzayana         	| ADT POINT<br>ADT WAKTU<br>FITUR Pemesanan Makanan dan Delivery<br>LAPORAN Bab 1, 3                                                                                                                                                 	|
-| 13521101 Arsa Izdihar Islam       	| ADT Makanan<br>ADT Tree<br>ADT String<br>ADT List Dinamik<br>ADT Kulkas<br>ADT Multiset<br>FITUR Main, UI<br>FITUR Inisiasi<br>FITUR Parser<br>FITUR Notification<br>FITUR Kulkas<br>FITUR Rekomendasi Makanan<br>LAPORAN Bab 3, 5 	|
+| PIC                               	| JOBDESC                                                                                                                                                                                                                         	|
+|-----------------------------------	|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
+| 13521046 Jeffrey Chow             	| ADT Matriks<br>ADT Mesin Karakter dan Kata<br>ADT List String<br>FITUR Catalog<br>FITUR Cookbook<br>FITUR Pengolahan Makanan<br>FITUR Waktu Pengolahan Makanan<br>LAPORAN Bab 2, 6                                              	|
+| 13521057 Hosea Nathanael Abetnego 	| ADT Simulator<br>ADT List Statik<br>FITUR Simulator<br>FITUR PETA (move, aksi)<br>LAPORAN Bab 7, 8, 9                                                                                                                           	|
+| 13521075 Muhammad Rifko Favian    	| ADT Queue<br>ADT Stack<br>FITUR Waktu<br>FITUR Undo/Redo<br>LAPORAN Bab 3, 4                                                                                                                                                    	|
+| 13521077 Husnia Munzayana         	| ADT POINT<br>ADT WAKTU<br>FITUR Pemesanan Makanan dan Delivery<br>LAPORAN Bab 1, 3, 4                                                                                                                                           	|
+| 13521101 Arsa Izdihar Islam       	| ADT Makanan<br>ADT Tree<br>ADT String<br>ADT List Dinamik<br>ADT Kulkas<br>ADT Multiset<br>FITUR Main, UI<br>FITUR Inisiasi<br>FITUR Parser<br>FITUR Notification<br>FITUR Kulkas<br>FITUR Rekomendasi Makanan<br>LAPORAN Bab 5 	|
 
 ## Daftar Fitur
 1. Inisiasi
