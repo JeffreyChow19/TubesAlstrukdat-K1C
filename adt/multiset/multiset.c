@@ -8,6 +8,11 @@ void CreateSet(MultiSet *m, int cap)
 
   SetBUFFER(*m) = (SetInfo *)malloc(SetCAPACITY(*m) * sizeof(SetInfo));
 
+  if (SetBUFFER(*m) == NULL)
+  {
+    printf("Memory allocation failed.\n");
+  }
+
   SetNEFF(*m) = 0;
 }
 
@@ -209,12 +214,20 @@ boolean hasOccurence(MultiSet m, int id, int num)
 void expandSet(MultiSet *m, int num)
 {
   SetBUFFER(*m) = (SetInfo *)realloc(SetBUFFER(*m), (SetCAPACITY(*m) + num) * sizeof(SetInfo));
+  if (SetBUFFER(*m) == NULL)
+  {
+    printf("Memory allocation failed.\n");
+  }
   SetCAPACITY(*m) += num;
 }
 
 void shrinkSet(MultiSet *m, int num)
 {
   SetBUFFER(*m) = (SetInfo *)realloc(SetBUFFER(*m), (SetCAPACITY(*m) - num) * sizeof(SetInfo));
+  if (SetBUFFER(*m) == NULL)
+  {
+    printf("Memory allocation failed.\n");
+  }
   SetCAPACITY(*m) -= num;
 }
 
@@ -231,4 +244,16 @@ void displaySet(MultiSet m)
     }
   }
   printf("}\n");
+}
+
+void copySet(MultiSet m1, MultiSet *m2)
+{
+  CreateSet(m2, SetNEFF(m1));
+  int i;
+  for (i = 0; i < SetNEFF(m1); i++)
+  {
+    SetELMT(*m2, i).id = SetELMT(m1, i).id;
+    SetELMT(*m2, i).num = SetELMT(m1, i).num;
+  }
+  SetNEFF(*m2) = SetNEFF(m1);
 }

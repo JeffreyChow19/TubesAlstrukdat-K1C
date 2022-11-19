@@ -7,6 +7,10 @@ void CreateLString(LString *l, int capacity)
 {
     LSCAPACITY(*l) = capacity > 0 ? capacity : 1;
     LSBUFFER(*l) = (String *)malloc(sizeof(SElType) * LSCAPACITY(*l));
+    if (LSBUFFER(*l) == NULL)
+    {
+        printf("Memory allocation failed.\n");
+    }
     LSNEFF(*l) = 0;
 }
 

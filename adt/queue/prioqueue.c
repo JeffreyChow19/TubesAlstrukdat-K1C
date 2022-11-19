@@ -27,6 +27,10 @@ int queueLength(PrioQueue Q)
 void CreateQueue(PrioQueue *Q, int Max, char type)
 {
     (*Q).buffer = (QElType *)malloc((Max) * sizeof(QElType));
+    if ((*Q).buffer == NULL)
+    {
+        printf("Memory allocation failed.\n");
+    }
 
     if ((*Q).buffer != NULL)
     {
@@ -223,6 +227,10 @@ void expandQueue(PrioQueue *Q, int num)
 {
     MaxQueue(*Q) += num;
     (*Q).buffer = realloc((*Q).buffer, MaxQueue(*Q) * sizeof(QElType));
+    if ((*Q).buffer == NULL)
+    {
+        printf("Memory allocation failed.\n");
+    }
 }
 
 void reduceAllTime(PrioQueue *Q)

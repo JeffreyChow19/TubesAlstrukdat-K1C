@@ -52,4 +52,6 @@ void shrinkSet(MultiSet *m, int num);
 
 void displaySet(MultiSet m);
 
+void copySet(MultiSet m1, MultiSet *m2);
+
 #endif

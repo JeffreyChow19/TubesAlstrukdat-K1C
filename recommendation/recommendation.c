@@ -8,20 +8,24 @@ void showRecommendation()
 {
   ListDin recs;
   CreateListDin(&recs, recipes.nEff);
+  MultiSet inv;
+  CreateSet(&inv, 10);
+  addAllToSet(simulator, &inv);
 
   int i;
   for (i = getLastIdxDin(recipes); i >= getFirstIdxDin(recipes); i--)
   {
     int id = ID(INFO(ELMT(recipes, i)));
-    MultiSet inv;
-    CreateSet(&inv, 10);
-    addAllToSet(simulator, &inv);
-    if (canBeMade(inv, id))
+    MultiSet invCop;
+    copySet(inv, &invCop);
+    if (canBeMade(invCop, id))
     {
       insertLastDin(&recs, ELMT(recipes, i));
     }
-    dealocateSet(&inv);
+    dealocateSet(&invCop);
   }
+
+  dealocateSet(&inv);
 
   if (recs.nEff == 0)
   {
@@ -107,7 +111,10 @@ boolean canBeMade(MultiSet inv, int id)
   for (j = 0; j < SetNEFF(bahan); j++)
   {
     if (!canBeMade(inv, SetELMT(bahan, j).id))
+    {
+      dealocateSet(&bahan);
       return false;
+    }
   }
   dealocateSet(&bahan);
 

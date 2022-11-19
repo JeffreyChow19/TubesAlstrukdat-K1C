@@ -6,6 +6,10 @@ void CreateEmptyString(String *s, int capacity)
 {
   /* ALGORITMA */
   SBUFFER(*s) = (char *)malloc((capacity + 1) * sizeof(char));
+  if (SBUFFER(*s) == NULL)
+  {
+    printf("Memory allocation failed.\n");
+  }
   SCAPACITY(*s) = capacity;
   LENGTH(*s) = 0;
   CHAR(*s, 0) = '\0';
@@ -64,6 +68,10 @@ void expandString(String *s, int num)
 {
   int newCapacity = SCAPACITY(*s) + num;
   SBUFFER(*s) = (char *)realloc(SBUFFER(*s), (newCapacity + 1) * sizeof(char));
+  if (SBUFFER(*s) == NULL)
+  {
+    printf("Memory allocation failed.\n");
+  }
   SCAPACITY(*s) = newCapacity;
 }
 

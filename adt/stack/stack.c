@@ -6,6 +6,10 @@ void CreateStack(Stack *S, int max)
 {
     (*S).buffer = (ElTypeStack *)malloc(max * sizeof(ElTypeStack));
     MaxStack(*S) = max;
+    if ((*S).buffer == NULL)
+    {
+        printf("Memory allocation failed.\n");
+    }
     IDX_TOP(*S) = IDX_UNDEF;
 }
 
@@ -46,12 +50,20 @@ void expandStack(Stack *S, int num)
 {
     MaxStack(*S) += num;
     (*S).buffer = realloc((*S).buffer, MaxStack(*S) * sizeof(ElTypeStack));
+    if ((*S).buffer == NULL)
+    {
+        printf("Memory reallocation failed.\n");
+    }
 }
 
 void shrinkStack(Stack *S, int num)
 {
     MaxStack(*S) -= num;
     (*S).buffer = realloc((*S).buffer, MaxStack(*S) * sizeof(ElTypeStack));
+    if ((*S).buffer == NULL)
+    {
+        printf("Memory reallocation failed.\n");
+    }
 }
 
 void clearStack(Stack *S)

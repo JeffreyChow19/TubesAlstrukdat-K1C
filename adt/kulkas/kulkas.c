@@ -17,6 +17,11 @@ void CreateKulkas(Kulkas *k)
   KNEFF(*k) = 0;
   KCAPACITY(*k) = INITIALCAP;
   KBUFFER(*k) = (InfoKulkas *)malloc(INITIALCAP * sizeof(InfoKulkas));
+
+  if (KBUFFER(*k) == NULL)
+  {
+    printf("Memory allocation failed.\n");
+  }
 }
 
 void dealocateFridge(Kulkas *k)
@@ -42,6 +47,10 @@ void addItemKulkas(Kulkas *k, Makanan m, int x, int y)
   {
     KCAPACITY(*k) += 2;
     KBUFFER(*k) = (InfoKulkas *)realloc(KBUFFER(*k), KCAPACITY(*k) * sizeof(InfoKulkas));
+    if (KBUFFER(*k) == NULL)
+    {
+      printf("Memory allocation failed.\n");
+    }
   }
   InfoKulkas e;
   KFOOD(e) = m;
@@ -73,6 +82,10 @@ void removeItemKulkasByIndex(Kulkas *k, Makanan *val, int idx)
   {
     KCAPACITY(*k) -= 2;
     KBUFFER(*k) = (InfoKulkas *)realloc(KBUFFER(*k), KCAPACITY(*k) * sizeof(InfoKulkas));
+    if (KBUFFER(*k) == NULL)
+    {
+      printf("Memory allocation failed.\n");
+    }
   }
 
   x = Absis(KPOS(e));

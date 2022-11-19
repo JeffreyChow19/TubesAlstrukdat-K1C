@@ -7,6 +7,10 @@ void CreateListDin(ListDin *l, int capacity)
 {
   CAPACITY(*l) = capacity > 0 ? capacity : 1;
   BUFFER(*l) = (ElTypeDin *)malloc(CAPACITY(*l) * sizeof(ElTypeDin));
+  if (BUFFER(*l) == NULL)
+  {
+    printf("Memory allocation failed.\n");
+  }
   NEFF(*l) = 0;
 }
 
@@ -126,16 +130,28 @@ void expandListDin(ListDin *l, int num)
 {
   CAPACITY(*l) += num;
   BUFFER(*l) = realloc(BUFFER(*l), CAPACITY(*l) * sizeof(ElTypeDin));
+  if (BUFFER(*l) == NULL)
+  {
+    printf("Memory allocation failed.\n");
+  }
 }
 
 void shrinkListDin(ListDin *l, int num)
 {
   CAPACITY(*l) -= num;
   BUFFER(*l) = realloc(BUFFER(*l), CAPACITY(*l) * sizeof(ElTypeDin));
+  if (BUFFER(*l) == NULL)
+  {
+    printf("Memory allocation failed.\n");
+  }
 }
 
 void compressListDin(ListDin *l)
 {
   CAPACITY(*l) = NEFF(*l);
   BUFFER(*l) = realloc(BUFFER(*l), CAPACITY(*l) * sizeof(ElTypeDin));
+  if (BUFFER(*l) == NULL)
+  {
+    printf("Memory allocation failed.\n");
+  }
 }

@@ -1,9 +1,14 @@
 #include "tree.h"
+#include <stdio.h>
 
 Address newNode(Makanan val, int childrenCapacity)
 {
   Address a = (Address)malloc(sizeof(Node));
-  if (a != NULL)
+  if (a == NULL)
+  {
+    printf("Memory allocation failed.\n");
+  }
+  else
   {
     INFO(a) = val;
     CreateListDin(&CHILDREN(a), childrenCapacity);
