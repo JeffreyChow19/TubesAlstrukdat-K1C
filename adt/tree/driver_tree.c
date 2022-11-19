@@ -3,12 +3,13 @@
 
 // command:
 // gcc driver_tree.c tree.c ../listdin/listdin.c ../string/string.c ../makanan/makanan.c ../waktu/time.c ../point/point.c
-Address createNode(int id, char *name, int dex, int hex, int mex, char *action, int ddel, int hdel, int mdel)
+Address createNode(int id, char *name, int dex, int hex, int mex, char *action, int ddel, int hdel, int mdel, int sizex, int sizey)
 {
   Time expiry, delivery;
   String sname, saction;
   Makanan m;
   Address a;
+  Point size;
 
   CreateTime(&expiry, dex, hex, mex);
   CreateTime(&delivery, ddel, hdel, mdel);
@@ -18,7 +19,9 @@ Address createNode(int id, char *name, int dex, int hex, int mex, char *action, 
   setLiteral(&sname, name);
   setLiteral(&saction, action);
 
-  CreateMakanan(&m, id, sname, expiry, saction, delivery);
+  CreatePoint(&size, sizex, sizey);
+
+  CreateMakanan(&m, id, sname, expiry, saction, delivery, size);
 
   a = newNode(m, 5);
   return a;
@@ -26,14 +29,14 @@ Address createNode(int id, char *name, int dex, int hex, int mex, char *action, 
 
 int main()
 {
-  Address root = createNode(1, "Nasi Goreng", 1, 0, 0, "FRY", 0, 0, 0);
-  Address nasi = createNode(2, "Nasi", 1, 0, 0, "BOIL", 0, 0, 0);
+  Address root = createNode(1, "Nasi Goreng", 1, 0, 0, "FRY", 0, 0, 0, 2, 2);
+  Address nasi = createNode(2, "Nasi", 1, 0, 0, "BOIL", 0, 0, 0, 2, 2);
   insertLast(&CHILDREN(root), nasi);
 
-  Address beras = createNode(3, "Beras", 1, 0, 0, "BUY", 0, 0, 5);
+  Address beras = createNode(3, "Beras", 1, 0, 0, "BUY", 0, 0, 5, 2, 2);
   insertLast(&CHILDREN(nasi), beras);
 
-  Address ayam = createNode(4, "Ayam", 3, 0, 0, "BUY", 0, 0, 5);
+  Address ayam = createNode(4, "Ayam", 3, 0, 0, "BUY", 0, 0, 5, 2, 2);
 
   insertLast(&CHILDREN(root), ayam);
 
