@@ -9,10 +9,11 @@
 boolean buy()
 {
     int com, i;
-
+    blue(false);
     printf("====================\n");
     printf("==      BUY       ==\n");
     printf("====================\n");
+    reset();
 
     if (listLength(rawFoods) == 0)
     {

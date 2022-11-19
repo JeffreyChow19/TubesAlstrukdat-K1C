@@ -73,10 +73,9 @@ void tick()
   incTime(&(Clock(simulator)));
 }
 
-void tickWithTime(int h, int m)
+void tickWithTime(int m)
 {
-  Time tickTime;
-  CreateTime(&tickTime, 0, h, m);
+  Time tickTime = MinutetoTime(m);
 
   while (!isDurZero(tickTime))
   {

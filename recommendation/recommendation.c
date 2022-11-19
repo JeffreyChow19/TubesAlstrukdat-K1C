@@ -2,6 +2,7 @@
 #include "../data/data.h"
 #include "../adt/multiset/multiset.h"
 #include "../cookbook/cookbook.h"
+#include "../color/color.h"
 
 void showRecommendation()
 {
@@ -24,11 +25,13 @@ void showRecommendation()
 
   if (recs.nEff == 0)
   {
-    printf("Tidak ada resep yang dapat dibuat.\n");
+    red(false);
+    printf("\nTidak ada resep yang dapat dibuat.\n");
+    reset();
   }
   else
   {
-    printf("Resep yang dapat dibuat:\n");
+    printf("\nResep yang dapat dibuat:\n");
     for (i = getFirstIdxDin(recs); i <= getLastIdxDin(recs); i++)
     {
       printf("%d. ", i + 1);

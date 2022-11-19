@@ -9,7 +9,7 @@
 boolean processFood(String process)
 {
     // print header
-    yellow(false);
+    blue(false);
     int i;
     for (i = 0; i < process.nEff + 12; i++)
     {

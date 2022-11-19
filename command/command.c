@@ -114,14 +114,25 @@ boolean startCommand()
       dealocateString(&str);
       return startCommand();
     }
+
     int m = stringToInt(str);
     dealocateString(&str);
     IgnoreWords();
-    Time t;
-    CreateTime(&t, 0, h, m);
+
+    if (!isTimeValid(0, 0, m))
+    {
+      red(false);
+      printf("Menit yang dimasukkan tidak valid. Silahkan coba lagi\n");
+      reset();
+      return startCommand();
+    }
+
+    m += h * 60;
+
+    Time t = MinutetoTime(m);
 
     addToStack(true);
-    tickWithTime(h, m);
+    tickWithTime(m);
     green(false);
     printf("\nWaktu telah berjalan ");
     WriteDuration(t);
@@ -270,7 +281,9 @@ boolean startCommand()
 
 void enterToContinue()
 {
-  printf("Press ENTER to continue...");
+  yellow(false);
+  printf("\nPress ENTER to continue...");
+  reset();
   STARTWORD(stdin, false);
   IgnoreWords();
 }
