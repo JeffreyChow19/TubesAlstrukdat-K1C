@@ -12,7 +12,6 @@ ListDin recipes;
 Sim simulator;
 Stack undoStack;
 Stack redoStack;
-LString notifs;
 ListStatik rawFoods;
 
 void initData(char *mapFile, char *foodsFile, char *recipesFile)
@@ -23,7 +22,6 @@ void initData(char *mapFile, char *foodsFile, char *recipesFile)
   readRecipesConfig(recipesFile);
   CreateStack(&undoStack, 10);
   CreateStack(&redoStack, 10);
-  CreateLString(&notifs, 10);
   filterRaw();
 }
 

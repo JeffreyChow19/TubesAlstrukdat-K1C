@@ -11,8 +11,8 @@ void CreateSim(Sim *S, String Name, Point Pos)
     CreateQueue(&Delv(*S), 50, 'd');
     CreateQueue(&Proc(*S), 50, 'p');
     CreateKulkas(&Fridge(*S));
-    CreateLString(&Notifs(*S), 3);
-    CreateLString(&UndoNotifs(*S), 3);
+    CreateLString(&Notifs(*S), 5);
+    CreateLString(&UndoNotifs(*S), 5);
 }
 
 void dealocateSim(Sim *S)

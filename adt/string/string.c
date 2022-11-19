@@ -1,5 +1,6 @@
 #include "string.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 void CreateEmptyString(String *s, int capacity)
 {

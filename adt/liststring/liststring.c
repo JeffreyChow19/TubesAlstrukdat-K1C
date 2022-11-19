@@ -45,7 +45,17 @@ boolean isFullLString(LString l)
 void expandLString(LString *l, int num)
 {
     LSCAPACITY(*l) += num;
-    LSBUFFER(*l) = realloc(LSBUFFER(*l), LSCAPACITY(*l) * sizeof(SElType));
+
+    // realloc doesnt work
+    SElType *temp = (SElType *)malloc(sizeof(SElType) * LSCAPACITY(*l));
+
+    for (int i = 0; i < LSNEFF(*l); i++)
+    {
+        temp[i] = LSBUFFER(*l)[i];
+    }
+
+    free(LSBUFFER(*l));
+    LSBUFFER(*l) = temp;
 }
 
 void insertLastString(LString *l, SElType val)
